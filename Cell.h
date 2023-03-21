@@ -7,12 +7,12 @@ class Strand {
     private:
         string strand;
         void normalize();
-        bool validate();
+        bool validate() const;
     
     public:
         Strand(string strand);
         void set(string strand);
-        string get();
+        string get() const;
 };
 
 class Genome {
@@ -24,9 +24,9 @@ class Genome {
         Genome(string rna, string dnaf, string dnas);
         void setRNA(string s);
         void setDNA(string s1, string s2);
-        Strand* getRNA();
-        pair<Strand*, Strand*> getDNA();
-        pair<Strand*, Strand*> transformRNAtoDNA();
+        Strand* getRNA() const;
+        pair<Strand*, Strand*> getDNA() const;
+        pair<Strand*, Strand*> transformRNAtoDNA() const;
         void mutateSmallScaleRNA(char n1, char n2, int n = -1);
         void mutateSmallScaleDNA(char n1, char n2, int n = -1);
         void mutateLargeScaleRNA(string s1, string s2);
@@ -42,7 +42,7 @@ class Chromosome : public Genome {
     public:
         Chromosome(string s1, string s2);
         void set(string s1, string s2);
-        pair<Strand*, Strand*> get();
+        pair<Strand*, Strand*> get() const;
         void mutateSmallScale(char n1, char n2, int n = -1);
         void mutateLargeScale(string s1, string s2);
         void mutateInversely(string s);
@@ -51,7 +51,7 @@ class Chromosome : public Genome {
 class Cell {
     protected:
         int number;
-        Chromosome* chromosome;
+        Chromosome* chromosomes;
     
     public:
         Cell(int n);
@@ -60,5 +60,5 @@ class Cell {
         void mutateSmallScale(char n1, char n2, int m, int n = -1);
         void mutateLargeScale(string s1, int n, string s2, int m);
         void mutateInversely(string s, int n);
-        void printComplementaryPalindromes();
+        void printComplementaryPalindromes() const;
 };

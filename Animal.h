@@ -8,10 +8,10 @@ class Animal : public Cell {
     public:
         Animal(int n);
         void killBadChromosomes();
-        double getGeneticSimilarity(Animal animal);
-        Animal* reproduceAsexually();
-        bool operator==(Animal animal);
-        Animal* operator+(Animal animal);
+        double getGeneticSimilarity(const Animal& animal) const;
+        Animal* reproduceAsexually() const;
+        bool operator==(const Animal& animal) const;
+        Animal* operator+(const Animal& animal) const;
 
         friend class Virus;
 };
@@ -23,9 +23,9 @@ class Virus : public Genome {
     public:
         Virus(string rna);
         void set(string rna);
-        Strand* get();
+        Strand* get() const;
         void mutateSmallScale(char n1, char n2, int m, int n = -1);
         void mutateLargeScale(string s1, int n, string s2, int m);
         void mutateInversely(string s, int n);
-        bool isPathogenic(Animal animal);
+        bool isPathogenic(const Animal& animal) const;
 };
