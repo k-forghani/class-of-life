@@ -7,31 +7,32 @@ using namespace std;
 /* Strand */
 
 void Strand::normalize () {
-    string normalized_strand = "";
+    string nstrand = "";
 
     for (int i = 0; i < strand.length(); i++) {
-        if (isalpha(strand[i])) {
-            normalized_strand += strand[i];
-        }
+        char c = toupper(strand[i]);
+        if (nucleotides.count(c))
+            nstrand += c;
     }
 
-    strand = normalized_strand;
+    strand = nstrand;
 }
 
 bool Strand::validate () const {
-
+    return true;
 }
 
 Strand::Strand (string strand) {
-
+    Strand::setStrand(strand);
 }
 
 void Strand::setStrand (string strand) {
-
+    this -> strand = strand;
+    normalize();
 }
 
 string Strand::getStrand () const {
-
+    return strand;
 }
 
 /* Genome */
