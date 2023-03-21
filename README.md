@@ -6,6 +6,21 @@ This is a program to simply simulate some fundamental biological processes, deve
 
 ## Installation
 
+To compile the project and run the interface, just run `run.sh` with `main` argument:
+
+```bash
+chmod +x run.sh
+./run.sh main
+```
+
+Instead of using the interface, you may run the test and debug the project:
+
+```bash
+./run.sh test
+```
+
+**Note**: The commands may be a bit different on Windows or macOS.
+
 ## Developers
 
 This project was developed by *Kazem Forghani* and *Elaheh Razmkhah*.
