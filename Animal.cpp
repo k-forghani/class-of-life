@@ -35,15 +35,15 @@ Virus::Virus (string rna) : Genome(rna, "", "") {
 
 }
 
-void Virus::set (string rna) {
+void Virus::setVirus (string rna) {
 
 }
 
-Strand* Virus::get () const {
+Strand* Virus::getVirus () const {
 
 }
 
-void Virus::mutateSmallScale (char n1, char n2, int m, int n = -1) {
+void Virus::mutateSmallScale (char n1, char n2, int m, int n) {
 
 }
 

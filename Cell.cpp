@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 #include "Cell.h"
 
 using namespace std;
@@ -6,7 +7,15 @@ using namespace std;
 /* Strand */
 
 void Strand::normalize () {
+    string normalized_strand = "";
 
+    for (int i = 0; i < strand.length(); i++) {
+        if (isalpha(strand[i])) {
+            normalized_strand += strand[i];
+        }
+    }
+
+    strand = normalized_strand;
 }
 
 bool Strand::validate () const {
@@ -17,11 +26,11 @@ Strand::Strand (string strand) {
 
 }
 
-void Strand::set (string strand) {
+void Strand::setStrand (string strand) {
 
 }
 
-string Strand::get () const {
+string Strand::getStrand () const {
 
 }
 
@@ -51,11 +60,11 @@ pair<Strand*, Strand*> Genome::transformRNAtoDNA () const {
 
 }
 
-void Genome::mutateSmallScaleRNA (char n1, char n2, int n = -1) {
+void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
 
 }
 
-void Genome::mutateSmallScaleDNA (char n1, char n2, int n = -1) {
+void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
 
 }
 
@@ -81,15 +90,15 @@ Chromosome::Chromosome (string s1, string s2) : Genome("", s1, s2) {
 
 }
 
-void Chromosome::set (string s1, string s2) {
+void Chromosome::setChromosome (string s1, string s2) {
 
 }
 
-pair<Strand*, Strand*> Chromosome::get () const {
+pair<Strand*, Strand*> Chromosome::getChromosome () const {
 
 }
 
-void Chromosome::mutateSmallScale (char n1, char n2, int n = -1) {
+void Chromosome::mutateSmallScale (char n1, char n2, int n) {
 
 }
 
@@ -115,7 +124,7 @@ void Cell::dieIfShould () {
 
 }
 
-void Cell::mutateSmallScale (char n1, char n2, int m, int n = -1) {
+void Cell::mutateSmallScale (char n1, char n2, int m, int n) {
 
 }
 

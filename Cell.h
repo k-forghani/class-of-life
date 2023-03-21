@@ -1,18 +1,23 @@
+#ifndef CELL_H
+#define CELL_H
+
 #include <iostream>
 #include <utility>
+#include <set>
 
 using namespace std;
 
 class Strand {
     private:
+        const set<char> nucleotides = {'A', 'C', 'G', 'T'};
         string strand;
         void normalize();
         bool validate() const;
     
     public:
         Strand(string strand);
-        void set(string strand);
-        string get() const;
+        void setStrand(string strand);
+        string getStrand() const;
 };
 
 class Genome {
@@ -41,8 +46,8 @@ class Chromosome : public Genome {
     
     public:
         Chromosome(string s1, string s2);
-        void set(string s1, string s2);
-        pair<Strand*, Strand*> get() const;
+        void setChromosome(string s1, string s2);
+        pair<Strand*, Strand*> getChromosome() const;
         void mutateSmallScale(char n1, char n2, int n = -1);
         void mutateLargeScale(string s1, string s2);
         void mutateInversely(string s);
@@ -62,3 +67,5 @@ class Cell {
         void mutateInversely(string s, int n);
         void printComplementaryPalindromes() const;
 };
+
+#endif
