@@ -17,7 +17,7 @@ double Animal::getGeneticSimilarity (const Animal& animal) const {
 
 }
 
-Animal* Animal::reproduceAsexually () const {
+Animal Animal::reproduceAsexually () const {
 
 }
 
@@ -25,7 +25,7 @@ bool operator== (const Animal& a1, const Animal& a2) {
 
 }
 
-Animal* operator+ (const Animal& a1, const Animal& a2) {
+Animal operator+ (const Animal& a1, const Animal& a2) {
 
 }
 
@@ -39,7 +39,7 @@ void Virus::setVirus (string rna) {
 
 }
 
-Strand* Virus::getVirus () const {
+Strand Virus::getVirus () const {
 
 }
 

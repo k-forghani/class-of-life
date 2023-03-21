@@ -9,22 +9,22 @@ class Animal : public Cell {
         Animal(int n);
         void killBadChromosomes();
         double getGeneticSimilarity(const Animal& animal) const;
-        Animal* reproduceAsexually() const;
+        Animal reproduceAsexually() const;
         
         friend bool operator==(const Animal& a1, const Animal& a2);
-        friend Animal* operator+(const Animal& a1, const Animal& a2);
+        friend Animal operator+(const Animal& a1, const Animal& a2);
 
         friend class Virus;
 };
 
 class Virus : public Genome {
     protected:
-        pair<Strand*, Strand*> dna = make_pair<Strand*, Strand*>(NULL, NULL);
+        pair<Strand*, Strand*>* dna = new pair<Strand*, Strand*>(NULL, NULL);
 
     public:
         Virus(string rna);
         void setVirus(string rna);
-        Strand* getVirus() const;
+        Strand getVirus() const;
         void mutateSmallScale(char n1, char n2, int m, int n = -1);
         void mutateLargeScale(string s1, int n, string s2, int m);
         void mutateInversely(string s, int n);

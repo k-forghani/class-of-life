@@ -11,8 +11,6 @@ class Strand {
     private:
         const set<char> nucleotides = {'A', 'C', 'G', 'T'};
         string strand;
-        void normalize();
-        bool validate() const;
     
     public:
         Strand(string strand);
@@ -23,13 +21,13 @@ class Strand {
 class Genome {
     protected:
         Strand* rna;
-        pair<Strand*, Strand*> dna;
+        pair<Strand*, Strand*>* dna;
     
     public:
         Genome(string rna, string dnaf, string dnas);
         void setRNA(string s);
         void setDNA(string s1, string s2);
-        Strand* getRNA() const;
+        Strand getRNA() const;
         pair<Strand*, Strand*> getDNA() const;
         pair<Strand*, Strand*> transformRNAtoDNA() const;
         void mutateSmallScaleRNA(char n1, char n2, int n = -1);

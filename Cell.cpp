@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include <set>
 #include "Cell.h"
 
@@ -6,29 +7,18 @@ using namespace std;
 
 /* Strand */
 
-void Strand::normalize () {
-    string nstrand = "";
-
-    for (int i = 0; i < strand.length(); i++) {
-        char c = toupper(strand[i]);
-        if (nucleotides.count(c))
-            nstrand += c;
-    }
-
-    strand = nstrand;
-}
-
-bool Strand::validate () const {
-    return true;
-}
-
 Strand::Strand (string strand) {
     Strand::setStrand(strand);
 }
 
-void Strand::setStrand (string strand) {
-    this -> strand = strand;
-    normalize();
+void Strand::setStrand (string strand) { 
+    this -> strand = "";
+
+    for (int i = 0; i < strand.length(); i++) {
+        char c = toupper(strand[i]);
+        if (nucleotides.count(c))
+            this -> strand += c;
+    }
 }
 
 string Strand::getStrand () const {
@@ -38,27 +28,49 @@ string Strand::getStrand () const {
 /* Genome */
 
 Genome::Genome (string rna, string dnaf, string dnas) {
-
+    this -> rna = new Strand(rna);
+    this -> dna = new pair<Strand*, Strand*>(
+        new Strand(dnaf),
+        new Strand(dnas)
+    );
 }
 
 void Genome::setRNA (string s) {
-
+    rna -> setStrand(s);
 }
 
 void Genome::setDNA (string s1, string s2) {
-
+    dna -> first -> setStrand(s1);
+    dna -> second -> setStrand(s2);
 }
 
-Strand* Genome::getRNA () const {
-
+Strand Genome::getRNA () const {
+    return *rna;
 }
 
 pair<Strand*, Strand*> Genome::getDNA () const {
-
+    return *dna;
 }
 
 pair<Strand*, Strand*> Genome::transformRNAtoDNA () const {
+    string comp = rna -> getStrand();
 
+    for (int i = 0; i < comp.length(); i++) {
+        if (comp[i] == 'A') {
+            comp[i] = 'T';
+        } else if (comp[i] == 'T') {
+            comp[i] = 'A';
+        } else if (comp[i] == 'C') {
+            comp[i] = 'G';
+        } else {
+            comp[i] = 'C';
+        }
+    }
+    
+    return make_pair<Strand*, Strand*>(
+        new Strand(rna -> getStrand()),
+        new Strand(comp)
+    );
 }
 
 void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
