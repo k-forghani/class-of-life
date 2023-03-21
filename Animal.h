@@ -10,8 +10,9 @@ class Animal : public Cell {
         void killBadChromosomes();
         double getGeneticSimilarity(const Animal& animal) const;
         Animal* reproduceAsexually() const;
-        bool operator==(const Animal& animal) const;
-        Animal* operator+(const Animal& animal) const;
+        
+        friend bool operator==(const Animal& a1, const Animal& a2);
+        friend Animal* operator+(const Animal& a1, const Animal& a2);
 
         friend class Virus;
 };
