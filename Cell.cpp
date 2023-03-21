@@ -29,10 +29,7 @@ string Strand::getStrand () const {
 
 Genome::Genome (string rna, string dnaf, string dnas) {
     this -> rna = new Strand(rna);
-    this -> dna = new pair<Strand*, Strand*>(
-        new Strand(dnaf),
-        new Strand(dnas)
-    );
+    this -> dna = new pair<Strand, Strand>(Strand(dnaf), Strand(dnas));
 }
 
 void Genome::setRNA (string s) {
@@ -40,19 +37,19 @@ void Genome::setRNA (string s) {
 }
 
 void Genome::setDNA (string s1, string s2) {
-    dna -> first -> setStrand(s1);
-    dna -> second -> setStrand(s2);
+    (dna -> first).setStrand(s1);
+    (dna -> second).setStrand(s2);
 }
 
 Strand Genome::getRNA () const {
     return *rna;
 }
 
-pair<Strand*, Strand*> Genome::getDNA () const {
+pair<Strand, Strand> Genome::getDNA () const {
     return *dna;
 }
 
-pair<Strand*, Strand*> Genome::transformRNAtoDNA () const {
+pair<Strand, Strand> Genome::transformRNAtoDNA () const {
     string comp = rna -> getStrand();
 
     for (int i = 0; i < comp.length(); i++) {
@@ -67,9 +64,9 @@ pair<Strand*, Strand*> Genome::transformRNAtoDNA () const {
         }
     }
     
-    return make_pair<Strand*, Strand*>(
-        new Strand(rna -> getStrand()),
-        new Strand(comp)
+    return make_pair<Strand, Strand>(
+        Strand(rna -> getStrand()),
+        Strand(comp)
     );
 }
 
@@ -107,7 +104,7 @@ void Chromosome::setChromosome (string s1, string s2) {
 
 }
 
-pair<Strand*, Strand*> Chromosome::getChromosome () const {
+pair<Strand, Strand> Chromosome::getChromosome () const {
 
 }
 

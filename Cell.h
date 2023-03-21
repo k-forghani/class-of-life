@@ -21,15 +21,15 @@ class Strand {
 class Genome {
     protected:
         Strand* rna;
-        pair<Strand*, Strand*>* dna;
+        pair<Strand, Strand>* dna;
     
     public:
         Genome(string rna, string dnaf, string dnas);
         void setRNA(string s);
         void setDNA(string s1, string s2);
         Strand getRNA() const;
-        pair<Strand*, Strand*> getDNA() const;
-        pair<Strand*, Strand*> transformRNAtoDNA() const;
+        pair<Strand, Strand> getDNA() const;
+        pair<Strand, Strand> transformRNAtoDNA() const;
         void mutateSmallScaleRNA(char n1, char n2, int n = -1);
         void mutateSmallScaleDNA(char n1, char n2, int n = -1);
         void mutateLargeScaleRNA(string s1, string s2);
@@ -45,7 +45,7 @@ class Chromosome : public Genome {
     public:
         Chromosome(string s1, string s2);
         void setChromosome(string s1, string s2);
-        pair<Strand*, Strand*> getChromosome() const;
+        pair<Strand, Strand> getChromosome() const;
         void mutateSmallScale(char n1, char n2, int n = -1);
         void mutateLargeScale(string s1, string s2);
         void mutateInversely(string s);

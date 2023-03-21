@@ -19,7 +19,7 @@ class Animal : public Cell {
 
 class Virus : public Genome {
     protected:
-        pair<Strand*, Strand*>* dna = new pair<Strand*, Strand*>(NULL, NULL);
+        pair<Strand, Strand>* dna = NULL;
 
     public:
         Virus(string rna);
