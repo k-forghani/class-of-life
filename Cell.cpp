@@ -50,28 +50,42 @@ pair<Strand, Strand> Genome::getDNA () const {
 }
 
 pair<Strand, Strand> Genome::transformRNAtoDNA () const {
-    string comp = rna -> getStrand();
+    string com = rna -> getStrand();
 
-    for (int i = 0; i < comp.length(); i++) {
-        if (comp[i] == 'A') {
-            comp[i] = 'T';
-        } else if (comp[i] == 'T') {
-            comp[i] = 'A';
-        } else if (comp[i] == 'C') {
-            comp[i] = 'G';
+    for (int i = 0; i < com.length(); i++) {
+        if (com[i] == 'A') {
+            com[i] = 'T';
+        } else if (com[i] == 'T') {
+            com[i] = 'A';
+        } else if (com[i] == 'C') {
+            com[i] = 'G';
         } else {
-            comp[i] = 'C';
+            com[i] = 'C';
         }
     }
     
     return make_pair<Strand, Strand>(
         Strand(rna -> getStrand()),
-        Strand(comp)
+        Strand(com)
     );
 }
 
 void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
+    n1 = toupper(n1);
+    n2 = toupper(n2);
+    
+    string s = rna -> getStrand();
 
+    int c = 0;
+
+    for (int i = 0; i < s.length() && (n == -1 || c < n); i++) {
+        if (s[i] == n1) {
+            s[i] = n2;
+            c++;
+        }
+    }
+
+    rna -> setStrand(s);
 }
 
 void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
