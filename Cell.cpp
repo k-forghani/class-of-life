@@ -27,6 +27,18 @@ string Strand::getStrand () const {
 
 /* Genome */
 
+char Genome::getComplement (char n) const {
+    if (n == 'A') {
+        return 'T';
+    } else if (n == 'T') {
+        return 'A';
+    } else if (n == 'C') {
+        return 'G';
+    } else {
+        return 'C';
+    }
+}
+
 Genome::Genome (string rna, string dnaf, string dnas) {
     this -> rna = new Strand(rna);
     this -> dna = new pair<Strand, Strand>(Strand(dnaf), Strand(dnas));
@@ -53,15 +65,7 @@ pair<Strand, Strand> Genome::transformRNAtoDNA () const {
     string com = rna -> getStrand();
 
     for (int i = 0; i < com.length(); i++) {
-        if (com[i] == 'A') {
-            com[i] = 'T';
-        } else if (com[i] == 'T') {
-            com[i] = 'A';
-        } else if (com[i] == 'C') {
-            com[i] = 'G';
-        } else {
-            com[i] = 'C';
-        }
+        com[i] = Genome::getComplement(com[i]);
     }
     
     return make_pair<Strand, Strand>(
