@@ -93,7 +93,28 @@ void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
 }
 
 void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
+    n1 = toupper(n1);
+    n2 = toupper(n2);
 
+    string s1 = (dna -> first).getStrand();
+    string s2 = (dna -> second).getStrand();
+    
+    int c = 0;
+
+    for (int i = 0; i < s1.length() && (n == -1 || c < n); i++) {
+        if (s1[i] == n1) {
+            s1[i] = n2;
+            s2[i] = Genome::getComplement(n2);
+            c++;
+        } else if (s2[i] == n1) {
+            s2[i] = n2;
+            s1[i] = Genome::getComplement(n2);
+            c++;
+        }
+    }
+    
+    (dna -> first).setStrand(s1);
+    (dna -> second).setStrand(s2);
 }
 
 void Genome::mutateLargeScaleRNA (string s1, string s2) {
