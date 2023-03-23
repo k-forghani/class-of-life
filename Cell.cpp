@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 #include <set>
+#include <vector>
 #include "common.h"
 #include "Cell.h"
 
@@ -195,15 +196,67 @@ void Chromosome::mutateInversely (string s) {
 /* Cell */
 
 Cell::Cell (int n) {
-
+    if (n > 0) {
+        number = n;
+    }
 }
 
-void Cell::addChromosome (const Chromosome& c) {
+Cell::~Cell () {
+    for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
+        delete *i;
+    }
+}
 
+void Cell::addChromosome (string s1, string s2) {
+    if (chromosomes.size() < number) {
+        chromosomes.push_back(new Chromosome(s1, s2));
+    }
 }
 
 void Cell::dieIfShould () {
+    bool will_die = false;
 
+    auto i = chromosomes.begin();
+    while (i != chromosomes.end()) {
+        Chromosome c(**i);
+
+        pair<Strand, Strand> dna = c.getChromosome();
+
+        string d1 = dna.first.getStrand();
+        string d2 = dna.second.getStrand();
+
+        int unbonded = 0;
+        int at_bonds = 0;
+        int gc_bonds = 0;
+
+        for (int j = 0; j < d1.length(); j++) {
+            if (d2[j] != getComplement(d1[j])) {
+                unbonded++;
+            }
+
+            if ((d1[j] == 'A' && d2[j] == 'T') || (d1[j] == 'T' && d2[j] == 'A')) {
+                at_bonds++;
+            }
+
+            if ((d1[j] == 'G' && d2[j] == 'C') || (d1[j] == 'C' && d2[j] == 'G')) {
+                at_bonds++;
+            }
+        }
+        
+        if ((unbonded > 5) || ((double)at_bonds / (double)gc_bonds > 3)) {
+            will_die = true;
+            break;
+        }
+
+        if (true) {
+            i = chromosomes.erase(i);
+        } else {
+            ++i;
+        }
+    }
+    
+    // TO_BE_IMPLEMENTED
+    // A mechanism for self-destruction ...
 }
 
 void Cell::mutateSmallScale (char n1, char n2, int m, int n) {

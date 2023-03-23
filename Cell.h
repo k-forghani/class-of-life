@@ -56,11 +56,12 @@ class Chromosome : public Genome {
 class Cell {
     protected:
         int number;
-        vector<Chromosome> chromosomes;
+        vector<Chromosome*> chromosomes;
     
     public:
         Cell(int n);
-        void addChromosome(const Chromosome& c);
+        ~Cell();
+        void addChromosome(string s1, string s2);
         void dieIfShould();
         void mutateSmallScale(char n1, char n2, int m, int n = -1);
         void mutateLargeScale(string s1, int n, string s2, int m);

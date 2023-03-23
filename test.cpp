@@ -57,5 +57,22 @@ int main () {
     genome.mutateInverselyDNA("aatt");
     genome.printDNA("DNA:\n");
 
+
+
+    Cell* cell = new Cell(3);
+    cell -> addChromosome(
+        "acgtacgtggccacgt",
+        "tgcatgcaccggtgca"
+    );
+    cell -> addChromosome(
+        "acgtacgtggccacgt",
+        "tgcatgcaccggtgca"
+    );
+    cell -> addChromosome(
+        "acgtacgtggccacgt",
+        "tgcatgcaccggtgca"
+    );
+    cell -> dieIfShould();
+    
     return 0;
 }
