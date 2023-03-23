@@ -107,7 +107,17 @@ void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
 }
 
 void Genome::mutateLargeScaleRNA (string s1, string s2) {
+    s1 = Strand(s1).getStrand();
+    s2 = Strand(s2).getStrand();
+    
+    string s = rna -> getStrand();
 
+    int i = findPattern(s, s1);
+    if (i > -1) {
+        s = s.replace(i, s1.length(), s2);
+    }
+
+    rna -> setStrand(s);
 }
 
 void Genome::mutateLargeScaleDNA (string s1, string s2) {
