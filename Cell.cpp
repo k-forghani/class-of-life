@@ -161,7 +161,7 @@ void Chromosome::setChromosome (string s1, string s2) {
 }
 
 pair<Strand, Strand> Chromosome::getChromosome () const {
-
+    return Chromosome::getDNA();
 }
 
 void Chromosome::mutateSmallScale (char n1, char n2, int n) {

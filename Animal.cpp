@@ -14,19 +14,19 @@ void Animal::killBadChromosomes () {
 }
 
 double Animal::getGeneticSimilarity (const Animal& animal) const {
-
+    return 0.0;
 }
 
 Animal Animal::reproduceAsexually () const {
-
+    return Animal(0);
 }
 
 bool operator== (const Animal& a1, const Animal& a2) {
-
+    return true;
 }
 
 Animal operator+ (const Animal& a1, const Animal& a2) {
-
+    return Animal(0);
 }
 
 /* Virus */
@@ -40,7 +40,7 @@ void Virus::setVirus (string rna) {
 }
 
 Strand Virus::getVirus () const {
-
+    return Strand("");
 }
 
 void Virus::mutateSmallScale (char n1, char n2, int m, int n) {
@@ -56,5 +56,5 @@ void Virus::mutateInversely (string s, int n) {
 }
 
 bool Virus::isPathogenic (const Animal& animal) const {
-
+    return true;
 }
