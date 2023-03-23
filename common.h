@@ -10,4 +10,6 @@ const set<char> NUCLEOTIDES = {'A', 'C', 'G', 'T'};
 
 char getComplement(char n);
 
+int findPattern(string s, string p);
+
 #endif
