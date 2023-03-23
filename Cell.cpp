@@ -1,7 +1,6 @@
 #include <iostream>
 #include <utility>
 #include <set>
-#include <algorithm>
 #include "common.h"
 #include "Cell.h"
 
@@ -144,18 +143,12 @@ void Genome::mutateLargeScaleDNA (string s1, string s2) {
 }
 
 void Genome::mutateInverselyRNA (string s) {
-    s = Strand(s).getStrand();
-
-    string r = rna -> getStrand();
-
-    int i = findPattern(r, s);
-
-    if (i > -1) {
-        reverse(s.begin(), s.end());
-        r = r.replace(i, s.length(), s);
+    string sr = "";
+    for (int i = 0; i < s.length(); i++) {
+        sr = s[i] + sr;
     }
     
-    rna -> setStrand(r);
+    Genome::mutateLargeScaleRNA(s, sr);
 }
 
 void Genome::mutateInverselyDNA (string s) {
