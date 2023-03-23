@@ -65,12 +65,12 @@ int main () {
         "tgcatgcaccggtgca"
     );
     cell -> addChromosome(
-        "acgtacgtggccacgt",
-        "tgcatgcaccggtgca"
+        "gtacgacttatg",
+        "acgtgcacgacc"
     );
     cell -> addChromosome(
-        "acgtacgtggccacgt",
-        "tgcatgcaccggtgca"
+        "acgtgg",
+        "ggtgac"
     );
 
     /* mutateSmallScale() */
@@ -79,6 +79,17 @@ int main () {
     cell -> mutateSmallScale('a', 'c', 0, 1);
     Chromosome* c = (cell -> getChromosomes()).at(0);
     c -> printDNA();
+
+    /* mutateLargeScale() */
+    
+    cout << endl << "mutateLargeScale()" << endl;
+    cell -> mutateLargeScale("gta", 1, "gac", 2);
+    Chromosome* c1 = (cell -> getChromosomes()).at(1);
+    Chromosome* c2 = (cell -> getChromosomes()).at(2);
+    cout << "Chromosome 1:" << endl;
+    c1 -> printDNA();
+    cout << "Chromosome 2:" << endl;
+    c2 -> printDNA();
 
     /* dieIfShould() */
 

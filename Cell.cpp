@@ -273,7 +273,21 @@ void Cell::mutateSmallScale (char n1, char n2, int m, int n) {
 }
 
 void Cell::mutateLargeScale (string s1, int n, string s2, int m) {
+    s1 = Strand(s1).getStrand();
+    s2 = Strand(s2).getStrand();
 
+    Chromosome* cn(chromosomes.at(n));
+    Chromosome* cm(chromosomes.at(m));
+    
+    int cni = findPattern((cn -> getChromosome()).first.getStrand(), s1);
+    int cnj = findPattern((cn -> getChromosome()).second.getStrand(), s1);
+    int cmi = findPattern((cm -> getChromosome()).first.getStrand(), s2);
+    int cmj = findPattern((cm -> getChromosome()).second.getStrand(), s2);
+
+    if ((cni > -1 || cnj > -1) && (cmi > -1 || cmj > -1)) { 
+        cn -> mutateLargeScale(s1, s2);
+        cm -> mutateLargeScale(s2, s1);
+    }
 }
 
 void Cell::mutateInversely (string s, int n) {
