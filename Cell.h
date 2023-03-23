@@ -22,7 +22,6 @@ class Genome {
     protected:
         Strand* rna;
         pair<Strand, Strand>* dna;
-        char getComplement(char n) const;
     
     public:
         Genome(string rna, string dnaf, string dnas);

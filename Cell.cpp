@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 #include <set>
+#include "common.h"
 #include "Cell.h"
 
 using namespace std;
@@ -26,18 +27,6 @@ string Strand::getStrand () const {
 }
 
 /* Genome */
-
-char Genome::getComplement (char n) const {
-    if (n == 'A') {
-        return 'T';
-    } else if (n == 'T') {
-        return 'A';
-    } else if (n == 'C') {
-        return 'G';
-    } else {
-        return 'C';
-    }
-}
 
 Genome::Genome (string rna, string dnaf, string dnas) {
     this -> rna = new Strand(rna);
@@ -65,7 +54,7 @@ pair<Strand, Strand> Genome::transformRNAtoDNA () const {
     string com = rna -> getStrand();
 
     for (int i = 0; i < com.length(); i++) {
-        com[i] = Genome::getComplement(com[i]);
+        com[i] = getComplement(com[i]);
     }
     
     return make_pair<Strand, Strand>(
@@ -104,11 +93,11 @@ void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
     for (int i = 0; i < s1.length() && (n == -1 || c < n); i++) {
         if (s1[i] == n1) {
             s1[i] = n2;
-            s2[i] = Genome::getComplement(n2);
+            s2[i] = getComplement(n2);
             c++;
         } else if (s2[i] == n1) {
             s2[i] = n2;
-            s1[i] = Genome::getComplement(n2);
+            s1[i] = getComplement(n2);
             c++;
         }
     }
