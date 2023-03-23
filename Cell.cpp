@@ -193,6 +193,35 @@ void Chromosome::mutateInversely (string s) {
     Chromosome::mutateInverselyDNA(s);
 }
 
+bool Chromosome::isAbnormal () const {
+    string d1 = (dna -> first).getStrand();
+    string d2 = (dna -> second).getStrand();
+
+    int unbonded = 0;
+    int at_bonds = 0;
+    int gc_bonds = 0;
+
+    for (int j = 0; j < d1.length(); j++) {
+        if (d2[j] != getComplement(d1[j])) {
+            unbonded++;
+        }
+
+        if ((d1[j] == 'A' && d2[j] == 'T') || (d1[j] == 'T' && d2[j] == 'A')) {
+            at_bonds++;
+        }
+
+        if ((d1[j] == 'G' && d2[j] == 'C') || (d1[j] == 'C' && d2[j] == 'G')) {
+            at_bonds++;
+        }
+    }
+    
+    if ((unbonded > 5) || ((double)at_bonds / (double)gc_bonds > 3)) {
+        return true;
+    }
+
+    return false;
+}
+
 /* Cell */
 
 Cell::Cell (int n) {
@@ -225,30 +254,7 @@ void Cell::dieIfShould () {
     for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
         Chromosome c(**i);
 
-        pair<Strand, Strand> dna = c.getChromosome();
-
-        string d1 = dna.first.getStrand();
-        string d2 = dna.second.getStrand();
-
-        int unbonded = 0;
-        int at_bonds = 0;
-        int gc_bonds = 0;
-
-        for (int j = 0; j < d1.length(); j++) {
-            if (d2[j] != getComplement(d1[j])) {
-                unbonded++;
-            }
-
-            if ((d1[j] == 'A' && d2[j] == 'T') || (d1[j] == 'T' && d2[j] == 'A')) {
-                at_bonds++;
-            }
-
-            if ((d1[j] == 'G' && d2[j] == 'C') || (d1[j] == 'C' && d2[j] == 'G')) {
-                at_bonds++;
-            }
-        }
-        
-        if ((unbonded > 5) || ((double)at_bonds / (double)gc_bonds > 3)) {
+        if (c.isAbnormal()) {
             will_die = true;
             break;
         }

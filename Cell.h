@@ -51,6 +51,7 @@ class Chromosome : public Genome {
         void mutateSmallScale(char n1, char n2, int n = -1);
         void mutateLargeScale(string s1, string s2);
         void mutateInversely(string s);
+        bool isAbnormal() const;
 };
 
 class Cell {
