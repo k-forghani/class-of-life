@@ -15,8 +15,13 @@ char getComplement (char n) {
     }
 }
 
-// Knuth-Morris-Pratt Pattern Searching (Computing LPS Table + KMP Match)
-// Find more at https://www.scaler.com/topics/data-structures/kmp-algorithm/.
+/*
+    Knuth-Morris-Pratt Pattern Searching Algorithm
+    Description: There are two main parts inside this function:
+    1. Computing LPS Table
+    2. KMP Match
+    Reference: https://www.scaler.com/topics/data-structures/kmp-algorithm/
+*/
 int findPattern (string s, string p) {
     // Computing LPS Table
     
@@ -25,7 +30,7 @@ int findPattern (string s, string p) {
     int lps[m];
     lps[0] = 0;
 
-    int len = 0; // length of previous longest proper prefix that is also a suffix
+    int len = 0;
     int i = 1;
 
     while (i < m) {
@@ -50,13 +55,13 @@ int findPattern (string s, string p) {
     int n = s.length();
 
     while (i < n) {
-        if (s[i] == p[j]) { // the characters are a match
+        if (s[i] == p[j]) {
             i++;
             j++;
-            if (j == m) { // j pointer has reached end of pattern
-                return i - j; // index of the match
+            if (j == m) {
+                return i - j;
             }
-        } else if (i < n && p[j] != s[i]) { // no match
+        } else if (i < n && p[j] != s[i]) {
             if (j > 0) {
                 j = lps[j - 1];
             } else {
@@ -65,5 +70,5 @@ int findPattern (string s, string p) {
         }
     }
 
-    return -1; // no match
+    return -1;
 }
