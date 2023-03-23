@@ -130,7 +130,7 @@ void Genome::mutateLargeScaleDNA (string s1, string s2) {
     int i = findPattern(d1, s1);
     int j = findPattern(d2, s1);
     
-    if (i > -1 && i <= j) {
+    if (i > -1 && (j == -1 || i <= j)) {
         d1 = d1.replace(i, s1.length(), s2);
         d2 = d2.replace(i, s1.length(), getStrandComplement(s2));
     } else if (j > -1) {
@@ -152,7 +152,12 @@ void Genome::mutateInverselyRNA (string s) {
 }
 
 void Genome::mutateInverselyDNA (string s) {
-
+    string sr = "";
+    for (int i = 0; i < s.length(); i++) {
+        sr = s[i] + sr;
+    }
+    
+    Genome::mutateLargeScaleDNA(s, sr);
 }
 
 /* Chromosome */

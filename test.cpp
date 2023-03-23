@@ -51,5 +51,11 @@ int main () {
     genome.mutateInverselyRNA("gat");
     cout << "RNA: " << genome.getRNA().getStrand() << endl;
 
+    /* mutateInverselyDNA() */
+    
+    cout << endl << "mutateInverselyDNA()" << endl;
+    genome.mutateInverselyDNA("aatt");
+    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+
     return 0;
 }
