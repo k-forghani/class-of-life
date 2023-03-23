@@ -15,6 +15,13 @@ char getComplement (char n) {
     }
 }
 
+string getStrandComplement (string s) {
+    for (int i = 0; i < s.length(); i++) {
+        s[i] = getComplement(s[i]);
+    }
+    return s;
+}
+
 /*
     Knuth-Morris-Pratt Pattern Searching Algorithm
     Description: There are two main parts inside this function:

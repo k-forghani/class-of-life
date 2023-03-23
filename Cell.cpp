@@ -121,7 +121,25 @@ void Genome::mutateLargeScaleRNA (string s1, string s2) {
 }
 
 void Genome::mutateLargeScaleDNA (string s1, string s2) {
+    s1 = Strand(s1).getStrand();
+    s2 = Strand(s2).getStrand();
 
+    string d1 = (dna -> first).getStrand();
+    string d2 = (dna -> second).getStrand();
+
+    int i = findPattern(d1, s1);
+    int j = findPattern(d2, s1);
+    
+    if (i > -1 && i <= j) {
+        d1 = d1.replace(i, s1.length(), s2);
+        d2 = d2.replace(i, s1.length(), getStrandComplement(s2));
+    } else if (j > -1) {
+        d2 = d2.replace(j, s1.length(), s2);
+        d1 = d1.replace(j, s1.length(), getStrandComplement(s2));
+    }
+    
+    (dna -> first).setStrand(d1);
+    (dna -> second).setStrand(d2);
 }
 
 void Genome::mutateInverselyRNA (string s) {

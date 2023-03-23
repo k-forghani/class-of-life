@@ -39,5 +39,11 @@ int main () {
     genome.mutateLargeScaleRNA("aac", "tt");
     cout << "RNA: " << endl << genome.getRNA().getStrand() << endl;
 
+    /* mutateLargeScaleDNA() */
+
+    cout << endl << "mutateLargeScaleDNA()" << endl;
+    genome.mutateLargeScaleDNA("ac", "gg");
+    cout << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+
     return 0;
 }
