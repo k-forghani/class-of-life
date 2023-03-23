@@ -152,12 +152,10 @@ void Genome::mutateInverselyDNA (string s) {
 
 /* Chromosome */
 
-Chromosome::Chromosome (string s1, string s2) : Genome("", s1, s2) {
-
-}
+Chromosome::Chromosome (string s1, string s2) : Genome("", s1, s2) {}
 
 void Chromosome::setChromosome (string s1, string s2) {
-
+    Chromosome::setDNA(s1, s2);
 }
 
 pair<Strand, Strand> Chromosome::getChromosome () const {
@@ -165,15 +163,15 @@ pair<Strand, Strand> Chromosome::getChromosome () const {
 }
 
 void Chromosome::mutateSmallScale (char n1, char n2, int n) {
-
+    Chromosome::mutateSmallScaleDNA(n1, n2, n);
 }
 
 void Chromosome::mutateLargeScale (string s1, string s2) {
-
+    Chromosome::mutateLargeScaleDNA(s1, s2);
 }
 
 void Chromosome::mutateInversely (string s) {
-
+    Chromosome::mutateInversely(s);
 }
 
 /* Cell */
