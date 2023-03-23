@@ -160,6 +160,14 @@ void Genome::mutateInverselyDNA (string s) {
     Genome::mutateLargeScaleDNA(s, sr);
 }
 
+void Genome::printRNA (string before) {
+    cout << before << Genome::getRNA().getStrand() << endl;
+}
+
+void Genome::printDNA (string before) {
+    cout << before << Genome::getDNA().first.getStrand() << endl << Genome::getDNA().second.getStrand() << endl;
+}
+
 /* Chromosome */
 
 Chromosome::Chromosome (string s1, string s2) : Genome("", s1, s2) {}

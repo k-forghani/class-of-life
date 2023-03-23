@@ -12,50 +12,50 @@ int main () {
     );
 
     /* Initial Things */
-    cout << "RNA: " << endl << genome.getRNA().getStrand() << endl;
-    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+    genome.printRNA("RNA: ");
+    genome.printDNA("DNA:\n");
 
     /* transformRNAtoDNA() */
 
     cout << endl << "transformRNAtoDNA()" << endl;
     pair<Strand, Strand> dna = genome.transformRNAtoDNA();
-    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+    genome.printDNA("DNA:\n");
 
     /* mutateSmallScaleRNA() */
 
     cout << endl << "mutateSmallScaleRNA()" << endl;
     genome.mutateSmallScaleRNA('g', 'a', 2);
-    cout << "RNA: " << genome.getRNA().getStrand() << endl;
+    genome.printRNA("RNA: ");
 
     /* mutateSmallScaleDNA */
 
     cout << endl << "mutateSmallScaleDNA()" << endl;
     genome.mutateSmallScaleDNA('g', 'a', -1);
-    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+    genome.printDNA("DNA:\n");
 
     /* mutateLargeScaleRNA() */
 
     cout << endl << "mutateLargeScaleRNA()" << endl;
     genome.mutateLargeScaleRNA("aac", "tt");
-    cout << "RNA: " << genome.getRNA().getStrand() << endl;
+    genome.printRNA("RNA: ");
 
     /* mutateLargeScaleDNA() */
 
     cout << endl << "mutateLargeScaleDNA()" << endl;
     genome.mutateLargeScaleDNA("ac", "gg");
-    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+    genome.printDNA("DNA:\n");
 
     /* mutateInverselyRNA() */
     
     cout << endl << "mutateInverselyRNA()" << endl;
     genome.mutateInverselyRNA("gat");
-    cout << "RNA: " << genome.getRNA().getStrand() << endl;
+    genome.printRNA("RNA: ");
 
     /* mutateInverselyDNA() */
     
     cout << endl << "mutateInverselyDNA()" << endl;
     genome.mutateInverselyDNA("aatt");
-    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+    genome.printDNA("DNA:\n");
 
     return 0;
 }

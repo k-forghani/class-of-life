@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include <set>
+#include <vector>
 
 using namespace std;
 
@@ -35,6 +36,8 @@ class Genome {
         void mutateLargeScaleDNA(string s1, string s2);
         void mutateInverselyRNA(string s);
         void mutateInverselyDNA(string s);
+        void printRNA(string before = "");
+        void printDNA(string before = "");
 };
 
 class Chromosome : public Genome {
@@ -53,7 +56,7 @@ class Chromosome : public Genome {
 class Cell {
     protected:
         int number;
-        Chromosome* chromosomes;
+        vector<Chromosome> chromosomes;
     
     public:
         Cell(int n);
