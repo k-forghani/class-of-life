@@ -72,6 +72,16 @@ int main () {
         "acgtacgtggccacgt",
         "tgcatgcaccggtgca"
     );
+
+    /* mutateSmallScale() */
+    
+    cout << endl << "First chromosome after mutateSmallScale()" << endl;
+    cell -> mutateSmallScale('a', 'c', 0, 1);
+    Chromosome* c = (cell -> getChromosomes()).at(0);
+    c -> printDNA();
+
+    /* dieIfShould() */
+
     cell -> dieIfShould();
     
     return 0;

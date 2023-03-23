@@ -161,11 +161,11 @@ void Genome::mutateInverselyDNA (string s) {
     Genome::mutateLargeScaleDNA(s, sr);
 }
 
-void Genome::printRNA (string before) {
+void Genome::printRNA (string before) const {
     cout << before << Genome::getRNA().getStrand() << endl;
 }
 
-void Genome::printDNA (string before) {
+void Genome::printDNA (string before) const {
     cout << before << Genome::getDNA().first.getStrand() << endl << Genome::getDNA().second.getStrand() << endl;
 }
 
@@ -213,6 +213,10 @@ void Cell::addChromosome (string s1, string s2) {
     if (chromosomes.size() < number) {
         chromosomes.push_back(new Chromosome(s1, s2));
     }
+}
+
+vector<Chromosome*> Cell::getChromosomes () const {
+    return chromosomes;
 }
 
 void Cell::dieIfShould () {
@@ -264,7 +268,8 @@ void Cell::dieIfShould () {
 }
 
 void Cell::mutateSmallScale (char n1, char n2, int m, int n) {
-
+    Chromosome* c(chromosomes.at(m));
+    c -> mutateSmallScale(n1, n2, n);
 }
 
 void Cell::mutateLargeScale (string s1, int n, string s2, int m) {

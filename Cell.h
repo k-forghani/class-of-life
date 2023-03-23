@@ -36,8 +36,8 @@ class Genome {
         void mutateLargeScaleDNA(string s1, string s2);
         void mutateInverselyRNA(string s);
         void mutateInverselyDNA(string s);
-        void printRNA(string before = "");
-        void printDNA(string before = "");
+        void printRNA(string before = "") const;
+        void printDNA(string before = "") const;
 };
 
 class Chromosome : public Genome {
@@ -62,6 +62,7 @@ class Cell {
         Cell(int n);
         ~Cell();
         void addChromosome(string s1, string s2);
+        vector<Chromosome*> getChromosomes() const;
         void dieIfShould();
         void mutateSmallScale(char n1, char n2, int m, int n = -1);
         void mutateLargeScale(string s1, int n, string s2, int m);
