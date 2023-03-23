@@ -198,6 +198,8 @@ void Chromosome::mutateInversely (string s) {
 Cell::Cell (int n) {
     if (n > 0) {
         number = n;
+    } else {
+        number = 1;
     }
 }
 
@@ -255,8 +257,10 @@ void Cell::dieIfShould () {
         }
     }
     
-    // TO_BE_IMPLEMENTED
-    // A mechanism for self-destruction ...
+    // NOTE: Object must be constructed using 'new' keyword.
+    if (will_die) {
+        delete this;
+    }
 }
 
 void Cell::mutateSmallScale (char n1, char n2, int m, int n) {
