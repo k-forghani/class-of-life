@@ -23,7 +23,7 @@ Instead of using the interface, you may run the test and debug the project:
 
 ## Developers
 
-This project was founded by [*Kazem Forghani*](../../k-forghani) in collaboration with [*Elaheh Razmkhah*](../../ELrzm).
+This project was founded by [*Kazem Forghani*](https://github.com/k-forghani) in collaboration with [*Elaheh Razmkhah*](https://github.com/ELrzm).
 
 ## License
 
