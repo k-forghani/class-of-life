@@ -23,6 +23,8 @@ Instead of using the interface, you may run the test and debug the project:
 
 ## Developers
 
-This project was developed by *Kazem Forghani* and *Elaheh Razmkhah*.
+This project was founded by *Kazem Forghani* in collaboration with *Elaheh Razmkhah*.
 
 ## License
+
+This project has been released under *MIT License*.
