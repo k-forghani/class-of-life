@@ -25,25 +25,31 @@ int main () {
 
     cout << endl << "mutateSmallScaleRNA()" << endl;
     genome.mutateSmallScaleRNA('g', 'a', 2);
-    cout << "RNA: " << endl << genome.getRNA().getStrand() << endl;
+    cout << "RNA: " << genome.getRNA().getStrand() << endl;
 
     /* mutateSmallScaleDNA */
 
     cout << endl << "mutateSmallScaleDNA()" << endl;
     genome.mutateSmallScaleDNA('g', 'a', -1);
-    cout << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
 
     /* mutateLargeScaleRNA() */
 
     cout << endl << "mutateLargeScaleRNA()" << endl;
     genome.mutateLargeScaleRNA("aac", "tt");
-    cout << "RNA: " << endl << genome.getRNA().getStrand() << endl;
+    cout << "RNA: " << genome.getRNA().getStrand() << endl;
 
     /* mutateLargeScaleDNA() */
 
     cout << endl << "mutateLargeScaleDNA()" << endl;
     genome.mutateLargeScaleDNA("ac", "gg");
-    cout << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+    cout << "DNA: " << endl << genome.getDNA().first.getStrand() << endl << genome.getDNA().second.getStrand() << endl;
+
+    /* mutateInverselyRNA() */
+    
+    cout << endl << "mutateInverselyRNA()" << endl;
+    genome.mutateInverselyRNA("gat");
+    cout << "RNA: " << genome.getRNA().getStrand() << endl;
 
     return 0;
 }

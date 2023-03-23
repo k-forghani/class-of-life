@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include <set>
+#include <algorithm>
 
 using namespace std;
 
