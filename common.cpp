@@ -15,13 +15,8 @@ char getComplement (char n) {
     }
 }
 
-/*
-    Knuth-Morris-Pratt Pattern Searching Algorithm
-    Description: There are two main parts inside this function:
-        1. Computing LPS Table
-        2. KMP Match
-    Reference: https://www.scaler.com/topics/data-structures/kmp-algorithm/
-*/
+// Knuth-Morris-Pratt Pattern Searching (Computing LPS Table + KMP Match)
+// Find more at https://www.scaler.com/topics/data-structures/kmp-algorithm/.
 int findPattern (string s, string p) {
     // Computing LPS Table
     
