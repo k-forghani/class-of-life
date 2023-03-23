@@ -9,7 +9,6 @@ using namespace std;
 
 class Strand {
     private:
-        const set<char> nucleotides = {'A', 'C', 'G', 'T'};
         string strand;
     
     public:

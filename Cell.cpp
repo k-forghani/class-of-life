@@ -17,7 +17,7 @@ void Strand::setStrand (string strand) {
 
     for (int i = 0; i < strand.length(); i++) {
         char c = toupper(strand[i]);
-        if (nucleotides.count(c))
+        if (NUCLEOTIDES.count(c))
             this -> strand += c;
     }
 }
