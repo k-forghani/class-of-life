@@ -222,8 +222,7 @@ vector<Chromosome*> Cell::getChromosomes () const {
 void Cell::dieIfShould () {
     bool will_die = false;
 
-    auto i = chromosomes.begin();
-    while (i != chromosomes.end()) {
+    for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
         Chromosome c(**i);
 
         pair<Strand, Strand> dna = c.getChromosome();
@@ -252,12 +251,6 @@ void Cell::dieIfShould () {
         if ((unbonded > 5) || ((double)at_bonds / (double)gc_bonds > 3)) {
             will_die = true;
             break;
-        }
-
-        if (true) {
-            i = chromosomes.erase(i);
-        } else {
-            ++i;
         }
     }
     
