@@ -9,8 +9,18 @@ Animal::Animal (int n) : Cell(n) {
 
 }
 
+// NOTE: Not tested yet!
 void Animal::killBadChromosomes () {
+    auto i = chromosomes.begin();
+    while (i != chromosomes.end()) {
+        Chromosome c(**i);
 
+        if (c.isAbnormal()) {
+            i = chromosomes.erase(i);
+        } else {
+            ++i;
+        }
+    }
 }
 
 double Animal::getGeneticSimilarity (const Animal& animal) const {
@@ -22,7 +32,15 @@ Animal Animal::reproduceAsexually () const {
 }
 
 bool operator== (const Animal& a1, const Animal& a2) {
-    return true;
+    if (a1.number != a2.number) {
+        return false;
+    }
+
+    if (a1.getGeneticSimilarity(a2) > 0.7) {
+        return true;
+    }
+
+    return false;
 }
 
 Animal operator+ (const Animal& a1, const Animal& a2) {
