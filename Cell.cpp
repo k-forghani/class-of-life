@@ -190,7 +190,7 @@ void Chromosome::mutateLargeScale (string s1, string s2) {
 }
 
 void Chromosome::mutateInversely (string s) {
-    Chromosome::mutateInversely(s);
+    Chromosome::mutateInverselyDNA(s);
 }
 
 /* Cell */
@@ -291,7 +291,8 @@ void Cell::mutateLargeScale (string s1, int n, string s2, int m) {
 }
 
 void Cell::mutateInversely (string s, int n) {
-
+    Chromosome* c(chromosomes.at(n));
+    c -> mutateInversely(s);
 }
 
 void Cell::printComplementaryPalindromes () const {

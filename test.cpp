@@ -91,6 +91,13 @@ int main () {
     cout << "Chromosome 2:" << endl;
     c2 -> printDNA();
 
+    /* mutateInversely() */
+    
+    cout << endl << "Second chromosome mutateInversely()" << endl;
+    cell -> mutateInversely("gac", 1);
+    Chromosome* cp = (cell -> getChromosomes()).at(1);
+    cp -> printDNA();
+
     /* dieIfShould() */
 
     cell -> dieIfShould();
