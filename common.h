@@ -12,6 +12,8 @@ char getComplement(char n);
 
 string getStrandComplement(string s);
 
+bool isComplementaryPalindrome(string s);
+
 int findPattern(string s, string p);
 
 #endif

@@ -98,6 +98,11 @@ int main () {
     Chromosome* cp = (cell -> getChromosomes()).at(1);
     cp -> printDNA();
 
+    /* printComplementaryPalindromes() */
+    
+    cout << endl << "printComplementaryPalindromes()" << endl;
+    cell -> printComplementaryPalindromes();
+
     /* dieIfShould() */
 
     cell -> dieIfShould();
