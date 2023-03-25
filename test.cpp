@@ -113,7 +113,7 @@ int main () {
     Animal a2(1);
     a1.addChromosome(
         "ttggcccattagctaa",
-        "aacggtttagcccc"
+        "aacggtttagccccgg"
     );
     a2.addChromosome(
         "ttggcccattagctaa",
@@ -124,6 +124,17 @@ int main () {
 
     cout << endl << "getGeneticSimilarity()" << endl;
     cout << a1.getGeneticSimilarity(a2) << endl;
+
+    /* operator == */
+
+    cout << endl << "operator ==" << endl;
+    cout << to_string(a1 == a2) << endl;
+
+    /* killBadChromosomes() */
+
+    cout << endl << "killBadChromosomes()" << endl;
+    a1.killBadChromosomes();
+    cout << "Number of Chromosomes: " << a1.getChromosomes().size() << endl;
     
     return 0;
 }

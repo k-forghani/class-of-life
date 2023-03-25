@@ -6,11 +6,8 @@ using namespace std;
 
 /* Animal */
 
-Animal::Animal (int n) : Cell(n) {
+Animal::Animal (int n) : Cell(n) {}
 
-}
-
-// NOTE: Not tested yet!
 void Animal::killBadChromosomes () {
     auto i = chromosomes.begin();
     while (i != chromosomes.end()) {
@@ -22,6 +19,7 @@ void Animal::killBadChromosomes () {
             ++i;
         }
     }
+    number = chromosomes.size();
 }
 
 double Animal::getGeneticSimilarity (const Animal& animal) const {
