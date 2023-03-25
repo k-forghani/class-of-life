@@ -296,36 +296,29 @@ void Cell::mutateInversely (string s, int n) {
 
 void Cell::printComplementaryPalindromes () const {
     for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
-        Chromosome c(**i);
-        string s1 = c.getChromosome().first.getStrand();
-        string s2 = c.getChromosome().second.getStrand();
-        
-        for (int j = 0; j < s1.length() - 1; j++) {
-            for (int k = 0; k < s1.length() / 2 - 1; k++) {
-                if (s1[j - k] == getComplement(s1[j + 1 + k])) {
-                    string ss1 = s1.substr(j - k, 2 * k + 2);
-                    cout << "C" << i - chromosomes.begin() + 1 << "\tS1\t" << j - k << "-" << j + 1 + k << "\t" << ss1 << endl;
-                } else {
-                    break;
-                }
-                if (j - k - 1 < 0 || j + 1 + k + 1 > s1.length() - 1) {
-                    break;
-                }
-            }
-        }
+        int ci = i - chromosomes.begin() + 1;
+        pair<Strand, Strand> dna = (**i).getChromosome();
+        string s = dna.first.getStrand();
 
-        for (int j = 0; j < s2.length() - 1; j++) {
-            for (int k = 0; k < s2.length() / 2 - 1; k++) {
-                if (s2[j - k] == getComplement(s2[j + 1 + k])) {
-                    string ss2 = s2.substr(j - k, 2 * k + 2);
-                    cout << "C" << i - chromosomes.begin() + 1 << "\tS2\t" << j - k << "-" << j + 1 + k << "\t" << ss2 << endl;
-                } else {
-                    break;
-                }
-                if (j - k - 1 < 0 || j + 1 + k + 1 > s2.length() - 1) {
-                    break;
+        for (int j = 0; j < 2; j++) {
+            s = dna.first.getStrand();
+
+            for (int k = 0; k < s.length() - 1; k++) {
+                for (int q = 0; q < s.length() / 2 - 1; q++) {
+                    int l = k - q;
+                    int u = k + 1 + q;
+                    if (s[l] == getComplement(s[u])) {
+                        cout << "C" << ci << "\tS" << j + 1 <<"\t" << l << "-" << u << "\t" << s.substr(l, u - l + 1) << endl;
+                    } else {
+                        break;
+                    }
+                    if (l - 1 < 0 || u + 1 > s.length() - 1) {
+                        break;
+                    }
                 }
             }
+
+            dna.first = dna.second;
         }
     }
 }
