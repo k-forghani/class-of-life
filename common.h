@@ -14,6 +14,6 @@ string getStrandComplement(string s);
 
 int findPattern(string s, string p);
 
-int getSimilarityScore(string s1, string s2);
+double getSimilarityScore(string s1, string s2);
 
 #endif

@@ -85,7 +85,7 @@ int findPattern (string s, string p) {
     Description: This is a customized minimal version of the algorithm.
     Reference: http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch
 */
-int getSimilarityScore (string s1, string s2) {
+double getSimilarityScore (string s1, string s2) {
     int match = 1;
     int mismatch = 0;
     int gap = 0;
