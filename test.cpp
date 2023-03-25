@@ -106,6 +106,24 @@ int main () {
     /* dieIfShould() */
 
     cell -> dieIfShould();
+
+
+
+    Animal a1(1);
+    Animal a2(1);
+    a1.addChromosome(
+        "ttggcccattagctaa",
+        "aacggtttagcccc"
+    );
+    a2.addChromosome(
+        "ttggcccattagctaa",
+        "gacggtttatacta"
+    );
+
+    /* getGeneticSimilarity() */
+
+    cout << endl << "getGeneticSimilarity()" << endl;
+    cout << a1.getGeneticSimilarity(a2) << endl;
     
     return 0;
 }

@@ -79,3 +79,76 @@ int findPattern (string s, string p) {
 
     return -1;
 }
+
+/*
+    Algorithm: Pairwise [Global] Sequence Alignment Algorithm (Needleman-Wunsch Algorithm)
+    Description: This is a customized minimal version of the algorithm.
+    Reference: http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch
+*/
+int getSimilarityScore (string s1, string s2) {
+    int match = 1;
+    int mismatch = 0;
+    int gap = 0;
+
+    int n = s1.length();
+    int m = s2.length();
+
+    int mat[n + 1][m + 1];
+
+    mat[0][0] = 0;
+    
+    for (int i = 1; i < n + 1; i++) {
+        mat[i][0] = mat[i - 1][0] + gap;
+    }
+    
+    for (int i = 1; i < m + 1; i++) {
+        mat[0][i] = mat[0][i - 1] + gap;
+    }
+
+    for (int i = 1; i < n + 1; i++) {
+        for (int j = 1; j < m + 1; j++) {
+            int score = mismatch;
+            if (s1[i - 1] == s2[j - 1]) {
+                score = match;
+            }
+            mat[i][j] = max(
+                max(
+                    mat[i - 1][j] + gap,
+                    mat[i][j - 1] + gap
+                ),
+                mat[i - 1][j - 1] + score
+            );
+        }
+    }
+
+    int i = n;
+    int j = m;
+    int length = 0;
+
+    while (i != 0 || j != 0) {
+        if (i == 0) {
+            j--;
+        } else if (j == 0) {
+            i--;
+        } else {
+            int maxx = max(
+                max(
+                    mat[i - 1][j],
+                    mat[i][j - 1]
+                ),
+                mat[i - 1][j - 1]
+            );
+            if (maxx == mat[i - 1][j - 1]) {
+                i--;
+                j--;
+            } else if (maxx == mat[i - 1][j]) {
+                i--;
+            } else {
+                j--;
+            }
+        }
+        length++;
+    }
+
+    return (double)mat[n][m] / (double)length;
+}

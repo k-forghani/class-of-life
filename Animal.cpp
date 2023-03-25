@@ -1,4 +1,5 @@
 #include <iostream>
+#include "common.h"
 #include "Animal.h"
 
 using namespace std;
@@ -24,7 +25,33 @@ void Animal::killBadChromosomes () {
 }
 
 double Animal::getGeneticSimilarity (const Animal& animal) const {
-    return 0.0;
+    string g1s1 = "";
+    string g1s2 = "";
+    string g2s1 = "";
+    string g2s2 = "";
+
+    for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
+        pair<Strand, Strand> dna = (**i).getChromosome();
+        g1s1 += dna.first.getStrand();
+        g1s2 += dna.second.getStrand();
+    }
+    
+    for (auto i = animal.chromosomes.begin(); i != animal.chromosomes.end(); ++i) {
+        pair<Strand, Strand> dna = (**i).getChromosome();
+        g2s1 += dna.first.getStrand();
+        g2s2 += dna.second.getStrand();
+    }
+
+    return max(
+        max(
+            getSimilarityScore(g1s1 + g1s2, g2s1 + g2s2),
+            getSimilarityScore(g1s1 + g1s2, g2s2 + g2s1)
+        ),
+        max(
+            getSimilarityScore(g1s2 + g1s1, g2s1 + g2s2),
+            getSimilarityScore(g1s2 + g1s1, g2s2 + g2s1)
+        )
+    );
 }
 
 Animal Animal::reproduceAsexually () const {
