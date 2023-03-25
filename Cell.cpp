@@ -307,7 +307,7 @@ void Cell::printComplementaryPalindromes () const {
                 if (isComplementaryPalindrome(ss1)) {
                     cout << "C" << i - chromosomes.begin() + 1 << "\tS1\t" << j << "-" << j + k - 1 << "\t" << ss1 << endl;
                 }
-                if (isComplementaryPalindrome(ss1)) {
+                if (isComplementaryPalindrome(ss2)) {
                     cout << "C" << i - chromosomes.begin() + 1 << "\tS2\t" << j << "-" << j + k - 1 << "\t" << ss2 << endl;
                 }
             }
