@@ -295,6 +295,8 @@ void Cell::mutateInversely (string s, int n) {
 }
 
 void Cell::printComplementaryPalindromes () const {
+    cout << "Chr.\tStrand\tRegion\tSubsequence" << endl;
+
     for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
         int ci = i - chromosomes.begin() + 1;
         pair<Strand, Strand> dna = (**i).getChromosome();
@@ -308,7 +310,7 @@ void Cell::printComplementaryPalindromes () const {
                     int l = k - q;
                     int u = k + 1 + q;
                     if (s[l] == getComplement(s[u])) {
-                        cout << "C" << ci << "\tS" << j + 1 <<"\t" << l << "-" << u << "\t" << s.substr(l, u - l + 1) << endl;
+                        cout << ci << "\t" << j + 1 <<"\t" << l << "-" << u << "\t" << s.substr(l, u - l + 1) << endl;
                     } else {
                         break;
                     }
