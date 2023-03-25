@@ -22,18 +22,6 @@ string getStrandComplement (string s) {
     return s;
 }
 
-bool isComplementaryPalindrome (string s) {
-    if (s.length() % 2 != 0) {
-        return false;
-    }
-    for (int i = 0; i < s.length() / 2; i++) {
-        if (s[i] != getComplement(s[s.length() - i - 1])) {
-            return false;
-        }
-    }
-    return true;
-}
-
 /*
     Knuth-Morris-Pratt Pattern Searching Algorithm
     Description: There are two main parts inside this function:

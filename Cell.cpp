@@ -300,15 +300,30 @@ void Cell::printComplementaryPalindromes () const {
         string s1 = c.getChromosome().first.getStrand();
         string s2 = c.getChromosome().second.getStrand();
         
-        for (int j = 0; j < s1.length(); j++) {
-            for (int k = 2; k < s1.length() - j; k += 2) {
-                string ss1 = s1.substr(j, k);
-                string ss2 = s2.substr(j, k);
-                if (isComplementaryPalindrome(ss1)) {
-                    cout << "C" << i - chromosomes.begin() + 1 << "\tS1\t" << j << "-" << j + k - 1 << "\t" << ss1 << endl;
+        for (int j = 0; j < s1.length() - 1; j++) {
+            for (int k = 0; k < s1.length() / 2 - 1; k++) {
+                if (s1[j - k] == getComplement(s1[j + 1 + k])) {
+                    string ss1 = s1.substr(j - k, 2 * k + 2);
+                    cout << "C" << i - chromosomes.begin() + 1 << "\tS1\t" << j - k << "-" << j + 1 + k << "\t" << ss1 << endl;
+                } else {
+                    break;
                 }
-                if (isComplementaryPalindrome(ss2)) {
-                    cout << "C" << i - chromosomes.begin() + 1 << "\tS2\t" << j << "-" << j + k - 1 << "\t" << ss2 << endl;
+                if (j - k - 1 < 0 || j + 1 + k + 1 > s1.length() - 1) {
+                    break;
+                }
+            }
+        }
+
+        for (int j = 0; j < s2.length() - 1; j++) {
+            for (int k = 0; k < s2.length() / 2 - 1; k++) {
+                if (s2[j - k] == getComplement(s2[j + 1 + k])) {
+                    string ss2 = s2.substr(j - k, 2 * k + 2);
+                    cout << "C" << i - chromosomes.begin() + 1 << "\tS2\t" << j - k << "-" << j + 1 + k << "\t" << ss2 << endl;
+                } else {
+                    break;
+                }
+                if (j - k - 1 < 0 || j + 1 + k + 1 > s2.length() - 1) {
+                    break;
                 }
             }
         }
