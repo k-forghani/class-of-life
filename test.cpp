@@ -167,6 +167,31 @@ int main () {
     Animal baby = a1 + a2;
     cout << "Similarity with Parent 1: " << baby.getGeneticSimilarity(a1) << endl;
     cout << "Similarity with Parent 2: " << baby.getGeneticSimilarity(a2) << endl;
+
+
+
+    Virus virus("gttagctgtacgt");
+
+    /* Initial Things */
+    virus.printRNA("RNA: ");
+
+    /* mutateSmallScale() */
+
+    cout << endl << "mutateSmallScale()" << endl;
+    virus.mutateSmallScale('t', 'g', 2);
+    virus.printRNA("RNA: ");
+
+    /* mutateLargeScale() */
+
+    cout << endl << "mutateLargeScale()" << endl;
+    virus.mutateLargeScale("gtacgt", "aaaaaa");
+    virus.printRNA("RNA: ");
+
+    /* mutateInversely() */
+    
+    cout << endl << "mutateInversely()" << endl;
+    virus.mutateInversely("ct");
+    virus.printRNA("RNA: ");
     
     return 0;
 }

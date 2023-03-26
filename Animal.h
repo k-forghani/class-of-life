@@ -25,8 +25,8 @@ class Virus : public Genome {
         Virus(string rna);
         void setVirus(string rna);
         Strand getVirus() const;
-        void mutateSmallScale(char n1, char n2, int m, int n = -1);
-        void mutateLargeScale(string s1, int n, string s2, int m);
-        void mutateInversely(string s, int n);
+        void mutateSmallScale(char n1, char n2, int n = -1);
+        void mutateLargeScale(string s1, string s2);
+        void mutateInversely(string s);
         bool isPathogenic(const Animal& animal) const;
 };

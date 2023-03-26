@@ -143,28 +143,26 @@ Animal operator+ (const Animal& a1, const Animal& a2) {
 
 /* Virus */
 
-Virus::Virus (string rna) : Genome(rna, "", "") {
-
-}
+Virus::Virus (string rna) : Genome(rna, "", "") {}
 
 void Virus::setVirus (string rna) {
-
+    Virus::setRNA(rna);
 }
 
 Strand Virus::getVirus () const {
-    return Strand("");
+    return Virus::getRNA();
 }
 
-void Virus::mutateSmallScale (char n1, char n2, int m, int n) {
-
+void Virus::mutateSmallScale (char n1, char n2, int n) {
+    Virus::mutateSmallScaleRNA(n1, n2, n);
 }
 
-void Virus::mutateLargeScale (string s1, int n, string s2, int m) {
-
+void Virus::mutateLargeScale (string s1, string s2) {
+    Virus::mutateLargeScaleRNA(s1, s2);
 }
 
-void Virus::mutateInversely (string s, int n) {
-
+void Virus::mutateInversely (string s) {
+    Virus::mutateInverselyRNA(s);
 }
 
 bool Virus::isPathogenic (const Animal& animal) const {
