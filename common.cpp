@@ -32,11 +32,14 @@ string getStrandComplement (string s) {
 }
 
 /*
-    Knuth-Morris-Pratt Pattern Searching Algorithm
-    Description: There are two main parts inside this function:
-        1. Computing LPS Table
-        2. KMP Match
-    Reference: https://www.scaler.com/topics/data-structures/kmp-algorithm/
+    Algorithm:
+        Knuth-Morris-Pratt Pattern Searching Algorithm
+    Description:
+        There are two main parts inside this function:
+            1. Computing LPS Table
+            2. KMP Match
+    Reference:
+        https://www.scaler.com/topics/data-structures/kmp-algorithm/
 */
 int findPattern (string s, string p) {
     // Computing LPS Table
@@ -90,9 +93,12 @@ int findPattern (string s, string p) {
 }
 
 /*
-    Algorithm: Pairwise [Global] Sequence Alignment Algorithm (Needleman-Wunsch Algorithm)
-    Description: This is a customized minimal version of the algorithm.
-    Reference: http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch
+    Algorithm:
+        Pairwise [Global] Sequence Alignment Algorithm (Needleman-Wunsch Algorithm)
+    Description:
+        This is a customized minimal version of the algorithm.
+    Reference:
+        http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch
 */
 double getSimilarityScore (string s1, string s2) {
     int match = 1;
@@ -162,10 +168,11 @@ double getSimilarityScore (string s1, string s2) {
     return (double)mat[n][m] / (double)length;
 }
 
-
 /*
-    Algorithm: Dynamic Programming Approach
-    Description: This function finds a longest common substring between two strings.
+    Algorithm:
+        Dynamic Programming Approach
+    Description:
+        This function finds a longest common substring between two strings.
     References:
         https://www.scaler.com/topics/longest-common-substring/
         https://stackoverflow.com/a/30560066

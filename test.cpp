@@ -197,19 +197,19 @@ int main () {
 
 
 
-    virus.setVirus("gttagctgtacgt");
+    Virus pathogen("gtggctagcac");
 
     Animal host(5);
-    host.addChromosome("gatcgcctaggccc", "tgcactgca");
-    host.addChromosome("tgactagcttgacc", "catgctatt");
-    host.addChromosome("tgtgactgtcgtga", "gcatcggga");
-    host.addChromosome("gctagtcgctagct", "actatgcac");
-    host.addChromosome("tgagctagccctag", "ccatgagtc");
+    host.addChromosome("gctagccgatcgaa", "tgcactgcacatgc");
+    host.addChromosome("cgatccatgctagc", "catgctaacgtgtt");
+    host.addChromosome("actggagtgctagc", "gcatcgggcagcca");
+    host.addChromosome("agtgctagcagttg", "actatgtacggcac");
+    host.addChromosome("aaagctagcagtgg", "cccgtacatgagtc");
 
     /* isPathogenic() */
 
     cout << endl << "isPathogenic()" << endl;
-    cout << virus.isPathogenic(host) << endl;
+    cout << pathogen.isPathogenic(host) << endl;
     
     return 0;
 }
