@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "common.h"
 
 using namespace std;
@@ -159,4 +160,8 @@ double getSimilarityScore (string s1, string s2) {
     }
 
     return (double)mat[n][m] / (double)length;
+}
+
+string findLCS (vector<string> strings) {
+    return "";
 }

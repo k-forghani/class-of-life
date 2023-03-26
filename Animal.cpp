@@ -166,5 +166,26 @@ void Virus::mutateInversely (string s) {
 }
 
 bool Virus::isPathogenic (const Animal& animal) const {
-    return true;
+    for (int i = 0; i < 2; i++) {
+        vector<string> strings;
+
+        for (auto j = animal.chromosomes.begin(); j != animal.chromosomes.end(); ++j) {
+            pair<Strand, Strand> dna = (**j).getChromosome();
+            if (i == 0) {
+                strings.push_back(dna.first.getStrand());
+            } else {
+                strings.push_back(dna.second.getStrand());
+            }
+        }
+        
+        string lcs = findLCS(strings);
+
+        string r = rna -> getStrand();
+
+        if (findPattern(r, lcs) || findPattern(r, getStrandComplement(lcs))) {
+            return true;
+        }
+    }
+    
+    return false;
 }

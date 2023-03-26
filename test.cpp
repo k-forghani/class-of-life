@@ -192,6 +192,11 @@ int main () {
     cout << endl << "mutateInversely()" << endl;
     virus.mutateInversely("ct");
     virus.printRNA("RNA: ");
+
+    /* isPathogenic() */
+
+    cout << endl << "isPathogenic()" << endl;
+    cout << virus.isPathogenic(parent) << endl;
     
     return 0;
 }
