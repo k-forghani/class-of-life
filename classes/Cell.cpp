@@ -2,7 +2,7 @@
 #include <utility>
 #include <set>
 #include <vector>
-#include "common.h"
+#include "../libs/common.h"
 #include "Cell.h"
 
 using namespace std;

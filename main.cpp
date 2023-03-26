@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Cell.h"
-#include "Animal.h"
+#include "classes/Cell.h"
+#include "classes/Animal.h"
 
 using namespace std;
 
