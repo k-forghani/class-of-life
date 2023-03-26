@@ -182,7 +182,7 @@ bool Virus::isPathogenic (const Animal& animal) const {
 
         string r = rna -> getStrand();
 
-        if (findPattern(r, lcs) || findPattern(r, getStrandComplement(lcs))) {
+        if (lcs != "" && (findPattern(r, lcs) || findPattern(r, getStrandComplement(lcs)))) {
             return true;
         }
     }

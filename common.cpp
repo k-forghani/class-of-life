@@ -162,6 +162,63 @@ double getSimilarityScore (string s1, string s2) {
     return (double)mat[n][m] / (double)length;
 }
 
+
+/*
+    Algorithm: Dynamic Programming Approach
+    Description: This function finds a longest common substring between two strings.
+    References:
+        https://www.scaler.com/topics/longest-common-substring/
+        https://stackoverflow.com/a/30560066
+*/
+string findPairwiseLCS (string s1, string s2) {
+    int n = s1.length();
+    int m = s2.length();
+
+    int mat[n + 1][m + 1];
+
+    string lcs = "";
+
+    for (int i = 0; i < n + 1; i++) {
+        for (int j = 0; j < m + 1; j++) {
+            if (i == 0 || j == 0) {
+                mat[i][j] = 0;
+            } else if (s1[i - 1] == s2[j - 1]) {
+                mat[i][j] = mat[i - 1][j - 1] + 1;
+            } else {
+                mat[i][j] = 0;
+            }
+        }
+    }
+
+    for (int i = 1; i < n + 1; i++) {
+        for (int j = 1; j < m + 1; j++) {
+            if (mat[i][j] > lcs.length()) {
+                lcs = s1.substr(
+                    i - mat[i][j],
+                    mat[i][j]
+                );
+            }
+        }
+    }
+
+    return lcs;
+}
+
 string findLCS (vector<string> strings) {
-    return "";
+    while (strings.size() > 1) {
+        for (int i = 0; i < strings.size() - 1; i++) {
+            string s1 = strings.at(i);
+            string s2 = strings.at(i + 1);
+
+            string lcs = findPairwiseLCS(s1, s2);
+
+            strings.insert(strings.begin() + i, lcs);
+
+            strings.erase(
+                strings.begin() + i + 1,
+                strings.begin() + i + 2 + 1
+            );
+        }
+    }
+    return strings.at(0);
 }

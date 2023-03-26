@@ -20,6 +20,7 @@ int main () {
     );
 
     /* Initial Things */
+
     genome.printRNA("RNA: ");
     genome.printDNA("DNA:\n");
 
@@ -173,6 +174,7 @@ int main () {
     Virus virus("gttagctgtacgt");
 
     /* Initial Things */
+
     virus.printRNA("RNA: ");
 
     /* mutateSmallScale() */
@@ -193,10 +195,21 @@ int main () {
     virus.mutateInversely("ct");
     virus.printRNA("RNA: ");
 
+
+
+    virus.setVirus("gttagctgtacgt");
+
+    Animal host(5);
+    host.addChromosome("gatcgcctaggccc", "tgcactgca");
+    host.addChromosome("tgactagcttgacc", "catgctatt");
+    host.addChromosome("tgtgactgtcgtga", "gcatcggga");
+    host.addChromosome("gctagtcgctagct", "actatgcac");
+    host.addChromosome("tgagctagccctag", "ccatgagtc");
+
     /* isPathogenic() */
 
     cout << endl << "isPathogenic()" << endl;
-    cout << virus.isPathogenic(parent) << endl;
+    cout << virus.isPathogenic(host) << endl;
     
     return 0;
 }
