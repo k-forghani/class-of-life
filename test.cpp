@@ -87,7 +87,7 @@ int main () {
     cout << endl << "First chromosome after mutateSmallScale()" << endl;
     cell -> mutateSmallScale('a', 'c', 0, 1);
     Chromosome* c = (cell -> getChromosomes()).at(0);
-    c -> printDNA();
+    c -> print();
 
     /* mutateLargeScale() */
     
@@ -96,16 +96,16 @@ int main () {
     Chromosome* c1 = (cell -> getChromosomes()).at(1);
     Chromosome* c2 = (cell -> getChromosomes()).at(2);
     cout << "Chromosome 1:" << endl;
-    c1 -> printDNA();
+    c1 -> print();
     cout << "Chromosome 2:" << endl;
-    c2 -> printDNA();
+    c2 -> print();
 
     /* mutateInversely() */
     
     cout << endl << "Second chromosome mutateInversely()" << endl;
     cell -> mutateInversely("gac", 1);
     Chromosome* cp = (cell -> getChromosomes()).at(1);
-    cp -> printDNA();
+    cp -> print();
 
     /* printComplementaryPalindromes() */
     
@@ -175,25 +175,25 @@ int main () {
 
     /* Initial Things */
 
-    virus.printRNA("RNA: ");
+    virus.print("RNA: ");
 
     /* mutateSmallScale() */
 
     cout << endl << "mutateSmallScale()" << endl;
     virus.mutateSmallScale('t', 'g', 2);
-    virus.printRNA("RNA: ");
+    virus.print("RNA: ");
 
     /* mutateLargeScale() */
 
     cout << endl << "mutateLargeScale()" << endl;
     virus.mutateLargeScale("gtacgt", "aaaaaa");
-    virus.printRNA("RNA: ");
+    virus.print("RNA: ");
 
     /* mutateInversely() */
     
     cout << endl << "mutateInversely()" << endl;
     virus.mutateInversely("ct");
-    virus.printRNA("RNA: ");
+    virus.print("RNA: ");
 
 
 

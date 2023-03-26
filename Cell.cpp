@@ -222,6 +222,10 @@ bool Chromosome::isAbnormal () const {
     return false;
 }
 
+void Chromosome::print (string before) const {
+    Chromosome::printDNA(before);
+}
+
 /* Cell */
 
 Cell::Cell (int n) {
