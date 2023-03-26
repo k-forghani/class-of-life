@@ -97,7 +97,48 @@ bool operator== (const Animal& a1, const Animal& a2) {
 }
 
 Animal operator+ (const Animal& a1, const Animal& a2) {
-    return Animal(0);
+    if (a1.number != a2.number) {
+        return Animal((int)((a1.number + a2.number) / 2));
+    }
+
+    Animal c1 = a1.reproduceAsexually();
+    Animal c2 = a2.reproduceAsexually();
+
+    Animal* child = new Animal(c1.number);
+
+    Animal* current;
+    Animal* next;
+
+    if (randint(1, 2) == 1) {
+        current = &c1;
+        next = &c2;
+    } else {
+        current = &c2;
+        next = &c1;
+    }
+
+    for (int i = 0; i < child -> number; i++) {
+        int index = randint(0, (current -> chromosomes).size() - 1);
+        pair<Strand, Strand> dna = (current -> chromosomes).at(index) -> getChromosome();
+        child -> addChromosome(dna.first.getStrand(), dna.second.getStrand());
+        swap(current, next);
+    }
+
+
+    for (int i = 0; i < child -> number; i++) {
+        int source = randint(0, child -> number - 1);
+        int target = randint(0, child -> number - 1);
+        iter_swap(
+            (child -> chromosomes).begin() + source,
+            (child -> chromosomes).begin() + target
+        );
+    }
+
+    if (a1.getGeneticSimilarity(*child) > 0.7 && a2.getGeneticSimilarity(*child) > 0.7) {
+        return *child;
+    } else {
+        return a1 + a2;
+    }
 }
 
 /* Virus */

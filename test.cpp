@@ -158,6 +158,15 @@ int main () {
     cout << endl << "reproduceAsexually()" << endl;
     Animal child = parent.reproduceAsexually();
     cout << "Similarity with Parent: " << child.getGeneticSimilarity(parent) << endl;
+
+    /* operator + */
+
+    a1 = parent;
+    a2 = child;
+    cout << endl << "operator +" << endl;
+    Animal baby = a1 + a2;
+    cout << "Similarity with Parent 1: " << baby.getGeneticSimilarity(a1) << endl;
+    cout << "Similarity with Parent 2: " << baby.getGeneticSimilarity(a2) << endl;
     
     return 0;
 }
