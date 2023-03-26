@@ -21,6 +21,19 @@ Instead of using the interface, you may run the test and debug the project:
 
 **Note**: The commands may be a bit different on Windows or macOS.
 
+## Schema
+
+<p align="center">
+    <img src=schema/programs.drawio.svg><br>
+    <span>Figure 1. Programs Schema</span>
+</p>
+
+
+<p align="center">
+    <img src=schema/classes.drawio.svg>
+    <span>Figure 2. Classes Schema</span>
+</p>
+
 ## Developers
 
 This project was founded by [*Kazem Forghani*](https://github.com/k-forghani) in collaboration with [*Elaheh Razmkhah*](https://github.com/ELrzm).
