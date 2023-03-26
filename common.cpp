@@ -3,6 +3,14 @@
 
 using namespace std;
 
+int randint (int lower, int upper) {
+    return lower + rand() % (upper - lower + 1);
+}
+
+double randdbl (double lower, double upper, int precision) {
+    return lower + (double)(rand() % (int)(precision * (upper - lower) + 1)) / precision;
+}
+
 char getComplement (char n) {
     if (n == 'A') {
         return 'T';

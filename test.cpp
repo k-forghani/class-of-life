@@ -1,10 +1,18 @@
 #include <iostream>
+#include <cstdlib>
 #include "Cell.h"
 #include "Animal.h"
 
 using namespace std;
 
 int main () {
+
+    /* Random Seed */
+
+    srand(time(NULL));
+
+
+
     Genome genome(
         "gactacggat",
         "gatacacacc",
@@ -135,6 +143,21 @@ int main () {
     cout << endl << "killBadChromosomes()" << endl;
     a1.killBadChromosomes();
     cout << "Number of Chromosomes: " << a1.getChromosomes().size() << endl;
+
+
+
+    Animal parent(5);
+    parent.addChromosome("acgtgacgt", "tgcactgca");
+    parent.addChromosome("gtacgataa", "catgctatt");
+    parent.addChromosome("cgtagccct", "gcatcggga");
+    parent.addChromosome("tgatacgtg", "actatgcac");
+    parent.addChromosome("ggtactcag", "ccatgagtc");
+
+    /* reproduceAsexually() */
+
+    cout << endl << "reproduceAsexually()" << endl;
+    Animal child = parent.reproduceAsexually();
+    cout << "Similarity with Parent: " << child.getGeneticSimilarity(parent) << endl;
     
     return 0;
 }

@@ -53,7 +53,35 @@ double Animal::getGeneticSimilarity (const Animal& animal) const {
 }
 
 Animal Animal::reproduceAsexually () const {
-    return Animal(0);
+    Animal* child = new Animal(2 * number);
+
+    for (int i = 0; i < 2; i++) {
+        for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
+            pair<Strand, Strand> dna = (**i).getChromosome();
+            child -> addChromosome(dna.first.getStrand(), dna.second.getStrand());
+        }
+    }
+
+    for (int i = 0; i < number; i++) {
+        int source = randint(number, 2 * number - 1);
+        int target = randint(0, number - 1);
+        iter_swap(
+            (child -> chromosomes).begin() + source,
+            (child -> chromosomes).begin() + target
+        );
+    }
+
+    for (int i = 0; i < number; i++) {
+        (child -> chromosomes).pop_back();
+    }
+
+    child -> number = number;
+
+    if (Animal::getGeneticSimilarity(*child) <= SIMILARITY_THRESHOLD) {
+        return Animal::reproduceAsexually();
+    } else {
+        return *child;
+    }
 }
 
 bool operator== (const Animal& a1, const Animal& a2) {
@@ -61,7 +89,7 @@ bool operator== (const Animal& a1, const Animal& a2) {
         return false;
     }
 
-    if (a1.getGeneticSimilarity(a2) > 0.7) {
+    if (a1.getGeneticSimilarity(a2) > SIMILARITY_THRESHOLD) {
         return true;
     }
 
