@@ -19,8 +19,8 @@ class Strand {
 
 class Genome {
     protected:
-        Strand* rna;
-        pair<Strand, Strand>* dna;
+        Strand* rna = new Strand("");
+        pair<Strand, Strand>* dna = new pair<Strand, Strand>(Strand(""), Strand(""));
     
     public:
         Genome(string rna, string dnaf, string dnas);

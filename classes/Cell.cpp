@@ -30,28 +30,49 @@ string Strand::getStrand () const {
 /* Genome */
 
 Genome::Genome (string rna, string dnaf, string dnas) {
-    this -> rna = new Strand(rna);
-    this -> dna = new pair<Strand, Strand>(Strand(dnaf), Strand(dnas));
+    if (this -> rna != NULL) {
+        this -> rna -> setStrand(rna);
+    }
+    if (this -> dna != NULL) {
+        this -> dna -> first = Strand(dnaf);
+        this -> dna -> second = Strand(dnas);
+    }
 }
 
 void Genome::setRNA (string s) {
-    rna -> setStrand(s);
+    if (rna != NULL) {
+        rna -> setStrand(s);
+    }
 }
 
 void Genome::setDNA (string s1, string s2) {
-    (dna -> first).setStrand(s1);
-    (dna -> second).setStrand(s2);
+    if (dna != NULL) {
+        (dna -> first).setStrand(s1);
+        (dna -> second).setStrand(s2);
+    }
 }
 
 Strand Genome::getRNA () const {
-    return *rna;
+    if (rna != NULL) {
+        return *rna;
+    } else {
+        return Strand("");
+    }
 }
 
 pair<Strand, Strand> Genome::getDNA () const {
-    return *dna;
+    if (dna != NULL) {
+        return *dna;
+    } else {
+        return make_pair(Strand(""), Strand(""));
+    }
 }
 
 pair<Strand, Strand> Genome::transformRNAtoDNA () const {
+    if (rna == NULL) {
+        return make_pair(Strand(""), Strand(""));
+    }
+
     string com = rna -> getStrand();
 
     for (int i = 0; i < com.length(); i++) {
@@ -65,6 +86,10 @@ pair<Strand, Strand> Genome::transformRNAtoDNA () const {
 }
 
 void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
+    if (rna == NULL) {
+        return;
+    }
+
     n1 = toupper(n1);
     n2 = toupper(n2);
     
@@ -83,6 +108,10 @@ void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
 }
 
 void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
+    if (dna == NULL) {
+        return;
+    }
+
     n1 = toupper(n1);
     n2 = toupper(n2);
 
@@ -108,6 +137,10 @@ void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
 }
 
 void Genome::mutateLargeScaleRNA (string s1, string s2) {
+    if (rna == NULL) {
+        return;
+    }
+
     s1 = Strand(s1).getStrand();
     s2 = Strand(s2).getStrand();
     
@@ -122,6 +155,10 @@ void Genome::mutateLargeScaleRNA (string s1, string s2) {
 }
 
 void Genome::mutateLargeScaleDNA (string s1, string s2) {
+    if (dna == NULL) {
+        return;
+    }
+
     s1 = Strand(s1).getStrand();
     s2 = Strand(s2).getStrand();
 
@@ -144,6 +181,10 @@ void Genome::mutateLargeScaleDNA (string s1, string s2) {
 }
 
 void Genome::mutateInverselyRNA (string s) {
+    if (rna == NULL) {
+        return;
+    }
+
     string sr = "";
     for (int i = 0; i < s.length(); i++) {
         sr = s[i] + sr;
@@ -153,6 +194,10 @@ void Genome::mutateInverselyRNA (string s) {
 }
 
 void Genome::mutateInverselyDNA (string s) {
+    if (dna == NULL) {
+        return;
+    }
+    
     string sr = "";
     for (int i = 0; i < s.length(); i++) {
         sr = s[i] + sr;
