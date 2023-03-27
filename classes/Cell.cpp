@@ -1,8 +1,8 @@
 #include <iostream>
-#include <utility>
 #include <set>
 #include <vector>
 #include "../libs/common.h"
+#include "../libs/algorithms.h"
 #include "Cell.h"
 
 using namespace std;

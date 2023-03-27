@@ -28,7 +28,6 @@ Instead of using the interface, you may run the test and debug the project:
     <span>Figure 1. Programs Schema</span>
 </p>
 
-
 <p align="center">
     <img src=schema/classes.drawio.svg>
     <span>Figure 2. Classes Schema</span>

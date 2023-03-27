@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../libs/common.h"
+#include "../libs/algorithms.h"
 #include "Animal.h"
 
 using namespace std;
