@@ -6,8 +6,9 @@ using namespace std;
 
 /*
     Algorithm:
-        Knuth-Morris-Pratt Pattern Searching Algorithm
+        Knuth-Morris-Pratt Pattern Searching
     Description:
+        This function finds the first occurence of a substring inside a string.
         There are two main parts inside this function:
             1. Computing LPS Table
             2. KMP Match
@@ -66,17 +67,20 @@ int findPattern (string s, string p) {
 }
 
 /*
-    Algorithm:
-        Pairwise [Global] Sequence Alignment Algorithm (Needleman-Wunsch Algorithm)
+    Metric:
+        Normalized Levenstein Distance
+    Approach:
+        Dynamic Programming (Iterative with Full Matrix)
     Description:
-        This is a customized minimal version of the algorithm.
-    Reference:
-        http://rna.informatik.uni-freiburg.de/Teaching/index.jsp?toolName=Needleman-Wunsch
+        This is an implementation of normalized levenstein distance using iterative with full matrix approach.
+    References:
+        https://en.wikipedia.org/wiki/Levenshtein_distance
+        https://devopedia.org/levenshtein-distance#qst-ans-3
 */
-double getSimilarityScore (string s1, string s2) {
-    int match = 1;
-    int mismatch = 0;
-    int gap = 0;
+double computeNLD (string s1, string s2) {
+    int match = 0;
+    int mismatch = 1;
+    int gap = 1;
 
     int n = s1.length();
     int m = s2.length();
@@ -86,25 +90,27 @@ double getSimilarityScore (string s1, string s2) {
     mat[0][0] = 0;
     
     for (int i = 1; i < n + 1; i++) {
-        mat[i][0] = mat[i - 1][0] + gap;
+        mat[i][0] = i;
     }
     
     for (int i = 1; i < m + 1; i++) {
-        mat[0][i] = mat[0][i - 1] + gap;
+        mat[0][i] = i;
     }
 
     for (int i = 1; i < n + 1; i++) {
         for (int j = 1; j < m + 1; j++) {
-            int score = mismatch;
+            int cost;
             if (s1[i - 1] == s2[j - 1]) {
-                score = match;
+                cost = match;
+            } else {
+                cost = mismatch;
             }
-            mat[i][j] = max(
-                max(
+            mat[i][j] = min(
+                min(
                     mat[i - 1][j] + gap,
                     mat[i][j - 1] + gap
                 ),
-                mat[i - 1][j - 1] + score
+                mat[i - 1][j - 1] + cost
             );
         }
     }
@@ -119,17 +125,17 @@ double getSimilarityScore (string s1, string s2) {
         } else if (j == 0) {
             i--;
         } else {
-            int maxx = max(
-                max(
+            int minx = min(
+                min(
                     mat[i - 1][j],
                     mat[i][j - 1]
                 ),
                 mat[i - 1][j - 1]
             );
-            if (maxx == mat[i - 1][j - 1]) {
+            if (minx == mat[i - 1][j - 1]) {
                 i--;
                 j--;
-            } else if (maxx == mat[i - 1][j]) {
+            } else if (minx == mat[i - 1][j]) {
                 i--;
             } else {
                 j--;
@@ -142,10 +148,71 @@ double getSimilarityScore (string s1, string s2) {
 }
 
 /*
-    Algorithm:
-        Dynamic Programming Approach
+    Metric:
+        Modified Hausdorff Similarity
     Description:
-        This function finds a longest common substring between two strings.
+        This function computes a normalized similarity score based on a modified version of Hausdorff distance.
+    References:
+        https://en.wikipedia.org/wiki/Hausdorff_distance
+*/
+double computeMHS (vector<string> a, vector<string> b) {
+    int n1 = a.size();
+    int n2 = b.size();
+
+    double distances[n1][n2];
+
+    // Pairwise Distances
+
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n2; j++) {
+            distances[i][j] = computeNLD(
+                a.at(i),
+                b.at(j)
+            );
+        }
+    }
+
+    double s1 = 0;
+    double s2 = 0;
+    
+    // 1st Summation
+
+    for (int i = 0; i < n1; i++) {
+        double min_dist = distances[i][0];
+        for (int j = 1; j < n2; j++) {
+            if (distances[i][j] < min_dist) {
+                min_dist = distances[i][j];
+            }
+        }
+        s1 += min_dist;
+    }
+
+    // 2nd Summation
+
+    for (int j = 0; j < n2; j++) {
+        double min_dist = distances[0][j];
+        for (int i = 1; i < n1; i++) {
+            if (distances[i][j] < min_dist) {
+                min_dist = distances[i][j];
+            }
+        }
+        s2 += min_dist;
+    }
+    
+    // Modified Hausdorff Distance
+
+    double dh = 0.5 * (s1 / n1 + s2 / n2);
+
+    // Normalized Similarity Score
+
+    return 1.0 - dh;
+}
+
+/*
+    Approach:
+        Dynamic Programming
+    Description:
+        This function finds a longest common substring (LCS) between two strings.
     References:
         https://www.scaler.com/topics/longest-common-substring/
         https://stackoverflow.com/a/30560066
@@ -184,6 +251,10 @@ string findPairwiseLCS (string s1, string s2) {
     return lcs;
 }
 
+/*
+    Description:
+        This function finds a longest common substring (LCS) between several strings.
+*/
 string findLCS (vector<string> strings) {
     while (strings.size() > 1) {
         for (int i = 0; i < strings.size() - 1; i++) {

@@ -5,6 +5,6 @@ using namespace std;
 
 int findPattern(string s, string p);
 
-double getSimilarityScore(string s1, string s2);
+double computeMHS (vector<string> a, vector<string> b);
 
 string findLCS(vector<string> strings);

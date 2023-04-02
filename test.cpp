@@ -122,11 +122,11 @@ int main () {
     Animal a2(1);
     a1.addChromosome(
         "ttggcccattagctaa",
-        "aacggtttagccccgg"
+        "actgactgcatgactgcatg"
     );
     a2.addChromosome(
         "ttggcccattagctaa",
-        "gacggtttatacta"
+        "actgactgca"
     );
 
     /* getGeneticSimilarity() */

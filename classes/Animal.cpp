@@ -24,33 +24,38 @@ void Animal::killBadChromosomes () {
 }
 
 double Animal::getGeneticSimilarity (const Animal& animal) const {
-    string g1s1 = "";
-    string g1s2 = "";
-    string g2s1 = "";
-    string g2s2 = "";
+    double similarity = 0;
 
-    for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
-        pair<Strand, Strand> dna = (**i).getChromosome();
-        g1s1 += dna.first.getStrand();
-        g1s2 += dna.second.getStrand();
+    for (int i = 0; i < 3; i++) {
+        vector<string> a;
+        vector<string> b;
+
+        for (auto j = chromosomes.begin(); j != chromosomes.end(); ++j) {
+            pair<Strand, Strand> dna = (**j).getChromosome();
+            if (i == 0 || i == 1) {
+                a.push_back(dna.first.getStrand());
+            } else if (i == 2 || i == 3) {
+                a.push_back(dna.second.getStrand());
+            }
+        }
+        
+        for (auto j = animal.chromosomes.begin(); j != animal.chromosomes.end(); ++j) {
+            pair<Strand, Strand> dna = (**j).getChromosome();
+            if (i == 0 || i == 2) {
+                b.push_back(dna.first.getStrand());
+            } else if (i == 1 || i == 3) {
+                b.push_back(dna.second.getStrand());
+            }
+        }
+
+        double score = computeMHS(a, b);
+
+        if (score > similarity) {
+            similarity = score;
+        }
     }
     
-    for (auto i = animal.chromosomes.begin(); i != animal.chromosomes.end(); ++i) {
-        pair<Strand, Strand> dna = (**i).getChromosome();
-        g2s1 += dna.first.getStrand();
-        g2s2 += dna.second.getStrand();
-    }
-
-    return max(
-        max(
-            getSimilarityScore(g1s1 + g1s2, g2s1 + g2s2),
-            getSimilarityScore(g1s1 + g1s2, g2s2 + g2s1)
-        ),
-        max(
-            getSimilarityScore(g1s2 + g1s1, g2s1 + g2s2),
-            getSimilarityScore(g1s2 + g1s1, g2s2 + g2s1)
-        )
-    );
+    return similarity;
 }
 
 Animal Animal::reproduceAsexually () const {
