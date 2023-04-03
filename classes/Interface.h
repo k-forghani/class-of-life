@@ -61,7 +61,7 @@ class Text {
         
         friend ostream& operator<<(ostream& output, const Text& text);
         friend istream& operator>>(istream& input, const Text& text);
-        friend istream& operator+(const Text& t1, const Text& t2);
+        friend Text operator+(const Text& t1, const Text& t2);
 };
 
 class Logger {};
