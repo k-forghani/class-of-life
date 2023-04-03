@@ -1,34 +1,59 @@
 #include <iostream>
+#include <fstream>
 #include "Interface.h"
 
 using namespace std;
 
-/* File */
-
-File::File (string path) {
-
-}
-
-void File::write (string content) const {
-
-}
-
-string File::read () const {
-
-}
-
 /* FastA */
 
-FastA::FastA (string path) : File(path) {
-
+FastA::FastA (string path) {
+    this -> path = path;
 }
 
-void FastA::dump (map<string, string> content) const {
-
+void FastA::dump (map<string, string> content, int length) const {
+    ofstream fout(path);
+    
+    for (const auto &i : content) {
+        string id = i.first;
+        string seq = "";
+        
+        for (int j = 0; j < i.second.length(); j++) {
+            if ((j + 1) % length == 0 || j == i.second.length() - 1) {
+                int segment = (j + 1) % length;
+                seq += i.second.substr(j - segment, segment);
+            }
+        }
+        
+        fout << ">" << id << "\n" << seq;
+    }
+    
+    fout.close();
 }
 
 map<string, string> FastA::parse () const {
+    ifstream fin(path);
 
+    if (!fin.is_open()) {
+        return {};
+    }
+
+    string line;
+
+    map<string, string> content;
+
+    string latest = "";
+
+    while (!fin.eof()) {
+        getline(fin, line);
+        if (line[0] == '>') {
+            latest = line.substr(1, line.length() - 2);
+            content[latest] = "";
+        } else {
+            content[latest] += line.substr(0, line.length() - 1);
+        }
+    }
+
+    return content;
 }
 
 /* Text */

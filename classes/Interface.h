@@ -5,20 +5,13 @@
 
 using namespace std;
 
-class File {
-    protected:
+class FastA {
+    private:
         string path;
-    
-    public:
-        File(string path);
-        void write(string content) const;
-        string read() const;
-};
 
-class FastA : public File {
     public:
         FastA(string path);
-        void dump(map<string, string> content) const;
+        void dump(map<string, string> content, int length = 80) const;
         map<string, string> parse() const;
 };
 
