@@ -1,7 +1,7 @@
 #include <iostream>
+#include <vector>
 #include <set>
 #include <map>
-#include <Cell.h>
 
 using namespace std;
 
@@ -18,8 +18,8 @@ class File {
 class FastA : public File {
     public:
         FastA(string path);
-        void dump(map<string, Strand>) const;
-        map<string, Strand> parse() const;
+        void dump(map<string, string> content) const;
+        map<string, string> parse() const;
 };
 
 class Text {
@@ -64,8 +64,30 @@ class Text {
         friend Text operator+(const Text& t1, const Text& t2);
 };
 
-class Logger {};
+class Log {
+    private:
+        string type;
+        Text* text;
+    
+    public:
+        Log(string type, const Text& text);
+        void print(bool type) const;
+};
 
-class Workspace {};
+class Logger {
+    private:
+        string root = "";
+        vector<Log> logs;
+    
+    public:
+        Logger(string root = "", bool type = false);
+        void log(string type, Text text, bool print) const;
+};
 
-class Interface {};
+class Workspace {
+
+};
+
+class Interface {
+    
+};
