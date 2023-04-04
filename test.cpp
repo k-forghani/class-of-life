@@ -8,6 +8,18 @@
 using namespace std;
 
 int main () {
+    /* Text */
+
+    cout << Text("Enter something: ", "red");
+
+    Text text("", "green");
+    cin >> text;
+    cout << Text("You have entered ", "yellow") + text + Text(".", "yellow") << endl;
+
+    /* TEMPORARY: DO NOT CONTINUE */
+
+    return 0;
+
     /* FastA */
 
     FastA fasta("samples/genomes.fasta");
@@ -25,11 +37,6 @@ int main () {
 
     FastA nfasta("samples/genomes.temp.fasta");
     nfasta.write(records);
-
-
-    /* TEMPORARY: DO NOT CONTINUE */
-
-    return 0;
 
     /* Random Seed */
 

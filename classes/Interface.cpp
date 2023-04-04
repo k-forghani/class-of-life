@@ -60,20 +60,57 @@ map<string, string> FastA::parse () const {
 
 /* Text */
 
-Text::Text(string text, string foreground, string background, set<string> modes) {
+Text::Text (string text, string foreground, string background, set<string> modes) {
+    this -> text = text;
+    this -> foreground = foreground;
+    this -> modes = modes;
+    
+    render();
+}
 
+void Text::render () {
+    if (foreground != "" || background != "0" || modes.size() > 0) {
+        output = ESCAPE + CONTROL;
+
+        if (foreground != "") {
+            output += COLORS.at(foreground).first + SEPARATOR;
+        }
+
+        if (background != "") {
+            output += COLORS.at(background).second + SEPARATOR;
+        }
+
+        for (auto &&i : modes) {
+            output += MODES.at(i).first + SEPARATOR;
+        }
+        
+        output = output.substr(0, output.length() - 1) + END;
+        output += text;
+        output += ESCAPE + CONTROL + RESET + END;
+    } else {
+        output = text;
+    }
+}
+
+void Text::change (string text) {
+    this -> text = text;
+    render();
 }
 
 ostream& operator<< (ostream& output, const Text& text) {
-
+    output << text.output;
+    return output;
 }
 
-istream& operator>> (istream& input, const Text& text) {
-
+istream& operator>> (istream& input, Text& text) {
+    string content;
+    getline(input, content);
+    text.change(content);
+    return input;
 }
 
 Text operator+ (const Text& t1, const Text& t2) {
-
+    return Text(t1.output + t2.output);
 }
 
 /* Log */
