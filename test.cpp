@@ -12,9 +12,17 @@ int main () {
 
     cout << Text("Enter something: ", "red");
 
-    Text text("", "green");
+    Text text("", "green", "", {"bold", "blinking"});
     cin >> text;
     cout << Text("You have entered ", "yellow") + text + Text(".", "yellow") << endl;
+
+    /* Log */
+
+    Log log(
+        "info",
+        new Text("Program started!")
+    );
+    log.print(true);
 
     /* TEMPORARY: DO NOT CONTINUE */
 

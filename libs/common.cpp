@@ -11,6 +11,13 @@ double randdbl (double lower, double upper, int precision) {
     return lower + (double)(rand() % (int)(precision * (upper - lower) + 1)) / precision;
 }
 
+string toupper (string text) {
+    for (int i = 0; i < text.length(); i++) {
+        text[i] = toupper(text[i]);
+    }
+    return text;
+}
+
 vector<string> split (string text, char delimiter) {
     vector<string> items;
 

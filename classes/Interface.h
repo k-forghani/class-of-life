@@ -69,11 +69,18 @@ class Text {
 
 class Log {
     private:
+        const map<string, string> COLORS = {
+            {"INFO", "cyan"},
+            {"WARNING", "yellow"},
+            {"ERROR", "red"},
+            {"SUCCESS", "green"}
+        };
+
         string type;
         Text* text;
     
     public:
-        Log(string type, const Text& text);
+        Log(string type, Text* text);
         void print(bool type) const;
 };
 

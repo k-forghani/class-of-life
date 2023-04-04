@@ -18,6 +18,8 @@ int randint(int lower, int upper);
 
 double randdbl(double lower, double upper, int precision = 1000);
 
+string toupper(string text);
+
 vector<string> split(string text, char delimiter = ' ');
 
 string strip(string text);

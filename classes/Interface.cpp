@@ -115,12 +115,17 @@ Text operator+ (const Text& t1, const Text& t2) {
 
 /* Log */
 
-Log::Log (string type, const Text& text) {
-
+Log::Log (string type, Text* text) {
+    this -> type = toupper(type);
+    this -> text = text;
 }
 
-void Log::print(bool type) const {
-
+void Log::print (bool type) const {
+    if (type) {
+        string color = COLORS.at(this -> type);
+        cout << Text(this -> type, color) << " ";
+    }
+    cout << *text << endl;
 }
 
 /* Logger */
