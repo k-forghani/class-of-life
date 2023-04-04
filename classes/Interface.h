@@ -2,6 +2,8 @@
 #include <vector>
 #include <set>
 #include <map>
+#include "Cell.h"
+#include "Animal.h"
 
 using namespace std;
 
@@ -95,9 +97,46 @@ class Logger {
 };
 
 class Workspace {
-
+    private:
+        map<string, Genome*> genomes;
+        map<string, Cell*> cells;
+        map<string, Animal*> animals;
+        map<string, Virus*> viruses;
+    
+    public:
+        Workspace();
+    
+        void addGenome(string id, Genome* genome);
+        void addCell(string id, Cell* cell);
+        void addAnimal(string id, Animal* animal);
+        void addVirus(string id, Virus* virus);
+        void listGenomes();
+        void listCells();
+        void listAnimals();
+        void listViruses();
+        void showGenome(string id, string mode);
+        void showCell(string id, string mode);
+        void showAnimal(string id, string mode);
+        void showVirus(string id, string mode);
 };
 
 class Interface {
+    private:
+        string titile;
+        string version;
+        string author;
     
+    public:
+        Interface();
+
+        void showWelcome();
+        void showMenu();
+        void addGenome();
+        void addCell();
+        void addAnimal();
+        void addVirus(); 
+        void showHelp();
+        void askQuestion(string message, string type);
+        void showLog(string message, string type);
+        void getField(string name, string message);
 };
