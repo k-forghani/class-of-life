@@ -12,19 +12,19 @@ int main () {
 
     FastA fasta("samples/genomes.fasta");
 
-    map<string, string> seqs = fasta.parse();
-    for (const auto &i : seqs) {
+    map<string, string> records = fasta.parse();
+    for (const auto &i : records) {
         cout << ">" << i.first << endl;
         cout << i.second << endl;
         cout << endl;
     }
 
-    seqs.erase("g3 dnaf");
-    seqs.erase("g3 dnas");
-    seqs.erase("g3 rna");
+    records.erase("g3 dnaf");
+    records.erase("g3 dnas");
+    records.erase("g3 rna");
 
     FastA nfasta("samples/genomes.temp.fasta");
-    nfasta.write(seqs);
+    nfasta.write(records);
 
 
     /* TEMPORARY: DO NOT CONTINUE */

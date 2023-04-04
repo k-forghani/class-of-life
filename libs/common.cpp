@@ -32,6 +32,16 @@ vector<string> split (string text, char delimiter) {
     return items;
 }
 
+string strip (string text) {
+    while (isspace(*text.begin())) {
+        text.erase(0, 1);
+    }
+    while (isspace(*(text.end() - 1))) {
+        text.erase(text.length() - 1, 1);
+    }
+    return text;
+}
+
 char getComplement (char n) {
     if (n == 'A') {
         return 'T';

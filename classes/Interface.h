@@ -11,7 +11,7 @@ class FastA {
 
     public:
         FastA(string path);
-        void write(map<string, string> content, int length = 80) const;
+        void write(map<string, string> records, int length = 80) const;
         map<string, string> parse() const;
 };
 

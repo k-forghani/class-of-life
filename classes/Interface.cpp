@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "../libs/common.h"
 #include "Interface.h"
 
 using namespace std;
@@ -10,21 +11,22 @@ FastA::FastA (string path) {
     this -> path = path;
 }
 
-void FastA::write (map<string, string> content, int length) const {
+void FastA::write (map<string, string> records, int length) const {
     ofstream fout(path);
     
-    for (const auto &i : content) {
-        string id = i.first;
-        string seq = "";
+    for (const auto &i : records) {
+        string id = strip(i.first);
+        string seq = strip(i.second);
+        string nseq = "";
         
-        for (int j = 0; j < i.second.length(); j++) {
-            if ((j + 1) % length == 0 || j == i.second.length() - 1) {
+        for (int j = 0; j < seq.length(); j++) {
+            if ((j + 1) % length == 0 || j == seq.length() - 1) {
                 int segment = (j + 1) % length;
-                seq += i.second.substr(j - segment + 1, segment);
+                nseq += seq.substr(j - segment + 1, segment);
             }
         }
         
-        fout << ">" << id << "\n" << seq << "\n";
+        fout << ">" << id << "\n" << nseq << "\n";
     }
     
     fout.close();
@@ -37,23 +39,23 @@ map<string, string> FastA::parse () const {
         return {};
     }
 
-    string line;
-
-    map<string, string> content;
+    map<string, string> records;
 
     string latest = "";
+
+    string line;
 
     while (!fin.eof()) {
         getline(fin, line);
         if (line[0] == '>') {
-            latest = line.substr(1, line.length() - 1);
-            content[latest] = "";
+            latest = strip(line.substr(1, line.length()));
+            records[latest] = "";
         } else {
-            content[latest] += line.substr(0, line.length());
+            records[latest] += strip(line);
         }
     }
 
-    return content;
+    return records;
 }
 
 /* Text */

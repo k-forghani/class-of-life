@@ -20,6 +20,8 @@ double randdbl(double lower, double upper, int precision = 1000);
 
 vector<string> split(string text, char delimiter = ' ');
 
+string strip(string text);
+
 char getComplement(char n);
 
 string getStrandComplement(string s);
