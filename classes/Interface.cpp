@@ -10,7 +10,7 @@ FastA::FastA (string path) {
     this -> path = path;
 }
 
-void FastA::dump (map<string, string> content, int length) const {
+void FastA::write (map<string, string> content, int length) const {
     ofstream fout(path);
     
     for (const auto &i : content) {
@@ -20,11 +20,11 @@ void FastA::dump (map<string, string> content, int length) const {
         for (int j = 0; j < i.second.length(); j++) {
             if ((j + 1) % length == 0 || j == i.second.length() - 1) {
                 int segment = (j + 1) % length;
-                seq += i.second.substr(j - segment, segment);
+                seq += i.second.substr(j - segment + 1, segment);
             }
         }
         
-        fout << ">" << id << "\n" << seq;
+        fout << ">" << id << "\n" << seq << "\n";
     }
     
     fout.close();
@@ -46,10 +46,10 @@ map<string, string> FastA::parse () const {
     while (!fin.eof()) {
         getline(fin, line);
         if (line[0] == '>') {
-            latest = line.substr(1, line.length() - 2);
+            latest = line.substr(1, line.length() - 1);
             content[latest] = "";
         } else {
-            content[latest] += line.substr(0, line.length() - 1);
+            content[latest] += line.substr(0, line.length());
         }
     }
 

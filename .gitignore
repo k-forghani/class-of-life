@@ -48,3 +48,6 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Custom
+*.temp.*
