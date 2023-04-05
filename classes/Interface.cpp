@@ -165,25 +165,25 @@ void Workspace::showStrandSummary (const Strand& strand, int length) const {
 }
 
 void Workspace::showGenome (string id, string mode) const {
-    Genome genome = *genomes.at(id);
+    Genome* genome = genomes.at(id);
     
     if (mode == "extended") {
         cout << Text("ID", "", "", {"dim", "bold"}) << endl;
         cout << "\t" << Text(id) << endl;
         cout << Text("RNA", "", "", {"dim", "bold"}) << endl;
-        Workspace::showStrand(genome.getRNA(), 1, true);
+        Workspace::showStrand(genome -> getRNA(), 1, true);
         cout << Text("DNA", "", "", {"dim", "bold"}) << endl;
         cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
-        Workspace::showStrand(genome.getDNA().first, 2, true);
+        Workspace::showStrand((genome -> getDNA()).first, 2, true);
         cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
-        Workspace::showStrand(genome.getDNA().second, 2, true);
+        Workspace::showStrand((genome -> getDNA()).second, 2, true);
     } else if (mode == "compact") {
         cout << Text(id) << Text(" | ", "", "", {"dim", "bold"});
-        showStrandSummary(genome.getRNA());
+        showStrandSummary(genome -> getRNA());
         cout << Text(" | ", "", "", {"dim", "bold"});
-        showStrandSummary(genome.getDNA().first);
+        showStrandSummary((genome -> getDNA()).first);
         cout << Text(" | ", "", "", {"dim", "bold"});
-        showStrandSummary(genome.getDNA().second);
+        showStrandSummary((genome -> getDNA()).second);
         cout << endl;
     }
 }
@@ -210,11 +210,39 @@ void Workspace::showCell (string id, string mode) const {
 }
 
 void Workspace::showAnimal (string id, string mode) const {
+    Cell* animal = animals.at(id);
 
+    if (mode == "extended") {
+        cout << Text("ID", "", "", {"dim", "bold"}) << endl;
+        cout << "\t" << Text(id) << endl;
+        int counter = 0;
+        for (auto &&c : animal -> getChromosomes()) {
+            counter++;
+            cout << Text("Chromosome " + to_string(counter), "", "", {"dim", "bold"}) << endl;
+            cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
+            Workspace::showStrand((c -> getDNA()).first, 2, true);
+            cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
+            Workspace::showStrand((c -> getDNA()).second, 2, true);
+        }
+    } else if (mode == "compact") {
+        cout << Text(id) << Text(" | ", "", "", {"dim", "bold"});
+        cout << Text(to_string((animal -> getChromosomes()).size())) << Text(" Chromosomes") << endl;
+    }
 }
 
 void Workspace::showVirus (string id, string mode) const {
-
+    Virus* virus = viruses.at(id);
+    
+    if (mode == "extended") {
+        cout << Text("ID", "", "", {"dim", "bold"}) << endl;
+        cout << "\t" << Text(id) << endl;
+        cout << Text("RNA", "", "", {"dim", "bold"}) << endl;
+        Workspace::showStrand(virus -> getRNA(), 1, true);
+    } else if (mode == "compact") {
+        cout << Text(id) << Text(" | ", "", "", {"dim", "bold"});
+        showStrandSummary(virus -> getRNA());
+        cout << endl;
+    }
 }
 
 void Workspace::listGenomes () const {

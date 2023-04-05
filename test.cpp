@@ -42,6 +42,15 @@ int main () {
     ws.showCell("c1", "extended");
     ws.showCell("c1", "compact");
 
+    /* Viruses */
+
+    cout << "--- Virus ---" << endl;
+    ws.viruses["v1"] = new Virus(
+        "gactacgatcactacacggactactgacgcgcgctacgactacgactgactacgatcgacgtactactgatctacgactacttatatagctctatatatcgcctctatagatc"
+    );
+    ws.showVirus("v1", "extended");
+    ws.showVirus("v1", "compact");
+
     /* TEMPORARY: DO NOT CONTINUE */
 
     return 0;
