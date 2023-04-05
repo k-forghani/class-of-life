@@ -1,3 +1,6 @@
+#ifndef ANIMAL_H
+#define ANIMAL_H
+
 #include <iostream>
 #include "Cell.h"
 
@@ -30,3 +33,5 @@ class Virus : public Genome {
         bool isPathogenic(const Animal& animal) const;
         void print(string before = "") const;
 };
+
+#endif

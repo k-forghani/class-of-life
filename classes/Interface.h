@@ -1,3 +1,6 @@
+#ifndef INTERFACE_H
+#define INTERFACE_H
+
 #include <iostream>
 #include <vector>
 #include <set>
@@ -159,3 +162,5 @@ class Interface {
         void showAbout() const;
         void showHelp(const Text& information) const;
 };
+
+#endif
