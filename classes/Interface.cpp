@@ -16,17 +16,8 @@ void FastA::write (map<string, string> records, int length) const {
     
     for (const auto &i : records) {
         string id = strip(i.first);
-        string seq = strip(i.second);
-        string nseq = "";
-        
-        for (int j = 0; j < seq.length(); j++) {
-            if ((j + 1) % length == 0 || j == seq.length() - 1) {
-                int segment = (j + 1) % length;
-                nseq += seq.substr(j - segment + 1, segment);
-            }
-        }
-        
-        fout << ">" << id << "\n" << nseq << "\n";
+        string seq = divide(i.second, length);
+        fout << ">" << id << "\n" << seq << "\n";
     }
     
     fout.close();
@@ -136,8 +127,61 @@ void Workspace::addLog (string type, Text* text) {
     );
 }
 
-void Workspace::showGenome (string id, string mode) const {
+void Workspace::showStrand (const Strand& strand, int indent, bool numbers, int length) const {
+    string content = strand.getStrand();
 
+    int number = 1;
+
+    for (int j = 0; j < content.length(); j++) {
+        int segment = (j + 1) % length;
+        if (segment == 0 || j == content.length() - 1) {
+            if (segment == 0) {
+                segment = length;
+            }
+            cout << string(indent, '\t');
+            if (numbers) {
+                cout << Text(to_string(number), "", "", {"dim"}) << " ";
+            }
+            cout << Text(content.substr(j - segment + 1, segment)) << endl;
+            number++;
+        }
+    }
+}
+
+void Workspace::showStrandSummary (const Strand& strand, int length) const {
+    string content = strand.getStrand();
+
+    if (content.length() == length) {
+        cout << Text(content);
+    } else if (content.length() > length) {
+        cout << Text(content.substr(0, length - 4) + " ...");
+    } else {
+        cout << Text(content) << string(length - content.length(), ' ');
+    }
+}
+
+void Workspace::showGenome (string id, string mode) const {
+    Genome genome = *genomes.at(id);
+    
+    if (mode == "extended") {
+        cout << Text("ID", "", "", {"dim", "bold"}) << endl;
+        cout << "\t" << Text(id) << endl;
+        cout << Text("RNA", "", "", {"dim", "bold"}) << endl;
+        Workspace::showStrand(genome.getRNA(), 1, true);
+        cout << Text("DNA", "", "", {"dim", "bold"}) << endl;
+        cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
+        Workspace::showStrand(genome.getDNA().first, 2, true);
+        cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
+        Workspace::showStrand(genome.getDNA().second, 2, true);
+    } else if (mode == "compact") {
+        cout << id << Text(" | ", "", "", {"dim"});
+        showStrandSummary(genome.getRNA());
+        cout << Text(" | ", "", "", {"dim"});
+        showStrandSummary(genome.getDNA().first);
+        cout << Text(" | ", "", "", {"dim"});
+        showStrandSummary(genome.getDNA().second);
+        cout << endl;
+    }
 }
 
 void Workspace::showCell (string id, string mode) const {

@@ -8,6 +8,21 @@
 using namespace std;
 
 int main () {
+    /* Workspace */
+
+    Workspace ws("CoL");
+    ws.genomes["g1"] = new Genome(
+        "gactacggatgatcagcatcatcagcgactactagcgcgctatcgactacgactactatatagcgatcatctacgactactagcagctactacgacgcgctagcga",
+        "gatgtacgatatagccctagctatataggtctagatacgctagcgcgcgcgctatatatatcgctacgactacgatagctctagctatctagcgatctattacacc",
+        "gactatcagcatcattataagctactacgactctacgactactagcactatcgacgacgatcattatacgactacgatctactagcgatctatatagacgctatct"
+    );
+    ws.showGenome("g1", "extended");
+    ws.showGenome("g1", "compact");
+
+    /* TEMPORARY: DO NOT CONTINUE */
+
+    return 0;
+
     /* Text */
 
     cout << Text("Enter something: ", "red");
@@ -23,10 +38,6 @@ int main () {
         new Text("Program started!")
     );
     log.print(true);
-
-    /* TEMPORARY: DO NOT CONTINUE */
-
-    return 0;
 
     /* FastA */
 

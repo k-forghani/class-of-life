@@ -49,6 +49,22 @@ string strip (string text) {
     return text;
 }
 
+string divide (string text, int length) {
+    string ntext = "";
+    
+    for (int j = 0; j < text.length(); j++) {
+        int segment = (j + 1) % length;
+        if (segment == 0 || j == text.length() - 1) {
+            if (segment == 0) {
+                segment = length;
+            }
+            ntext += text.substr(j - segment + 1, segment);
+        }
+    }
+
+    return ntext;
+}
+
 char getComplement (char n) {
     if (n == 'A') {
         return 'T';

@@ -24,6 +24,8 @@ vector<string> split(string text, char delimiter = ' ');
 
 string strip(string text);
 
+string divide(string text, int length = 80);
+
 char getComplement(char n);
 
 string getStrandComplement(string s);
