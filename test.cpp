@@ -12,7 +12,7 @@ int main () {
 
     Workspace ws("CoL");
 
-    /* Genomes */
+    /* Genome */
 
     cout << "--- Genome ---" << endl;
     ws.genomes["g1"] = new Genome(
@@ -23,7 +23,7 @@ int main () {
     ws.showGenome("g1", "extended");
     ws.showGenome("g1", "compact");
 
-    /* Cells */
+    /* Cell */
 
     cout << endl << "--- Cell ---" << endl;
     ws.cells["c1"] = new Cell(3);
@@ -42,14 +42,23 @@ int main () {
     ws.showCell("c1", "extended");
     ws.showCell("c1", "compact");
 
-    /* Viruses */
+    /* Virus */
 
-    cout << "--- Virus ---" << endl;
+    cout << endl << "--- Virus ---" << endl;
     ws.viruses["v1"] = new Virus(
         "gactacgatcactacacggactactgacgcgcgctacgactacgactgactacgatcgacgtactactgatctacgactacttatatagctctatatatcgcctctatagatc"
     );
     ws.showVirus("v1", "extended");
     ws.showVirus("v1", "compact");
+
+    /* Genomes List */
+    cout << endl << "--- Genomes List ---" << endl;
+    ws.genomes["g2"] = new Genome(
+        "gatctacgatc",
+        "tgagctactac",
+        "gactatcgact"
+    );
+    ws.listGenomes();
 
     /* TEMPORARY: DO NOT CONTINUE */
 

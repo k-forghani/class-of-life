@@ -246,19 +246,27 @@ void Workspace::showVirus (string id, string mode) const {
 }
 
 void Workspace::listGenomes () const {
-
+    for (auto &&i : genomes) {
+        Workspace::showGenome(i.first, "compact");
+    }
 }
 
 void Workspace::listCells () const {
-
+    for (auto &&i : cells) {
+        Workspace::showCell(i.first, "compact");
+    }
 }
 
 void Workspace::listAnimals () const {
-
+    for (auto &&i : animals) {
+        Workspace::showAnimal(i.first, "compact");
+    }
 }
 
 void Workspace::listViruses () const {
-
+    for (auto &&i : viruses) {
+        Workspace::showVirus(i.first, "compact");
+    }
 }
 
 /* Interface */
