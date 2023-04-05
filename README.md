@@ -35,17 +35,17 @@ Instead of using the interface, you may run the test and debug the project:
 
 <p align="center">
     <img src=schema/classes/Cell.drawio.svg>
-    <span>Figure 2. <i>Cell.h</i> & <i>Cell.cpp</i> Schema</span>
+    <span>Figure 3. <i>Cell.h</i> & <i>Cell.cpp</i> Schema</span>
 </p>
 
 <p align="center">
     <img src=schema/classes/Animal.drawio.svg>
-    <span>Figure 2. <i>Animal.h</i> & <i>Animal.cpp</i> Schema</span>
+    <span>Figure 4. <i>Animal.h</i> & <i>Animal.cpp</i> Schema</span>
 </p>
 
 <p align="center">
     <img src=schema/classes/Interface.drawio.svg>
-    <span>Figure 2. <i>Interface.h</i> & <i>Interface.cpp</i> Schema</span>
+    <span>Figure 5. <i>Interface.h</i> & <i>Interface.cpp</i> Schema</span>
 </p>
 
 ## Developers
