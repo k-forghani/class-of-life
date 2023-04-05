@@ -140,4 +140,126 @@ void Logger::log (string type, Text text, bool print) const {
 
 /* Workspace */
 
+Workspace::Workspace () {
+
+}
+
+void Workspace::addGenome (string id, Genome* genome) {
+
+}
+
+void Workspace::addCell (string id, Cell* cell) {
+
+}
+
+void Workspace::addAnimal (string id, Animal* animal) {
+
+}
+
+void Workspace::addVirus (string id, Virus* virus) {
+
+}
+
+void Workspace::delGenome (string id) {
+
+}
+
+void Workspace::delCell (string id) {
+
+}
+
+void Workspace::delAnimal (string id) {
+
+}
+
+void Workspace::delVirus (string id) {
+
+}
+
+void Workspace::showGenome (string id, string mode) const {
+
+}
+
+void Workspace::showCell (string id, string mode) const {
+
+}
+
+void Workspace::showAnimal (string id, string mode) const {
+
+}
+
+void Workspace::showVirus (string id, string mode) const {
+
+}
+
+void Workspace::listGenomes () const {
+
+}
+
+void Workspace::listCells () const {
+
+}
+
+void Workspace::listAnimals () const {
+
+}
+
+void Workspace::listViruses () const {
+
+}
+
 /* Interface */
+
+Interface::Interface (
+    string name,
+    string version,
+    string datetime,
+    string description,
+    vector<string> authors
+) {
+
+}
+
+void Interface::cleanInput () const {
+
+}
+
+void Interface::clearScreen () const {
+
+}
+
+bool Interface::askQuestion (const Text& message, string type) const {
+
+}
+
+void Interface::showMessage (const Text& message, string type) const {
+
+}
+
+string Interface::getString (const Text& message) const {
+
+}
+
+int Interface::getInteger (const Text& message) const {
+
+}
+
+map<string, string> Interface::getObject (const Text& title, string type, map<string, string> fields) const {
+
+}
+
+void Interface::handleMenu (vector<string> choices, vector<void(*)()> functions) const {
+
+}
+
+void Interface::showWelcome () const {
+
+}
+
+void Interface::showAbout () const {
+
+}
+
+void Interface::showHelp (const Text& information) const {
+
+}
