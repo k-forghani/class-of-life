@@ -88,25 +88,19 @@ class Log {
         void print(bool type) const;
 };
 
-class Logger {
-    private:
-        string root = "";
-        vector<Log> logs;
-    
-    public:
-        Logger(string root = "", bool type = false);
-        void log(string type, Text text, bool print) const;
-};
-
 class Workspace {
     private:
+        string root;
         map<string, Genome*> genomes;
         map<string, Cell*> cells;
         map<string, Animal*> animals;
         map<string, Virus*> viruses;
+        vector<Log> logs;
     
     public:
-        Workspace();
+        Workspace(string root = "");
+
+        void addLog(string type, const Text& text);
     
         void addGenome(string id, Genome* genome);
         void addCell(string id, Cell* cell);

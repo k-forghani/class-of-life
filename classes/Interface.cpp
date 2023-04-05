@@ -122,19 +122,13 @@ void Log::print (bool type) const {
     cout << *text << endl;
 }
 
-/* Logger */
-
-Logger::Logger (string root, bool type) {
-
-}
-
-void Logger::log (string type, Text text, bool print) const {
-
-}
-
 /* Workspace */
 
-Workspace::Workspace () {
+Workspace::Workspace (string root) {
+
+}
+
+void Workspace::addLog (string type, const Text& text) {
 
 }
 
