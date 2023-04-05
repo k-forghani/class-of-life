@@ -91,26 +91,17 @@ class Log {
 class Workspace {
     private:
         string root;
+        vector<Log> logs;
+    
+    public:
         map<string, Genome*> genomes;
         map<string, Cell*> cells;
         map<string, Animal*> animals;
         map<string, Virus*> viruses;
-        vector<Log> logs;
-    
-    public:
+
         Workspace(string root = "");
 
-        void addLog(string type, const Text& text);
-    
-        void addGenome(string id, Genome* genome);
-        void addCell(string id, Cell* cell);
-        void addAnimal(string id, Animal* animal);
-        void addVirus(string id, Virus* virus);
-
-        void delGenome(string id);
-        void delCell(string id);
-        void delAnimal(string id);
-        void delVirus(string id);
+        void addLog(string type, Text* text);
 
         void showGenome(string id, string mode) const;
         void showCell(string id, string mode) const;

@@ -125,43 +125,15 @@ void Log::print (bool type) const {
 /* Workspace */
 
 Workspace::Workspace (string root) {
-
+    this -> root = root;
 }
 
-void Workspace::addLog (string type, const Text& text) {
-
-}
-
-void Workspace::addGenome (string id, Genome* genome) {
-
-}
-
-void Workspace::addCell (string id, Cell* cell) {
-
-}
-
-void Workspace::addAnimal (string id, Animal* animal) {
-
-}
-
-void Workspace::addVirus (string id, Virus* virus) {
-
-}
-
-void Workspace::delGenome (string id) {
-
-}
-
-void Workspace::delCell (string id) {
-
-}
-
-void Workspace::delAnimal (string id) {
-
-}
-
-void Workspace::delVirus (string id) {
-
+void Workspace::addLog (string type, Text* text) {
+    logs.push_back(Log(
+            type,
+            text
+        )
+    );
 }
 
 void Workspace::showGenome (string id, string mode) const {
