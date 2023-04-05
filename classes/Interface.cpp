@@ -1,53 +1,8 @@
 #include <iostream>
-#include <fstream>
 #include "../libs/common.h"
 #include "Interface.h"
 
 using namespace std;
-
-/* FastA */
-
-FastA::FastA (string path) {
-    this -> path = path;
-}
-
-void FastA::write (map<string, string> records, int length) const {
-    ofstream fout(path);
-    
-    for (const auto &i : records) {
-        string id = strip(i.first);
-        string seq = divide(i.second, length);
-        fout << ">" << id << "\n" << seq << "\n";
-    }
-    
-    fout.close();
-}
-
-map<string, string> FastA::parse () const {
-    ifstream fin(path);
-
-    if (!fin.is_open()) {
-        return {};
-    }
-
-    map<string, string> records;
-
-    string latest = "";
-
-    string line;
-
-    while (!fin.eof()) {
-        getline(fin, line);
-        if (line[0] == '>') {
-            latest = strip(line.substr(1, line.length()));
-            records[latest] = "";
-        } else {
-            records[latest] += strip(line);
-        }
-    }
-
-    return records;
-}
 
 /* Text */
 

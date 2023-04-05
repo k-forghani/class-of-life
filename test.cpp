@@ -4,6 +4,7 @@
 #include "classes/Animal.h"
 #include "classes/Interface.h"
 #include "libs/common.h"
+#include "libs/io.h"
 
 using namespace std;
 
@@ -243,9 +244,7 @@ int main () {
 
     cout << endl << Text("--- FastA ---", "cyan") << endl;
 
-    FastA fasta("samples/genomes.fasta");
-
-    map<string, string> records = fasta.parse();
+    map<string, string> records = parseFastA("samples/genomes.fasta");
     for (const auto &i : records) {
         cout << ">" << i.first << endl;
         cout << i.second << endl;
@@ -256,9 +255,7 @@ int main () {
     records.erase("g3 dnas");
     records.erase("g3 rna");
 
-    FastA nfasta("samples/genomes.temp.fasta");
-    nfasta.write(records);
-
+    writeFastA(records, "samples/genomes.temp.fasta");
 
 
 

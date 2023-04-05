@@ -10,16 +10,6 @@
 
 using namespace std;
 
-class FastA {
-    private:
-        string path;
-
-    public:
-        FastA(string path);
-        void write(map<string, string> records, int length = 80) const;
-        map<string, string> parse() const;
-};
-
 class Text {
     private:
         // Reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
