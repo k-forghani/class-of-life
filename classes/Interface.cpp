@@ -130,6 +130,10 @@ void Workspace::addLog (string type, Text* text) {
 void Workspace::showStrand (const Strand& strand, int indent, bool numbers, int length) const {
     string content = strand.getStrand();
 
+    if (content.length() <= length) {
+        numbers = false;
+    }
+
     int number = 1;
 
     for (int j = 0; j < content.length(); j++) {
@@ -174,18 +178,35 @@ void Workspace::showGenome (string id, string mode) const {
         cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
         Workspace::showStrand(genome.getDNA().second, 2, true);
     } else if (mode == "compact") {
-        cout << id << Text(" | ", "", "", {"dim"});
+        cout << Text(id) << Text(" | ", "", "", {"dim", "bold"});
         showStrandSummary(genome.getRNA());
-        cout << Text(" | ", "", "", {"dim"});
+        cout << Text(" | ", "", "", {"dim", "bold"});
         showStrandSummary(genome.getDNA().first);
-        cout << Text(" | ", "", "", {"dim"});
+        cout << Text(" | ", "", "", {"dim", "bold"});
         showStrandSummary(genome.getDNA().second);
         cout << endl;
     }
 }
 
 void Workspace::showCell (string id, string mode) const {
+    Cell* cell = cells.at(id);
 
+    if (mode == "extended") {
+        cout << Text("ID", "", "", {"dim", "bold"}) << endl;
+        cout << "\t" << Text(id) << endl;
+        int counter = 0;
+        for (auto &&c : cell -> getChromosomes()) {
+            counter++;
+            cout << Text("Chromosome " + to_string(counter), "", "", {"dim", "bold"}) << endl;
+            cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
+            Workspace::showStrand((c -> getDNA()).first, 2, true);
+            cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
+            Workspace::showStrand((c -> getDNA()).second, 2, true);
+        }
+    } else if (mode == "compact") {
+        cout << Text(id) << Text(" | ", "", "", {"dim", "bold"});
+        cout << Text(to_string((cell -> getChromosomes()).size())) << Text(" Chromosomes") << endl;
+    }
 }
 
 void Workspace::showAnimal (string id, string mode) const {

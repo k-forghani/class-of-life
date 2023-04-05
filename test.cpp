@@ -11,6 +11,10 @@ int main () {
     /* Workspace */
 
     Workspace ws("CoL");
+
+    /* Genomes */
+
+    cout << "--- Genome ---" << endl;
     ws.genomes["g1"] = new Genome(
         "gactacggatgatcagcatcatcagcgactactagcgcgctatcgactacgactactatatagcgatcatctacgactactagcagctactacgacgcgctagcga",
         "gatgtacgatatagccctagctatataggtctagatacgctagcgcgcgcgctatatatatcgctacgactacgatagctctagctatctagcgatctattacacc",
@@ -18,6 +22,25 @@ int main () {
     );
     ws.showGenome("g1", "extended");
     ws.showGenome("g1", "compact");
+
+    /* Cells */
+
+    cout << endl << "--- Cell ---" << endl;
+    ws.cells["c1"] = new Cell(3);
+    ws.cells["c1"] -> addChromosome(
+        "acgtacgtgggatcaggctacgactatcgatcagacgactatcaggctctagcttctatagcgccgactatcagctatacccacgt",
+        "gactacgagctactactactacgatcatcagcatctgatcatcgactactaactctctcgagagagacttacgcatcatcagcagc"
+    );
+    ws.cells["c1"] -> addChromosome(
+        "gtacgacttatg",
+        "acgtgcacgacc"
+    );
+    ws.cells["c1"] -> addChromosome(
+        "acgtgg",
+        "ggtgac"
+    );
+    ws.showCell("c1", "extended");
+    ws.showCell("c1", "compact");
 
     /* TEMPORARY: DO NOT CONTINUE */
 
