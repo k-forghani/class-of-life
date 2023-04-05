@@ -8,101 +8,13 @@
 using namespace std;
 
 int main () {
-    /* Workspace */
-
-    Workspace ws("CoL");
-
-    /* Genome */
-
-    cout << "--- Genome ---" << endl;
-    ws.genomes["g1"] = new Genome(
-        "gactacggatgatcagcatcatcagcgactactagcgcgctatcgactacgactactatatagcgatcatctacgactactagcagctactacgacgcgctagcga",
-        "gatgtacgatatagccctagctatataggtctagatacgctagcgcgcgcgctatatatatcgctacgactacgatagctctagctatctagcgatctattacacc",
-        "gactatcagcatcattataagctactacgactctacgactactagcactatcgacgacgatcattatacgactacgatctactagcgatctatatagacgctatct"
-    );
-    ws.showGenome("g1", "extended");
-    ws.showGenome("g1", "compact");
-
-    /* Cell */
-
-    cout << endl << "--- Cell ---" << endl;
-    ws.cells["c1"] = new Cell(3);
-    ws.cells["c1"] -> addChromosome(
-        "acgtacgtgggatcaggctacgactatcgatcagacgactatcaggctctagcttctatagcgccgactatcagctatacccacgt",
-        "gactacgagctactactactacgatcatcagcatctgatcatcgactactaactctctcgagagagacttacgcatcatcagcagc"
-    );
-    ws.cells["c1"] -> addChromosome(
-        "gtacgacttatg",
-        "acgtgcacgacc"
-    );
-    ws.cells["c1"] -> addChromosome(
-        "acgtgg",
-        "ggtgac"
-    );
-    ws.showCell("c1", "extended");
-    ws.showCell("c1", "compact");
-
-    /* Virus */
-
-    cout << endl << "--- Virus ---" << endl;
-    ws.viruses["v1"] = new Virus(
-        "gactacgatcactacacggactactgacgcgcgctacgactacgactgactacgatcgacgtactactgatctacgactacttatatagctctatatatcgcctctatagatc"
-    );
-    ws.showVirus("v1", "extended");
-    ws.showVirus("v1", "compact");
-
-    /* Genomes List */
-    cout << endl << "--- Genomes List ---" << endl;
-    ws.genomes["g2"] = new Genome(
-        "gatctacgatc",
-        "tgagctactac",
-        "gactatcgact"
-    );
-    ws.listGenomes();
-
-    /* TEMPORARY: DO NOT CONTINUE */
-
-    return 0;
-
-    /* Text */
-
-    cout << Text("Enter something: ", "red");
-
-    Text text("", "green", "", {"bold", "blinking"});
-    cin >> text;
-    cout << Text("You have entered ", "yellow") + text + Text(".", "yellow") << endl;
-
-    /* Log */
-
-    Log log(
-        "info",
-        new Text("Program started!")
-    );
-    log.print(true);
-
-    /* FastA */
-
-    FastA fasta("samples/genomes.fasta");
-
-    map<string, string> records = fasta.parse();
-    for (const auto &i : records) {
-        cout << ">" << i.first << endl;
-        cout << i.second << endl;
-        cout << endl;
-    }
-
-    records.erase("g3 dnaf");
-    records.erase("g3 dnas");
-    records.erase("g3 rna");
-
-    FastA nfasta("samples/genomes.temp.fasta");
-    nfasta.write(records);
-
     /* Random Seed */
 
     srand(time(NULL));
+    
 
 
+    cout << endl << Text("--- Genome ---", "yellow") << endl;
 
     Genome genome(
         "gactacggat",
@@ -117,47 +29,49 @@ int main () {
 
     /* transformRNAtoDNA() */
 
-    cout << endl << "transformRNAtoDNA()" << endl;
+    cout << endl << Text("transformRNAtoDNA()", "yellow") << endl;
     pair<Strand, Strand> dna = genome.transformRNAtoDNA();
     genome.printDNA("DNA:\n");
 
     /* mutateSmallScaleRNA() */
 
-    cout << endl << "mutateSmallScaleRNA()" << endl;
+    cout << endl << Text("mutateSmallScaleRNA()", "yellow") << endl;
     genome.mutateSmallScaleRNA('g', 'a', 2);
     genome.printRNA("RNA: ");
 
     /* mutateSmallScaleDNA */
 
-    cout << endl << "mutateSmallScaleDNA()" << endl;
+    cout << endl << Text("mutateSmallScaleDNA()", "yellow") << endl;
     genome.mutateSmallScaleDNA('g', 'a', -1);
     genome.printDNA("DNA:\n");
 
     /* mutateLargeScaleRNA() */
 
-    cout << endl << "mutateLargeScaleRNA()" << endl;
+    cout << endl << Text("mutateLargeScaleRNA()", "yellow") << endl;
     genome.mutateLargeScaleRNA("aac", "tt");
     genome.printRNA("RNA: ");
 
     /* mutateLargeScaleDNA() */
 
-    cout << endl << "mutateLargeScaleDNA()" << endl;
+    cout << endl << Text("mutateLargeScaleDNA()", "yellow") << endl;
     genome.mutateLargeScaleDNA("ac", "gg");
     genome.printDNA("DNA:\n");
 
     /* mutateInverselyRNA() */
     
-    cout << endl << "mutateInverselyRNA()" << endl;
+    cout << endl << Text("mutateInverselyRNA()", "yellow") << endl;
     genome.mutateInverselyRNA("gat");
     genome.printRNA("RNA: ");
 
     /* mutateInverselyDNA() */
     
-    cout << endl << "mutateInverselyDNA()" << endl;
+    cout << endl << Text("mutateInverselyDNA()", "yellow") << endl;
     genome.mutateInverselyDNA("aatt");
     genome.printDNA("DNA:\n");
 
 
+
+    cout << endl << Text("--- Cell ---", "green") << endl;
 
     Cell* cell = new Cell(3);
     cell -> addChromosome(
@@ -175,14 +89,14 @@ int main () {
 
     /* mutateSmallScale() */
     
-    cout << endl << "First chromosome after mutateSmallScale()" << endl;
+    cout << endl << Text("First chromosome after mutateSmallScale()", "green") << endl;
     cell -> mutateSmallScale('a', 'c', 0, 1);
     Chromosome* c = (cell -> getChromosomes()).at(0);
     c -> print();
 
     /* mutateLargeScale() */
     
-    cout << endl << "mutateLargeScale()" << endl;
+    cout << endl << Text("mutateLargeScale()", "green") << endl;
     cell -> mutateLargeScale("gta", 1, "gac", 2);
     Chromosome* c1 = (cell -> getChromosomes()).at(1);
     Chromosome* c2 = (cell -> getChromosomes()).at(2);
@@ -193,14 +107,14 @@ int main () {
 
     /* mutateInversely() */
     
-    cout << endl << "Second chromosome mutateInversely()" << endl;
+    cout << endl << Text("Second chromosome after mutateInversely()", "green") << endl;
     cell -> mutateInversely("gac", 1);
     Chromosome* cp = (cell -> getChromosomes()).at(1);
     cp -> print();
 
     /* printComplementaryPalindromes() */
     
-    cout << endl << "printComplementaryPalindromes()" << endl;
+    cout << endl << Text("printComplementaryPalindromes()", "green") << endl;
     cell -> printComplementaryPalindromes();
 
     /* dieIfShould() */
@@ -208,6 +122,8 @@ int main () {
     cell -> dieIfShould();
 
 
+
+    cout << endl << Text("--- Animal ---", "blue") << endl;
 
     Animal a1(1);
     Animal a2(1);
@@ -222,17 +138,17 @@ int main () {
 
     /* getGeneticSimilarity() */
 
-    cout << endl << "getGeneticSimilarity()" << endl;
+    cout << endl << Text("getGeneticSimilarity()", "blue") << endl;
     cout << a1.getGeneticSimilarity(a2) << endl;
 
     /* operator == */
 
-    cout << endl << "operator ==" << endl;
+    cout << endl << Text("operator ==", "blue") << endl;
     cout << to_string(a1 == a2) << endl;
 
     /* killBadChromosomes() */
 
-    cout << endl << "killBadChromosomes()" << endl;
+    cout << endl << Text("killBadChromosomes()", "blue") << endl;
     a1.killBadChromosomes();
     cout << "Number of Chromosomes: " << a1.getChromosomes().size() << endl;
 
@@ -247,7 +163,7 @@ int main () {
 
     /* reproduceAsexually() */
 
-    cout << endl << "reproduceAsexually()" << endl;
+    cout << endl << Text("reproduceAsexually()", "blue") << endl;
     Animal child = parent.reproduceAsexually();
     cout << "Similarity with Parent: " << child.getGeneticSimilarity(parent) << endl;
 
@@ -255,12 +171,14 @@ int main () {
 
     a1 = parent;
     a2 = child;
-    cout << endl << "operator +" << endl;
+    cout << endl << Text("operator +", "blue") << endl;
     Animal baby = a1 + a2;
     cout << "Similarity with Parent 1: " << baby.getGeneticSimilarity(a1) << endl;
     cout << "Similarity with Parent 2: " << baby.getGeneticSimilarity(a2) << endl;
 
 
+
+    cout << endl << Text("--- Virus ---", "magenta") << endl;
 
     Virus virus("gttagctgtacgt");
 
@@ -270,19 +188,19 @@ int main () {
 
     /* mutateSmallScale() */
 
-    cout << endl << "mutateSmallScale()" << endl;
+    cout << endl << Text("mutateSmallScale()", "magenta") << endl;
     virus.mutateSmallScale('t', 'g', 2);
     virus.print("RNA: ");
 
     /* mutateLargeScale() */
 
-    cout << endl << "mutateLargeScale()" << endl;
+    cout << endl << Text("mutateLargeScale()", "magenta") << endl;
     virus.mutateLargeScale("gtacgt", "aaaaaa");
     virus.print("RNA: ");
 
     /* mutateInversely() */
     
-    cout << endl << "mutateInversely()" << endl;
+    cout << endl << Text("mutateInversely()", "magenta") << endl;
     virus.mutateInversely("ct");
     virus.print("RNA: ");
 
@@ -299,8 +217,126 @@ int main () {
 
     /* isPathogenic() */
 
-    cout << endl << "isPathogenic()" << endl;
+    cout << endl << Text("isPathogenic()", "magenta") << endl;
     cout << pathogen.isPathogenic(host) << endl;
+
+
+
+    /* Text */
+
+    cout << endl << Text("--- Text ---", "blue") << endl;
+    cout << Text("Enter something: ", "red");
+    Text text("", "green", "", {"bold", "blinking"});
+    cin >> text;
+    cout << Text("You have entered ", "yellow") + text + Text(".", "yellow") << endl;
+
+    /* Log */
+
+    cout << endl << Text("--- Log ---", "green") << endl;
+    Log log(
+        "info",
+        new Text("Program started!")
+    );
+    log.print(true);
+
+    /* FastA */
+
+    cout << endl << Text("--- FastA ---", "cyan") << endl;
+
+    FastA fasta("samples/genomes.fasta");
+
+    map<string, string> records = fasta.parse();
+    for (const auto &i : records) {
+        cout << ">" << i.first << endl;
+        cout << i.second << endl;
+        cout << endl;
+    }
+
+    records.erase("g3 dnaf");
+    records.erase("g3 dnas");
+    records.erase("g3 rna");
+
+    FastA nfasta("samples/genomes.temp.fasta");
+    nfasta.write(records);
+
+
+
+
+    Workspace ws("CoL");
+
+    /* Workspace Genome */
+
+    cout << Text("--- Workspace Genome ---", "red") << endl;
+    ws.genomes["g1"] = new Genome(
+        "gactacggatgatcagcatcatcagcgactactagcgcgctatcgactacgactactatatagcgatcatctacgactactagcagctactacgacgcgctagcga",
+        "gatgtacgatatagccctagctatataggtctagatacgctagcgcgcgcgctatatatatcgctacgactacgatagctctagctatctagcgatctattacacc",
+        "gactatcagcatcattataagctactacgactctacgactactagcactatcgacgacgatcattatacgactacgatctactagcgatctatatagacgctatct"
+    );
+    ws.showGenome("g1", "extended");
+    ws.showGenome("g1", "compact");
+
+    /* Workspace Cell */
+
+    cout << endl << Text("--- Workspace Cell ---", "red") << endl;
+    ws.cells["c1"] = new Cell(3);
+    ws.cells["c1"] -> addChromosome(
+        "acgtacgtgggatcaggctacgactatcgatcagacgactatcaggctctagcttctatagcgccgactatcagctatacccacgt",
+        "gactacgagctactactactacgatcatcagcatctgatcatcgactactaactctctcgagagagacttacgcatcatcagcagc"
+    );
+    ws.cells["c1"] -> addChromosome(
+        "gtacgacttatg",
+        "acgtgcacgacc"
+    );
+    ws.cells["c1"] -> addChromosome(
+        "acgtgg",
+        "ggtgac"
+    );
+    ws.showCell("c1", "extended");
+    ws.showCell("c1", "compact");
+
+    /* Workspace Animal */
+
+    ws.animals["a1"] = new Animal(1);
+    ws.animals["a1"] -> addChromosome(
+        "gatctacgactac",
+        "gatctacgaccct"
+    );
+    ws.showAnimal("a1", "extended");
+    ws.showAnimal("a1", "compact");
+
+    /* Workspace Virus */
+
+    cout << endl << Text("--- Workspace Virus ---", "red") << endl;
+    ws.viruses["v1"] = new Virus(
+        "gactacgatcactacacggactactgacgcgcgctacgactacgactgactacgatcgacgtactactgatctacgactacttatatagctctatatatcgcctctatagatc"
+    );
+    ws.showVirus("v1", "extended");
+    ws.showVirus("v1", "compact");
+
+    /* Workspace Genomes List */
+    
+    cout << endl << Text("--- Workspace Genomes List ---", "red") << endl;
+    ws.genomes["g2"] = new Genome(
+        "gatctacgatc",
+        "tgagctactac",
+        "gactatcgact"
+    );
+    ws.listGenomes();
+
+    /* Workspace Cells List */
+    
+    cout << endl << Text("--- Workspace Cells List ---", "red") << endl;
+    ws.listCells();
+
+    /* Workspace Animals List */
+    
+    cout << endl << Text("--- Workspace Animals List ---", "red") << endl;
+    ws.listAnimals();
+
+    /* Workspace Viruses List */
+    
+    cout << endl << Text("--- Workspace Viruses List ---", "red") << endl;
+    ws.listViruses();
     
     return 0;
 }
