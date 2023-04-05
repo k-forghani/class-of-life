@@ -110,33 +110,53 @@ class Workspace {
         void addCell(string id, Cell* cell);
         void addAnimal(string id, Animal* animal);
         void addVirus(string id, Virus* virus);
-        void listGenomes();
-        void listCells();
-        void listAnimals();
-        void listViruses();
-        void showGenome(string id, string mode);
-        void showCell(string id, string mode);
-        void showAnimal(string id, string mode);
-        void showVirus(string id, string mode);
+
+        void delGenome(string id);
+        void delCell(string id);
+        void delAnimal(string id);
+        void delVirus(string id);
+
+        void showGenome(string id, string mode) const;
+        void showCell(string id, string mode) const;
+        void showAnimal(string id, string mode) const;
+        void showVirus(string id, string mode) const;
+        
+        void listGenomes() const;
+        void listCells() const;
+        void listAnimals() const;
+        void listViruses() const;
 };
 
 class Interface {
     private:
-        string titile;
+        string name;
         string version;
-        string author;
+        string datetime;
+        string description;
+        vector<string> authors;
     
     public:
-        Interface();
+        Interface(
+            string name,
+            string version,
+            string datetime,
+            string description,
+            vector<string> authors
+        );
 
-        void showWelcome();
-        void showMenu();
-        void addGenome();
-        void addCell();
-        void addAnimal();
-        void addVirus(); 
-        void showHelp();
-        void askQuestion(string message, string type);
-        void showLog(string message, string type);
-        void getField(string name, string message);
+        void cleanInput() const;
+        void clearScreen() const;
+
+        bool askQuestion(const Text& message, string type) const;
+        void showMessage(const Text& message, string type) const;
+
+        string getString(const Text& message) const;
+        int getInteger(const Text& message) const;
+        map<string, string> getObject(const Text& title, string type, map<string, string> fields) const;
+        
+        void handleMenu(vector<string> choices, vector<void(*)()> functions) const;
+
+        void showWelcome() const;
+        void showAbout() const;
+        void showHelp(const Text& information) const;
 };
