@@ -233,7 +233,7 @@ void Interface::clearScreen () const {
 }
 
 bool Interface::askQuestion (const Text& message, string type) const {
-
+    return true;
 }
 
 void Interface::showMessage (const Text& message, string type) const {
@@ -241,15 +241,15 @@ void Interface::showMessage (const Text& message, string type) const {
 }
 
 string Interface::getString (const Text& message) const {
-
+    return "";
 }
 
 int Interface::getInteger (const Text& message) const {
-
+    return 0;
 }
 
 map<string, string> Interface::getObject (const Text& title, string type, map<string, string> fields) const {
-
+    return {};
 }
 
 void Interface::handleMenu (vector<string> choices, vector<void(*)()> functions) const {
