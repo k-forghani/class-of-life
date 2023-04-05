@@ -64,11 +64,10 @@ Text::Text (string text, string foreground, string background, set<string> modes
     this -> text = text;
     this -> foreground = foreground;
     this -> modes = modes;
-    
-    render();
+    render(text);
 }
 
-void Text::render () {
+void Text::render (string text) {
     if (foreground != "" || background != "0" || modes.size() > 0) {
         output = ESCAPE + CONTROL;
 
@@ -92,11 +91,6 @@ void Text::render () {
     }
 }
 
-void Text::change (string text) {
-    this -> text = text;
-    render();
-}
-
 ostream& operator<< (ostream& output, const Text& text) {
     output << text.output;
     return output;
@@ -105,7 +99,7 @@ ostream& operator<< (ostream& output, const Text& text) {
 istream& operator>> (istream& input, Text& text) {
     string content;
     getline(input, content);
-    text.change(content);
+    text.render(content);
     return input;
 }
 

@@ -61,8 +61,7 @@ class Text {
             set<string> modes = {}
         );
 
-        void render();
-        void change(string text);
+        void render(string text);
         
         friend ostream& operator<<(ostream& output, const Text& text);
         friend istream& operator>>(istream& input, Text& text);
