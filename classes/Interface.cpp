@@ -7,13 +7,15 @@ using namespace std;
 /* Text */
 
 Text::Text (string text, string foreground, string background, set<string> modes) {
-    this -> text = text;
     this -> foreground = foreground;
+    this -> background = background;
     this -> modes = modes;
     render(text);
 }
 
 void Text::render (string text) {
+    this -> text = text;
+
     if (foreground != "" || background != "0" || modes.size() > 0) {
         output = ESCAPE + CONTROL;
 

@@ -28,7 +28,7 @@ class Text {
             {"white",   {"37", "47"}},
             {"default", {"39", "49"}},
         };
-        const map<string, pair<string, string>> MODES {
+        const map<string, pair<string, string>> MODES = {
             {"bold",          {"1", "22"}},
             {"dim",           {"2", "22"}},
             {"italic",        {"3", "23"}},
