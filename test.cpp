@@ -8,6 +8,14 @@
 
 using namespace std;
 
+void printRNA (const Genome& object) {
+    cout << "RNA: " << object.getRNA().getStrand() << endl;
+}
+
+void printDNA (const Genome& object) {
+    cout << "DNA:\n" << object.getDNA().first.getStrand() << endl << object.getDNA().second.getStrand() << endl;
+}
+
 int main () {
     /* Random Seed */
 
@@ -25,50 +33,50 @@ int main () {
 
     /* Initial Things */
 
-    genome.printRNA("RNA: ");
-    genome.printDNA("DNA:\n");
+    printRNA(genome);
+    printDNA(genome);
 
     /* transformRNAtoDNA() */
 
     cout << endl << Text("transformRNAtoDNA()", "yellow") << endl;
     pair<Strand, Strand> dna = genome.transformRNAtoDNA();
-    genome.printDNA("DNA:\n");
+    printDNA(genome);
 
     /* mutateSmallScaleRNA() */
 
     cout << endl << Text("mutateSmallScaleRNA()", "yellow") << endl;
     genome.mutateSmallScaleRNA('g', 'a', 2);
-    genome.printRNA("RNA: ");
+    printRNA(genome);
 
     /* mutateSmallScaleDNA */
 
     cout << endl << Text("mutateSmallScaleDNA()", "yellow") << endl;
     genome.mutateSmallScaleDNA('g', 'a', -1);
-    genome.printDNA("DNA:\n");
+    printDNA(genome);
 
     /* mutateLargeScaleRNA() */
 
     cout << endl << Text("mutateLargeScaleRNA()", "yellow") << endl;
     genome.mutateLargeScaleRNA("aac", "tt");
-    genome.printRNA("RNA: ");
+    printRNA(genome);
 
     /* mutateLargeScaleDNA() */
 
     cout << endl << Text("mutateLargeScaleDNA()", "yellow") << endl;
     genome.mutateLargeScaleDNA("ac", "gg");
-    genome.printDNA("DNA:\n");
+    printDNA(genome);
 
     /* mutateInverselyRNA() */
     
     cout << endl << Text("mutateInverselyRNA()", "yellow") << endl;
     genome.mutateInverselyRNA("gat");
-    genome.printRNA("RNA: ");
+    printRNA(genome);
 
     /* mutateInverselyDNA() */
     
     cout << endl << Text("mutateInverselyDNA()", "yellow") << endl;
     genome.mutateInverselyDNA("aatt");
-    genome.printDNA("DNA:\n");
+    printDNA(genome);
 
 
 
@@ -93,7 +101,7 @@ int main () {
     cout << endl << Text("First chromosome after mutateSmallScale()", "green") << endl;
     cell -> mutateSmallScale('a', 'c', 0, 1);
     Chromosome* c = (cell -> getChromosomes()).at(0);
-    c -> print();
+    printDNA(*c);
 
     /* mutateLargeScale() */
     
@@ -102,16 +110,16 @@ int main () {
     Chromosome* c1 = (cell -> getChromosomes()).at(1);
     Chromosome* c2 = (cell -> getChromosomes()).at(2);
     cout << "Chromosome 1:" << endl;
-    c1 -> print();
+    printDNA(*c1);
     cout << "Chromosome 2:" << endl;
-    c2 -> print();
+    printDNA(*c2);
 
     /* mutateInversely() */
     
     cout << endl << Text("Second chromosome after mutateInversely()", "green") << endl;
     cell -> mutateInversely("gac", 1);
     Chromosome* cp = (cell -> getChromosomes()).at(1);
-    cp -> print();
+    printDNA(*cp);
 
     /* getComplementaryPalindromes() */
     
@@ -199,25 +207,25 @@ int main () {
 
     /* Initial Things */
 
-    virus.print("RNA: ");
+    printRNA(virus);
 
     /* mutateSmallScale() */
 
     cout << endl << Text("mutateSmallScale()", "magenta") << endl;
     virus.mutateSmallScale('t', 'g', 2);
-    virus.print("RNA: ");
+    printRNA(virus);
 
     /* mutateLargeScale() */
 
     cout << endl << Text("mutateLargeScale()", "magenta") << endl;
     virus.mutateLargeScale("gtacgt", "aaaaaa");
-    virus.print("RNA: ");
+    printRNA(virus);
 
     /* mutateInversely() */
     
     cout << endl << Text("mutateInversely()", "magenta") << endl;
     virus.mutateInversely("ct");
-    virus.print("RNA: ");
+    printRNA(virus);
 
 
 

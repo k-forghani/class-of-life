@@ -207,14 +207,6 @@ void Genome::mutateInverselyDNA (string s) {
     Genome::mutateLargeScaleDNA(s, sr);
 }
 
-void Genome::printRNA (string before) const {
-    cout << before << Genome::getRNA().getStrand() << endl;
-}
-
-void Genome::printDNA (string before) const {
-    cout << before << Genome::getDNA().first.getStrand() << endl << Genome::getDNA().second.getStrand() << endl;
-}
-
 /* Chromosome */
 
 Chromosome::Chromosome (string s1, string s2) : Genome("", s1, s2) {}
@@ -266,10 +258,6 @@ bool Chromosome::isAbnormal () const {
     }
 
     return false;
-}
-
-void Chromosome::print (string before) const {
-    Chromosome::printDNA(before);
 }
 
 /* Cell */

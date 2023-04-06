@@ -35,8 +35,6 @@ class Genome {
         void mutateLargeScaleDNA(string s1, string s2);
         void mutateInverselyRNA(string s);
         void mutateInverselyDNA(string s);
-        void printRNA(string before = "") const;
-        void printDNA(string before = "") const;
 };
 
 class Chromosome : public Genome {
@@ -51,7 +49,6 @@ class Chromosome : public Genome {
         void mutateLargeScale(string s1, string s2);
         void mutateInversely(string s);
         bool isAbnormal() const;
-        void print(string before = "") const;
 };
 
 class Cell {

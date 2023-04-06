@@ -195,7 +195,3 @@ bool Virus::isPathogenic (const Animal& animal) const {
     
     return false;
 }
-
-void Virus::print (string before) const {
-    Virus::printRNA(before);
-}

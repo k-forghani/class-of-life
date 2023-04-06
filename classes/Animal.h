@@ -31,7 +31,6 @@ class Virus : public Genome {
         void mutateLargeScale(string s1, string s2);
         void mutateInversely(string s);
         bool isPathogenic(const Animal& animal) const;
-        void print(string before = "") const;
 };
 
 #endif
