@@ -113,11 +113,25 @@ int main () {
     Chromosome* cp = (cell -> getChromosomes()).at(1);
     cp -> print();
 
-    /* printComplementaryPalindromes() */
+    /* getComplementaryPalindromes() */
     
-    cout << endl << Text("printComplementaryPalindromes()", "green") << endl;
-    cell -> printComplementaryPalindromes();
+    cout << endl << Text("getComplementaryPalindromes()", "green") << endl;
+    vector<vector<string>> result = cell -> getComplementaryPalindromes();
 
+    string chromosome_index = "0";
+    string strand_index = "0";
+    for (auto &&i : result) {
+        if (i.at(0) != chromosome_index) {
+            cout << "Chromosome " << i.at(0) << endl;
+            chromosome_index = i.at(0);
+        }
+        if (i.at(1) != strand_index) {
+            cout << "\tStrand " << i.at(1) << endl;
+            strand_index = i.at(1);
+        }
+        cout << "\t\t" << i.at(2) << "-" << i.at(3) << "\t" << i.at(4) << endl;
+    }
+    
     /* dieIfShould() */
 
     cell -> dieIfShould();

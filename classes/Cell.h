@@ -68,7 +68,7 @@ class Cell {
         void mutateSmallScale(char n1, char n2, int m, int n = -1);
         void mutateLargeScale(string s1, int n, string s2, int m);
         void mutateInversely(string s, int n);
-        void printComplementaryPalindromes() const;
+        vector<vector<string>> getComplementaryPalindromes() const;
 };
 
 #endif

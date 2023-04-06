@@ -344,15 +344,17 @@ void Cell::mutateInversely (string s, int n) {
     c -> mutateInversely(s);
 }
 
-void Cell::printComplementaryPalindromes () const {
+vector<vector<string>> Cell::getComplementaryPalindromes () const {
+    vector<vector<string>> result;
+
     for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
-        cout << "Chromosome " << i - chromosomes.begin() + 1 << endl;
+        int chromosome_index = i - chromosomes.begin() + 1;
 
         pair<Strand, Strand> dna = (**i).getChromosome();
         string s = dna.first.getStrand();
 
         for (int j = 0; j < 2; j++) {
-            cout << "\tStrand " << j + 1 << endl;
+            int strand_index = j + 1;
             
             s = dna.first.getStrand();
 
@@ -361,7 +363,15 @@ void Cell::printComplementaryPalindromes () const {
                     int l = k - q;
                     int u = k + 1 + q;
                     if (s[l] == getComplement(s[u])) {
-                        cout << "\t\t" << l << "-" << u << "\t" << s.substr(l, u - l + 1) << endl;
+                        result.push_back(
+                            {
+                                to_string(chromosome_index),
+                                to_string(strand_index),
+                                to_string(l),
+                                to_string(u),
+                                s.substr(l, u - l + 1)
+                            }
+                        );
                     } else {
                         break;
                     }
@@ -374,4 +384,6 @@ void Cell::printComplementaryPalindromes () const {
             dna.first = dna.second;
         }
     }
+
+    return result;
 }
