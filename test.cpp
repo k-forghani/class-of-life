@@ -361,6 +361,8 @@ int main () {
 
     /* Interface */
 
+    cout << endl << Text("--- Interface ---", "cyan") << endl;
+
     Interface interface(
         "CoL CLI",
         "0.9",
@@ -381,10 +383,16 @@ int main () {
         "extended"
     );
 
+    interface.cleanInput();
     string name = interface.getString(
-        Text("Enter your name.", "green", "", {"bold"})
+        Text("What is your name?", "green", "", {"bold"})
     );
-    cout << Text("What is your name?") << " " << Text(name, "blue") << endl;
+    cout << Text("Your name is") << " " << Text(name, "blue") << Text(".") << endl;
+
+    int integer = interface.getInteger(
+        Text("What is your age?", "magenta", "", {"italic"})
+    );
+    cout << Text("Your age is") << " " << Text(name, "cyan") << Text(".") << endl;
     
     return 0;
 }
