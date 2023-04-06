@@ -295,7 +295,14 @@ void Interface::showMessage (const Text& message, string type) const {
 }
 
 string Interface::getString (const Text& message) const {
-    return "";
+    cout << message << endl;
+    Text cursor(message);
+    cursor.changeText(">>>");
+    cursor.changeModes({"blinking"});
+    cout << cursor << " ";
+    string value;
+    getline(cin, value);
+    return value;
 }
 
 int Interface::getInteger (const Text& message) const {

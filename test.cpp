@@ -356,6 +356,35 @@ int main () {
     
     cout << endl << Text("--- Workspace Viruses List ---", "red") << endl;
     ws.listViruses();
+
+
+
+    /* Interface */
+
+    Interface interface(
+        "CoL CLI",
+        "0.9",
+        "2023 Apr 6 20:20",
+        "A program to simply simulate biological processes!",
+        {
+            "Kazem Forghani",
+            "Elaheh Razmkhah"
+        }
+    );
+
+    interface.askQuestion(
+        Text("Do you accept?", "red"),
+        "compact"
+    );
+    interface.askQuestion(
+        Text("Do you accept?", "red"),
+        "extended"
+    );
+
+    string name = interface.getString(
+        Text("Enter your name.", "green", "", {"bold"})
+    );
+    cout << Text("What is your name?") << " " << Text(name, "blue") << endl;
     
     return 0;
 }
