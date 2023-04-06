@@ -15,12 +15,10 @@ Strand::Strand (string strand) {
 
 void Strand::setStrand (string strand) { 
     this -> strand = "";
-
     for (int i = 0; i < strand.length(); i++) {
         char c = toupper(strand[i]);
-        if (NUCLEOTIDES.count(c)) {
+        if (NUCLEOTIDES.count(c))
             this -> strand += c;
-        }
     }
 }
 
@@ -31,9 +29,8 @@ string Strand::getStrand () const {
 /* Genome */
 
 Genome::Genome (string rna, string dnaf, string dnas) {
-    if (this -> rna != NULL) {
+    if (this -> rna != NULL)
         this -> rna -> setStrand(rna);
-    }
     if (this -> dna != NULL) {
         this -> dna -> first = Strand(dnaf);
         this -> dna -> second = Strand(dnas);
@@ -41,9 +38,8 @@ Genome::Genome (string rna, string dnaf, string dnas) {
 }
 
 void Genome::setRNA (string s) {
-    if (rna != NULL) {
+    if (rna != NULL)
         rna -> setStrand(s);
-    }
 }
 
 void Genome::setDNA (string s1, string s2) {
@@ -54,31 +50,27 @@ void Genome::setDNA (string s1, string s2) {
 }
 
 Strand Genome::getRNA () const {
-    if (rna != NULL) {
+    if (rna != NULL)
         return *rna;
-    } else {
+    else
         return Strand("");
-    }
 }
 
 pair<Strand, Strand> Genome::getDNA () const {
-    if (dna != NULL) {
+    if (dna != NULL)
         return *dna;
-    } else {
+    else
         return make_pair(Strand(""), Strand(""));
-    }
 }
 
 pair<Strand, Strand> Genome::transformRNAtoDNA () const {
-    if (rna == NULL) {
+    if (rna == NULL)
         return make_pair(Strand(""), Strand(""));
-    }
 
     string com = rna -> getStrand();
 
-    for (int i = 0; i < com.length(); i++) {
+    for (int i = 0; i < com.length(); i++)
         com[i] = getComplement(com[i]);
-    }
     
     return make_pair<Strand, Strand>(
         Strand(rna -> getStrand()),
@@ -87,9 +79,8 @@ pair<Strand, Strand> Genome::transformRNAtoDNA () const {
 }
 
 void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
-    if (rna == NULL) {
+    if (rna == NULL)
         return;
-    }
 
     n1 = toupper(n1);
     n2 = toupper(n2);
@@ -109,9 +100,8 @@ void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
 }
 
 void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
-    if (dna == NULL) {
+    if (dna == NULL)
         return;
-    }
 
     n1 = toupper(n1);
     n2 = toupper(n2);
@@ -138,9 +128,8 @@ void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
 }
 
 void Genome::mutateLargeScaleRNA (string s1, string s2) {
-    if (rna == NULL) {
+    if (rna == NULL)
         return;
-    }
 
     s1 = Strand(s1).getStrand();
     s2 = Strand(s2).getStrand();
@@ -148,17 +137,15 @@ void Genome::mutateLargeScaleRNA (string s1, string s2) {
     string s = rna -> getStrand();
 
     int i = findPattern(s, s1);
-    if (i > -1) {
+    if (i > -1)
         s = s.replace(i, s1.length(), s2);
-    }
 
     rna -> setStrand(s);
 }
 
 void Genome::mutateLargeScaleDNA (string s1, string s2) {
-    if (dna == NULL) {
+    if (dna == NULL)
         return;
-    }
 
     s1 = Strand(s1).getStrand();
     s2 = Strand(s2).getStrand();
@@ -182,27 +169,23 @@ void Genome::mutateLargeScaleDNA (string s1, string s2) {
 }
 
 void Genome::mutateInverselyRNA (string s) {
-    if (rna == NULL) {
+    if (rna == NULL)
         return;
-    }
 
     string sr = "";
-    for (int i = 0; i < s.length(); i++) {
+    for (int i = 0; i < s.length(); i++)
         sr = s[i] + sr;
-    }
     
     Genome::mutateLargeScaleRNA(s, sr);
 }
 
 void Genome::mutateInverselyDNA (string s) {
-    if (dna == NULL) {
+    if (dna == NULL)
         return;
-    }
     
     string sr = "";
-    for (int i = 0; i < s.length(); i++) {
+    for (int i = 0; i < s.length(); i++)
         sr = s[i] + sr;
-    }
     
     Genome::mutateLargeScaleDNA(s, sr);
 }
@@ -240,22 +223,18 @@ bool Chromosome::isAbnormal () const {
     int gc_bonds = 0;
 
     for (int j = 0; j < d1.length(); j++) {
-        if (d2[j] != getComplement(d1[j])) {
+        if (d2[j] != getComplement(d1[j]))
             unbonded++;
-        }
 
-        if ((d1[j] == 'A' && d2[j] == 'T') || (d1[j] == 'T' && d2[j] == 'A')) {
+        if ((d1[j] == 'A' && d2[j] == 'T') || (d1[j] == 'T' && d2[j] == 'A'))
             at_bonds++;
-        }
 
-        if ((d1[j] == 'G' && d2[j] == 'C') || (d1[j] == 'C' && d2[j] == 'G')) {
+        if ((d1[j] == 'G' && d2[j] == 'C') || (d1[j] == 'C' && d2[j] == 'G'))
             at_bonds++;
-        }
     }
     
-    if ((unbonded > 5) || ((double)at_bonds / (double)gc_bonds > 3)) {
+    if ((unbonded > 5) || ((double)at_bonds / (double)gc_bonds > 3))
         return true;
-    }
 
     return false;
 }
@@ -263,23 +242,20 @@ bool Chromosome::isAbnormal () const {
 /* Cell */
 
 Cell::Cell (int n) {
-    if (n > 0) {
+    if (n > 0)
         number = n;
-    } else {
+    else
         number = 1;
-    }
 }
 
 Cell::~Cell () {
-    for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
+    for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i)
         delete *i;
-    }
 }
 
 void Cell::addChromosome (string s1, string s2) {
-    if (chromosomes.size() < number) {
+    if (chromosomes.size() < number)
         chromosomes.push_back(new Chromosome(s1, s2));
-    }
 }
 
 vector<Chromosome*> Cell::getChromosomes () const {
@@ -298,15 +274,13 @@ void Cell::dieIfShould () {
         }
     }
     
-    // NOTE: Object must be constructed using 'new' keyword.
-    if (will_die) {
+    // NOTE: This will work if and only if the object is constructed using 'new' keyword.
+    if (will_die)
         delete this;
-    }
 }
 
 void Cell::mutateSmallScale (char n1, char n2, int m, int n) {
-    Chromosome* c(chromosomes.at(m));
-    c -> mutateSmallScale(n1, n2, n);
+    chromosomes.at(m) -> mutateSmallScale(n1, n2, n);
 }
 
 void Cell::mutateLargeScale (string s1, int n, string s2, int m) {
@@ -328,8 +302,7 @@ void Cell::mutateLargeScale (string s1, int n, string s2, int m) {
 }
 
 void Cell::mutateInversely (string s, int n) {
-    Chromosome* c(chromosomes.at(n));
-    c -> mutateInversely(s);
+    chromosomes.at(n) -> mutateInversely(s);
 }
 
 vector<vector<string>> Cell::getComplementaryPalindromes () const {
@@ -363,9 +336,8 @@ vector<vector<string>> Cell::getComplementaryPalindromes () const {
                     } else {
                         break;
                     }
-                    if (l - 1 < 0 || u + 1 > s.length() - 1) {
+                    if (l - 1 < 0 || u + 1 > s.length() - 1)
                         break;
-                    }
                 }
             }
 
