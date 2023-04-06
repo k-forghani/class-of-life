@@ -252,7 +252,13 @@ void Interface::clearScreen () const {
 }
 
 bool Interface::askQuestion (const Text& message, string type) const {
-    return true;
+    cout << message << " " << Text("[Y/n]") << " ";
+    string answer;
+    cin >> answer;
+    if (answer == "Y" || answer == "y") {
+        return true;
+    }
+    return false;
 }
 
 void Interface::showMessage (const Text& message, string type) const {
