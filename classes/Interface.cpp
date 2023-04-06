@@ -234,16 +234,21 @@ Interface::Interface (
     string datetime,
     string description,
     vector<string> authors
-) {
-
-}
+) : name(name), version(version), datetime(datetime), description(description), authors(authors) {}
 
 void Interface::cleanInput () const {
-
+    cin.clear();
+    cin.ignore(10000, '\n');
 }
 
 void Interface::clearScreen () const {
-
+    #if __linux__
+        system("clear");
+    #elif _WIN32
+        system("CLS");
+    #else
+        cout << "\033[L";
+    #endif
 }
 
 bool Interface::askQuestion (const Text& message, string type) const {
