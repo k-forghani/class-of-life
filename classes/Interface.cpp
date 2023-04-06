@@ -306,7 +306,14 @@ string Interface::getString (const Text& message) const {
 }
 
 int Interface::getInteger (const Text& message) const {
-    return 0;
+    cout << message << endl;
+    Text cursor(message);
+    cursor.changeText(">>>");
+    cursor.changeModes({"blinking"});
+    cout << cursor << " ";
+    int value;
+    cin >> value;
+    return value;
 }
 
 map<string, string> Interface::getObject (const Text& title, string type, map<string, string> fields) const {
