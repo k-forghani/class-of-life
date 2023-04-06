@@ -45,6 +45,8 @@ class Text {
         string background;
         set<string> modes;
         string output;
+
+        void render();
         
     public:
         Text(
@@ -54,8 +56,11 @@ class Text {
             set<string> modes = {}
         );
 
-        void render(string text);
-        
+        void changeText(string text);
+        void changeForeground(string foreground);
+        void changeBackground(string background);
+        void changeModes(set<string> modes);
+
         friend ostream& operator<<(ostream& output, const Text& text);
         friend istream& operator>>(istream& input, Text& text);
         friend Text operator+(const Text& t1, const Text& t2);

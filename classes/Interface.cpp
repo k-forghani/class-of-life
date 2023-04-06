@@ -7,16 +7,15 @@ using namespace std;
 /* Text */
 
 Text::Text (string text, string foreground, string background, set<string> modes) {
+    this -> text = text;
     this -> foreground = foreground;
     this -> background = background;
     this -> modes = modes;
-    render(text);
+    render();
 }
 
-void Text::render (string text) {
-    this -> text = text;
-
-    if (foreground != "" || background != "0" || modes.size() > 0) {
+void Text::render () {
+    if (foreground != "" || background != "" || modes.size() > 0) {
         output = ESCAPE + CONTROL;
 
         if (foreground != "") {
@@ -39,6 +38,26 @@ void Text::render (string text) {
     }
 }
 
+void Text::changeText (string text) {
+    this -> text = text;
+    Text::render();
+}
+
+void Text::changeForeground (string foreground) {
+    this -> foreground = foreground;
+    Text::render();
+}
+
+void Text::changeBackground (string background) {
+    this -> background = background;
+    Text::render();
+}
+
+void Text::changeModes (set<string> modes) {
+    this -> text = text;
+    Text::render();
+}
+
 ostream& operator<< (ostream& output, const Text& text) {
     output << text.output;
     return output;
@@ -47,7 +66,7 @@ ostream& operator<< (ostream& output, const Text& text) {
 istream& operator>> (istream& input, Text& text) {
     string content;
     getline(input, content);
-    text.render(content);
+    text.changeText(content);
     return input;
 }
 
