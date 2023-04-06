@@ -40,12 +40,10 @@ vector<string> split (string text, char delimiter) {
 }
 
 string strip (string text) {
-    while (isspace(*text.begin())) {
+    while (isspace(*text.begin()))
         text.erase(0, 1);
-    }
-    while (isspace(*(text.end() - 1))) {
+    while (isspace(*(text.end() - 1)))
         text.erase(text.length() - 1, 1);
-    }
     return text;
 }
 
@@ -55,9 +53,8 @@ string divide (string text, int length) {
     for (int j = 0; j < text.length(); j++) {
         int segment = (j + 1) % length;
         if (segment == 0 || j == text.length() - 1) {
-            if (segment == 0) {
+            if (segment == 0)
                 segment = length;
-            }
             ntext += text.substr(j - segment + 1, segment);
         }
     }
@@ -66,20 +63,18 @@ string divide (string text, int length) {
 }
 
 char getComplement (char n) {
-    if (n == 'A') {
+    if (n == 'A')
         return 'T';
-    } else if (n == 'T') {
+    else if (n == 'T')
         return 'A';
-    } else if (n == 'C') {
+    else if (n == 'C')
         return 'G';
-    } else {
+    else
         return 'C';
-    }
 }
 
 string getStrandComplement (string s) {
-    for (int i = 0; i < s.length(); i++) {
+    for (int i = 0; i < s.length(); i++)
         s[i] = getComplement(s[i]);
-    }
     return s;
 }
