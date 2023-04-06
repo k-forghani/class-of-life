@@ -54,7 +54,7 @@ void Text::changeBackground (string background) {
 }
 
 void Text::changeModes (set<string> modes) {
-    this -> text = text;
+    this -> modes = modes;
     Text::render();
 }
 
@@ -271,7 +271,17 @@ void Interface::clearScreen () const {
 }
 
 bool Interface::askQuestion (const Text& message, string type) const {
-    cout << message << " " << Text("[Y/n]") << " ";
+    Text options(message);
+    options.changeText("[Y/n]");
+    options.changeModes({"dim"});
+    if (type == "extended") {
+        Text cursor(message);
+        cursor.changeText(">>>");
+        cursor.changeModes({"blinking"});
+        cout << message << " " << options << " " << endl << cursor << " ";
+    } else if (type == "compact") {
+        cout << message << " " << options << " ";
+    }
     string answer;
     cin >> answer;
     if (answer == "Y" || answer == "y") {
