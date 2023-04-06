@@ -6,20 +6,27 @@ This is a program to simply simulate some fundamental biological processes, deve
 
 ## Installation
 
-To compile the project and run the interface, just run `run.sh` with `main` argument:
+On Unix-like operating systems, to compile the project and run the interface, just run `run.sh` with `main` argument:
 
 ```bash
 chmod +x run.sh
 ./run.sh main
 ```
 
-Instead of using the interface, you may run the test and debug the project:
+Instead of using the interface, you may run the test to debug the project:
 
 ```bash
 ./run.sh test
 ```
 
-**Note**: The commands may be a bit different on Windows or macOS.
+**Note**: These commands doesn't work on Windows or macOS. Alternatively, you can run these commands to compile the interface of the program:
+
+```bash
+g++ -c libs/*.cpp
+g++ -c classes/*.cpp
+g++ -o main.exe main.cpp *.o
+```
+Then you can run `main.exe` to use the interface.
 
 ## Schema
 
@@ -50,7 +57,9 @@ Instead of using the interface, you may run the test and debug the project:
 
 ## Developers
 
-This project was founded by [*Kazem Forghani*](https://github.com/k-forghani) in collaboration with [*Elaheh Razmkhah*](https://github.com/ELrzm).
+This project was developed by [*Kazem Forghani*](https://github.com/k-forghani), a student of Computer Science Department of Iran University of Science and Technology, in collaboration with [*Elaheh Razmkhah*](https://github.com/ELrzm).
+
+You can contact via k_forghani@mathdep.iust.ac.ir.
 
 ## License
 
