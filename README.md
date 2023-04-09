@@ -19,14 +19,17 @@ Instead of using the interface, you may run the test to debug the project:
 ./run.sh test
 ```
 
-**Note**: These commands doesn't work on Windows or macOS. Alternatively, you can run these commands to compile the interface of the program:
+On Windows, to compile the project and run the interface, you can run `main.bat`. Also just run `test.bat` to run the test and debug the project.
+
+**Note**: You can also run these commands to compile the interface of the program:
 
 ```bash
 g++ -c libs/*.cpp
 g++ -c classes/*.cpp
-g++ -o main.exe main.cpp *.o
+g++ -o main main.cpp *.o
 ```
-Then you can run `main.exe` to use the interface.
+
+Then you can run `main` to use the interface.
 
 ## Schema
 
