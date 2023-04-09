@@ -210,9 +210,9 @@ void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
 /*
     This method mutates a chunk of nucleotides s1 within RNA into another chunk s2.
     Inputs:
-        s1 : char
+        s1 : string
             A chunk of nucleotides which will be mutated
-        s2 : char
+        s2 : string
             A chunk of nucleotides wich will be mutated into
 */
 void Genome::mutateLargeScaleRNA (string s1, string s2) {
@@ -234,9 +234,9 @@ void Genome::mutateLargeScaleRNA (string s1, string s2) {
 /*
     This method mutates a chunk of nucleotides s1 within two strands of DNA into another chunk s2.
     Inputs:
-        s1 : char
+        s1 : string
             A chunk of nucleotides which will be mutated
-        s2 : char
+        s2 : string
             A chunk of nucleotides wich will be mutated into
 */
 void Genome::mutateLargeScaleDNA (string s1, string s2) {
@@ -267,7 +267,7 @@ void Genome::mutateLargeScaleDNA (string s1, string s2) {
 /*
     This method reverses a chunk of nucleotides within RNA.
     Inputs:
-        s : char
+        s : string
             A chunk of nucleotides which will be mutated
 */
 void Genome::mutateInverselyRNA (string s) {
@@ -284,7 +284,7 @@ void Genome::mutateInverselyRNA (string s) {
 /*
     This method reverses a chunk of nucleotides within two strands of DNA.
     Inputs:
-        s : char
+        s : string
             A chunk of nucleotides which will be mutated
 */
 void Genome::mutateInverselyDNA (string s) {
