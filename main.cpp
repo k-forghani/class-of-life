@@ -6,3 +6,22 @@ using namespace std;
 int main () {
     return 0;
 }
+
+// add animal GGATCGACT ACGTAGT
+// 1
+// add animal GATCAGCTAC
+// 2
+// similarity 1 2
+
+
+// Welcome!
+// [1] Add Genome
+// [2] Add Cell
+// .
+// .
+// .
+// [4] Caclculate Similarity between Animals
+// [5] Exit
+// >>> 2
+// Enter sequence of cell: 
+

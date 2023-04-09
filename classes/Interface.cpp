@@ -16,23 +16,27 @@ Text::Text (string text, string foreground, string background, set<string> modes
 
 void Text::render () {
     if (foreground != "" || background != "" || modes.size() > 0) {
-        output = ESCAPE + CONTROL;
+        #if __linux__
+            output = ESCAPE + CONTROL;
 
-        if (foreground != "") {
-            output += COLORS.at(foreground).first + SEPARATOR;
-        }
+            if (foreground != "") {
+                output += COLORS.at(foreground).first + SEPARATOR;
+            }
 
-        if (background != "") {
-            output += COLORS.at(background).second + SEPARATOR;
-        }
+            if (background != "") {
+                output += COLORS.at(background).second + SEPARATOR;
+            }
 
-        for (auto &&i : modes) {
-            output += MODES.at(i).first + SEPARATOR;
-        }
-        
-        output = output.substr(0, output.length() - 1) + END;
-        output += text;
-        output += ESCAPE + CONTROL + RESET + END;
+            for (auto &&i : modes) {
+                output += MODES.at(i).first + SEPARATOR;
+            }
+            
+            output = output.substr(0, output.length() - 1) + END;
+            output += text;
+            output += ESCAPE + CONTROL + RESET + END;
+        #else
+            output = text;
+        #endif
     } else {
         output = text;
     }

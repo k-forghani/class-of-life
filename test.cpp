@@ -19,7 +19,7 @@ void printDNA (const Genome& object) {
 int main () {
     /* Random Seed */
 
-    srand(time(NULL));
+    // srand(time(NULL));
     
 
 
