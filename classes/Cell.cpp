@@ -91,6 +91,12 @@ void Genome::setDNA (string s1, string s2) {
     }
 }
 
+/*
+    This method returns the Strand instance of RNA and an empty instance if doesn't exist.
+    Output:
+        rna : Strand
+            the Strand instance of RNA
+*/
 Strand Genome::getRNA () const {
     if (rna != NULL)
         return *rna;
@@ -98,6 +104,12 @@ Strand Genome::getRNA () const {
         return Strand("");
 }
 
+/*
+    This method returns a pair of DNA strands and a pair with empty instances if don't exist.
+    Output:
+        dna : pair<Strand, Strand>
+            the pair of DNA strands
+*/
 pair<Strand, Strand> Genome::getDNA () const {
     if (dna != NULL)
         return *dna;
@@ -105,6 +117,12 @@ pair<Strand, Strand> Genome::getDNA () const {
         return make_pair(Strand(""), Strand(""));
 }
 
+/*
+    This method make a DNA so that the first one is the RNA and the second one is its complement.
+    Output:
+        dna : pair<Strand, Strand>
+            the pair of constructed DNA strands
+*/
 pair<Strand, Strand> Genome::transformRNAtoDNA () const {
     if (rna == NULL)
         return make_pair(Strand(""), Strand(""));
@@ -120,6 +138,16 @@ pair<Strand, Strand> Genome::transformRNAtoDNA () const {
     );
 }
 
+/*
+    This method mutates n first nucleotides n1 within RNA into nucleotides n2.
+    Inputs:
+        n1 : char
+            The nucleotide which will be mutated
+        n2 : char
+            The nucleotide wich will be mutated into
+        n : int
+            Number of mutations
+*/
 void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
     if (rna == NULL)
         return;
@@ -141,6 +169,16 @@ void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
     rna -> setStrand(s);
 }
 
+/*
+    This method mutates n first nucleotides n1 within two strands of DNA into nucleotides n2.
+    Inputs:
+        n1 : char
+            The nucleotide which will be mutated
+        n2 : char
+            The nucleotide wich will be mutated into
+        n : int
+            Number of mutations
+*/
 void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
     if (dna == NULL)
         return;
@@ -169,6 +207,14 @@ void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
     (dna -> second).setStrand(s2);
 }
 
+/*
+    This method mutates a chunk of nucleotides s1 within RNA into another chunk s2.
+    Inputs:
+        s1 : char
+            A chunk of nucleotides which will be mutated
+        s2 : char
+            A chunk of nucleotides wich will be mutated into
+*/
 void Genome::mutateLargeScaleRNA (string s1, string s2) {
     if (rna == NULL)
         return;
@@ -185,6 +231,14 @@ void Genome::mutateLargeScaleRNA (string s1, string s2) {
     rna -> setStrand(s);
 }
 
+/*
+    This method mutates a chunk of nucleotides s1 within two strands of DNA into another chunk s2.
+    Inputs:
+        s1 : char
+            A chunk of nucleotides which will be mutated
+        s2 : char
+            A chunk of nucleotides wich will be mutated into
+*/
 void Genome::mutateLargeScaleDNA (string s1, string s2) {
     if (dna == NULL)
         return;
@@ -210,6 +264,12 @@ void Genome::mutateLargeScaleDNA (string s1, string s2) {
     (dna -> second).setStrand(d2);
 }
 
+/*
+    This method reverses a chunk of nucleotides within RNA.
+    Inputs:
+        s : char
+            A chunk of nucleotides which will be mutated
+*/
 void Genome::mutateInverselyRNA (string s) {
     if (rna == NULL)
         return;
@@ -221,6 +281,12 @@ void Genome::mutateInverselyRNA (string s) {
     Genome::mutateLargeScaleRNA(s, sr);
 }
 
+/*
+    This method reverses a chunk of nucleotides within two strands of DNA.
+    Inputs:
+        s : char
+            A chunk of nucleotides which will be mutated
+*/
 void Genome::mutateInverselyDNA (string s) {
     if (dna == NULL)
         return;
