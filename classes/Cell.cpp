@@ -9,10 +9,22 @@ using namespace std;
 
 /* Strand */
 
+/*
+    The constructor of Strand class
+    Inputs:
+        strand : string
+            the content containing A, C, G, and T
+*/
 Strand::Strand (string strand) {
     Strand::setStrand(strand);
 }
 
+/*
+    This method sets the content of the strand.
+    Inputs:
+        strand : string
+            the content containing A, C, G, and T
+*/
 void Strand::setStrand (string strand) { 
     this -> strand = "";
     for (int i = 0; i < strand.length(); i++) {
@@ -22,12 +34,28 @@ void Strand::setStrand (string strand) {
     }
 }
 
+/*
+    This method returns the content of the strand.
+    Output:
+        strand : string
+            the content of the strand
+*/
 string Strand::getStrand () const {
     return strand;
 }
 
 /* Genome */
 
+/*
+    The constructor of Genome class
+    Inputs:
+        rna : string
+            the RNA strand
+        dnaf : string
+            the first strand of DNA
+        dnas : string
+            the second strand of DNA
+*/
 Genome::Genome (string rna, string dnaf, string dnas) {
     if (this -> rna != NULL)
         this -> rna -> setStrand(rna);
@@ -37,11 +65,25 @@ Genome::Genome (string rna, string dnaf, string dnas) {
     }
 }
 
+/*
+    This method sets the RNA strand of the genome if possible.
+    Inputs:
+        s : string
+            the RNA strand
+*/
 void Genome::setRNA (string s) {
     if (rna != NULL)
         rna -> setStrand(s);
 }
 
+/*
+    This method sets the DNA strands of the genome if possible.
+    Inputs:
+        s1 : string
+            the first strand of DNA
+        s2 : string
+            the second strand of DNA
+*/
 void Genome::setDNA (string s1, string s2) {
     if (dna != NULL) {
         (dna -> first).setStrand(s1);

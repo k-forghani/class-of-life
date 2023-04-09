@@ -94,6 +94,10 @@ bool operator== (const Animal& a1, const Animal& a2) {
     return false;
 }
 
+/*
+    TO IMPLEMENT
+        First check if there is low similarity between parents!
+*/
 Animal operator+ (const Animal& a1, const Animal& a2) {
     if (a1.number != a2.number)
         return Animal((int)((a1.number + a2.number) / 2));
