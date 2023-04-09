@@ -7,13 +7,14 @@ int main () {
     return 0;
 }
 
+// COMMAND LINE INTERFACE (CLI)
 // add animal GGATCGACT ACGTAGT
 // 1
 // add animal GATCAGCTAC
 // 2
 // similarity 1 2
 
-
+// MENU
 // Welcome!
 // [1] Add Genome
 // [2] Add Cell
@@ -24,4 +25,3 @@ int main () {
 // [5] Exit
 // >>> 2
 // Enter sequence of cell: 
-
