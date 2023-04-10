@@ -274,62 +274,50 @@ void Interface::clearScreen () const {
     #endif
 }
 
-bool Interface::askQuestion (const Text& message, string type) const {
-    Text options(message);
-    options.changeText("[Y/n]");
-    options.changeModes({"dim"});
-    if (type == "extended") {
-        Text cursor(message);
-        cursor.changeText(">>>");
-        cursor.changeModes({"blinking"});
-        cout << message << " " << options << " " << endl << cursor << " ";
-    } else if (type == "compact") {
-        cout << message << " " << options << " ";
-    }
-    string answer;
-    cin >> answer;
-    if (answer == "Y" || answer == "y") {
-        return true;
-    }
-    return false;
-}
-
-void Interface::showMessage (const Text& message, string type) const {
-
-}
-
-string Interface::getString (const Text& message) const {
-    cout << message << endl;
-    Text cursor(message);
-    cursor.changeText(">>>");
-    cursor.changeModes({"blinking"});
+vector<string> Interface::getCommand () const {
+    Text cursor(">>>", "green", "", {"dim"});
     cout << cursor << " ";
     string value;
     getline(cin, value);
-    return value;
+    vector<string> blocks;
+    int previous = -1;
+    bool quotation = false;
+    for (int i = 0; i < value.length(); i++) {
+        if (value[i] == ' ' && !quotation) {
+            if (i - previous - 1 != 0) {
+                blocks.push_back(
+                    value.substr(previous + 1, i - previous - 1)
+                );
+            }
+            previous = i;
+        } else if (value[i] == '"' || value[i] == '\'') {
+            if (quotation) {
+                if (i - previous - 1 != 0) {
+                    blocks.push_back(
+                        value.substr(previous + 1, i - previous - 1)
+                    );
+                }
+            }
+            previous = i;
+            quotation = !quotation;
+        } else if (i == value.length() - 1) {
+            if (i - previous != 0) {
+                blocks.push_back(
+                    value.substr(previous + 1, i - previous)
+                );
+            }
+        }
+    }
+    return blocks;
 }
 
-int Interface::getInteger (const Text& message) const {
-    cout << message << endl;
-    Text cursor(message);
-    cursor.changeText(">>>");
-    cursor.changeModes({"blinking"});
-    cout << cursor << " ";
-    int value;
-    cin >> value;
-    return value;
-}
-
-map<string, string> Interface::getObject (const Text& title, string type, map<string, string> fields) const {
-    return {};
-}
-
-void Interface::handleMenu (vector<string> choices, vector<void(*)()> functions) const {
+void Interface::showMessage (const Text& message) const {
 
 }
 
 void Interface::showWelcome () const {
-
+    cout << Text(name) << " " << Text(version) << endl;
+    cout << Text(description) << endl;
 }
 
 void Interface::showAbout () const {

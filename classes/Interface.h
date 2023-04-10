@@ -131,15 +131,9 @@ class Interface {
         void cleanInput() const;
         void clearScreen() const;
 
-        bool askQuestion(const Text& message, string type) const;
-        void showMessage(const Text& message, string type) const;
+        vector<string> getCommand() const;
 
-        string getString(const Text& message) const;
-        int getInteger(const Text& message) const;
-        map<string, string> getObject(const Text& title, string type, map<string, string> fields) const;
-        
-        void handleMenu(vector<string> choices, vector<void(*)()> functions) const;
-
+        void showMessage(const Text& message) const;
         void showWelcome() const;
         void showAbout() const;
         void showHelp(const Text& information) const;

@@ -19,7 +19,7 @@ void printDNA (const Genome& object) {
 int main () {
     /* Random Seed */
 
-    // srand(time(NULL));
+    srand(time(NULL));
     
 
 
@@ -356,43 +356,6 @@ int main () {
     
     cout << endl << Text("--- Workspace Viruses List ---", "red") << endl;
     ws.listViruses();
-
-
-
-    /* Interface */
-
-    cout << endl << Text("--- Interface ---", "cyan") << endl;
-
-    Interface interface(
-        "CoL CLI",
-        "0.9",
-        "2023 Apr 6 20:20",
-        "A program to simply simulate biological processes!",
-        {
-            "Kazem Forghani",
-            "Elaheh Razmkhah"
-        }
-    );
-
-    interface.askQuestion(
-        Text("Do you accept?", "red"),
-        "compact"
-    );
-    interface.askQuestion(
-        Text("Do you accept?", "red"),
-        "extended"
-    );
-
-    interface.cleanInput();
-    string name = interface.getString(
-        Text("What is your name?", "green", "", {"bold"})
-    );
-    cout << Text("Your name is") << " " << Text(name, "blue") << Text(".") << endl;
-
-    int integer = interface.getInteger(
-        Text("What is your age?", "magenta", "", {"italic"})
-    );
-    cout << Text("Your age is") << " " << Text(name, "cyan") << Text(".") << endl;
     
     return 0;
 }
