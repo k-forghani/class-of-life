@@ -133,7 +133,6 @@ class Interface {
 
         vector<string> getCommand() const;
 
-        void showMessage(const Text& message) const;
         void showWelcome() const;
         void showAbout() const;
         void showHelp(const Text& information) const;

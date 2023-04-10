@@ -311,10 +311,6 @@ vector<string> Interface::getCommand () const {
     return blocks;
 }
 
-void Interface::showMessage (const Text& message) const {
-
-}
-
 void Interface::showWelcome () const {
     cout << Text(name) << " " << Text(version) << endl;
     cout << Text(description) << endl;
