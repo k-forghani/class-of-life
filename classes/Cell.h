@@ -60,6 +60,7 @@ class Cell {
         Cell(int n);
         ~Cell();
         void addChromosome(string s1, string s2);
+        void deleteChromosome(int index);
         vector<Chromosome*> getChromosomes() const;
         void dieIfShould();
         void mutateSmallScale(char n1, char n2, int m, int n = -1);

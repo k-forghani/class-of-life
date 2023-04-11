@@ -366,6 +366,10 @@ void Cell::addChromosome (string s1, string s2) {
         chromosomes.push_back(new Chromosome(s1, s2));
 }
 
+void Cell::deleteChromosome (int index) {
+    chromosomes.erase(chromosomes.begin() + index);
+}
+
 vector<Chromosome*> Cell::getChromosomes () const {
     return chromosomes;
 }

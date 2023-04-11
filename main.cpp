@@ -83,6 +83,23 @@ void start () {
                     );
                 }
                 continue;
+            } else if (blocks.at(0) == "delete") {
+                if (blocks.at(1) == "genome") {
+                    workspace.genomes.erase(args.at("id").at(0));
+                } else if (blocks.at(1) == "chromosome") {
+                    if (args.at("from").at(0) == "cell") {
+                        workspace.cells[args.at("id").at(0)] -> deleteChromosome(stoi(args.at("index").at(0)));
+                    } else if (args.at("from").at(0) == "animal") {
+                        workspace.animals[args.at("id").at(0)] -> deleteChromosome(stoi(args.at("index").at(0)));
+                    }
+                } else if (blocks.at(1) == "cell") {
+                    workspace.cells.erase(args.at("id").at(0));
+                } else if (blocks.at(1) == "animal") {
+                    workspace.animals.erase(args.at("id").at(0));
+                } else if (blocks.at(1) == "virus") {
+                    workspace.viruses.erase(args.at("id").at(0));
+                }
+                continue;
             } else if (blocks.at(0) == "show") {
                 if (blocks.at(1) == "genome") {
                     workspace.showGenome(args.at("id").at(0), "extended");
