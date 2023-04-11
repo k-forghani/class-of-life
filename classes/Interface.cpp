@@ -167,6 +167,33 @@ void Workspace::showGenome (string id, string mode) const {
     }
 }
 
+void Workspace::showChromosome (string from, string id, int index, string mode) const {
+    vector<Chromosome*> chromosomes;
+    if (from == "cell") {
+        chromosomes = cells.at(from) -> getChromosomes();
+    } else if (from == "animal") {
+        chromosomes = animals.at(from) -> getChromosomes();
+    }
+    if (chromosomes.size() > 0) {
+        Chromosome* c = chromosomes.at(index);
+        if (mode == "extended") {
+            cout << Text("ID", "", "", {"dim", "bold"}) << endl;
+            cout << "\t" << Text(id) << endl;
+            cout << Text("DNA", "", "", {"dim", "bold"}) << endl;
+            cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
+            Workspace::showStrand((c -> getDNA()).first, 2, true);
+            cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
+            Workspace::showStrand((c -> getDNA()).second, 2, true);
+        } else if (mode == "compact") {
+            cout << Text(id) << Text(" | ", "", "", {"dim", "bold"});
+            showStrandSummary((c -> getDNA()).first);
+            cout << Text(" | ", "", "", {"dim", "bold"});
+            showStrandSummary((c -> getDNA()).second);
+            cout << endl;
+        }
+    }
+}
+
 void Workspace::showCell (string id, string mode) const {
     Cell* cell = cells.at(id);
 

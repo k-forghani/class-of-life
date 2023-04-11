@@ -101,6 +101,7 @@ class Workspace {
         void showStrand(const Strand& strand, int indent = 0, bool numbers = false, int length = 80) const;
         void showStrandSummary (const Strand& strand, int length = 50) const;
         void showGenome(string id, string mode) const;
+        void showChromosome(string from, string id, int index, string mode) const;
         void showCell(string id, string mode) const;
         void showAnimal(string id, string mode) const;
         void showVirus(string id, string mode) const;
