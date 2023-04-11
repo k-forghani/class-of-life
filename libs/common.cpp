@@ -18,6 +18,13 @@ string toupper (string text) {
     return text;
 }
 
+string tolower (string text) {
+    for (int i = 0; i < text.length(); i++) {
+        text[i] = tolower(text[i]);
+    }
+    return text;
+}
+
 vector<string> split (string text, char delimiter) {
     vector<string> items;
 

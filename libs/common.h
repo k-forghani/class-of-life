@@ -20,6 +20,8 @@ double randdbl(double lower, double upper, int precision = 1000);
 
 string toupper(string text);
 
+string tolower(string text);
+
 vector<string> split(string text, char delimiter = ' ');
 
 string strip(string text);

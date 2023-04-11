@@ -99,12 +99,11 @@ Workspace::Workspace (string root) {
     this -> root = root;
 }
 
-void Workspace::addLog (string type, Text* text) {
-    logs.push_back(Log(
-            type,
-            text
-        )
-    );
+void Workspace::addLog (string type, Text* text, bool print) {
+    Log log(type, text);
+    logs.push_back(log);
+    if (print)
+        log.print();
 }
 
 void Workspace::showStrand (const Strand& strand, int indent, bool numbers, int length) const {
@@ -312,14 +311,15 @@ vector<string> Interface::getCommand () const {
 }
 
 void Interface::showWelcome () const {
-    cout << Text(name) << " " << Text(version) << endl;
+    cout << Text("Name") << ": " << Text(name) << endl;
+    cout << Text("Version:") << " " << Text(version) << endl;
     cout << Text(description) << endl;
 }
 
 void Interface::showAbout () const {
-
+    cout << Text("Coming soon!") << endl;
 }
 
 void Interface::showHelp (const Text& information) const {
-
+    cout << information << endl;
 }

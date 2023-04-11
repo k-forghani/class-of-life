@@ -80,7 +80,7 @@ class Log {
     
     public:
         Log(string type, Text* text);
-        void print(bool type) const;
+        void print(bool type = true) const;
 };
 
 class Workspace {
@@ -96,7 +96,7 @@ class Workspace {
 
         Workspace(string root = "");
 
-        void addLog(string type, Text* text);
+        void addLog(string type, Text* text, bool print = true);
 
         void showStrand(const Strand& strand, int indent = 0, bool numbers = false, int length = 80) const;
         void showStrandSummary (const Strand& strand, int length = 50) const;
