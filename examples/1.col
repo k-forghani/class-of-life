@@ -1,2 +1,0 @@
-load genomes -from examples/data/genomes.fasta
-list genomes

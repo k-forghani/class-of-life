@@ -1,0 +1,16 @@
+load genomes -from examples/data/genomes.fasta
+list genomes
+genomes transform -id g3
+genomes mutate rna small -id g3 -from a -to g -number 4
+show genome -id g3
+genomes mutate rna large -id g3 -from cgata -to ccccc
+show genome -id g3
+genomes mutate rna inversely -id g3 -on gggggcta
+show genome -id g3
+genomes mutate dna small -id g3 -from t -to a -number 5
+show genome -id g3
+genomes mutate dna large -id g3 -from aaac -to tttt
+show genome -id g3
+genomes mutate dna inversely -id g3 -on gaaa
+show genome -id g3
+exit
