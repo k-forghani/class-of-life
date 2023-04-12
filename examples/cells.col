@@ -9,3 +9,4 @@ cells mutate inversely -id c1 -on 1 tcatc
 show cell -id c1
 cells palindromes -id c1
 cells die -id c1
+list cells

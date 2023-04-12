@@ -1,0 +1,20 @@
+load animals -from examples/data/animals.fasta
+list animals
+show animal -id a1
+animals mutate small -id a1 -chromosome 1 -from a -to t -number 1
+show animal -id a1
+animals mutate large -id a1 -from 1 acg -to 2 gta
+show animal -id a1
+animals mutate inversely -id a1 -on 3 acg
+show animal -id a1
+animals palindromes -id a1
+animals similarity a1 a2
+animals equality a1 a2
+animals reproduce a1 -id a3
+show animal -id a3
+animals reproduce a1 a3 -id a4
+show animal -id a4
+animals kill chromosomes -id a1
+show animal -id a1
+animals die -id a2
+list animals

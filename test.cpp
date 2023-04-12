@@ -187,17 +187,17 @@ int main () {
     /* reproduceAsexually() */
 
     cout << endl << Text("reproduceAsexually()", "blue") << endl;
-    Animal child = parent.reproduceAsexually();
-    cout << "Similarity with Parent: " << child.getGeneticSimilarity(parent) << endl;
+    Animal* child = parent.reproduceAsexually();
+    cout << "Similarity with Parent: " << child -> getGeneticSimilarity(parent) << endl;
 
     /* operator + */
 
     a1 = parent;
     a2 = child;
     cout << endl << Text("operator +", "blue") << endl;
-    Animal baby = a1 + a2;
-    cout << "Similarity with Parent 1: " << baby.getGeneticSimilarity(a1) << endl;
-    cout << "Similarity with Parent 2: " << baby.getGeneticSimilarity(a2) << endl;
+    Animal* baby = a1 + a2;
+    cout << "Similarity with Parent 1: " << baby -> getGeneticSimilarity(a1) << endl;
+    cout << "Similarity with Parent 2: " << baby -> getGeneticSimilarity(a2) << endl;
 
 
 

@@ -7,6 +7,7 @@ using namespace std;
 
 // Functions Declarations
 
+string booleanToString(bool value);
 void perform(vector<string> blocks);
 void start();
 
@@ -26,8 +27,16 @@ Interface interface(
 
 // Functions Definitions
 
+string booleanToString (bool value) {
+    if (value) {
+        return "true";
+    } else {
+        return "false";
+    }
+}
+
 void perform (vector<string> blocks) {
-    try {
+    // try {
         map<string, vector<string>> args;
         string latest = "";
         for (auto &&i : blocks) {
@@ -278,57 +287,96 @@ void perform (vector<string> blocks) {
                         }
                     }
                 }
-            // Cells
-            } else if (blocks.at(0) == "cells") {
-                Cell* cell = wsp.cells.at(args.at("id").at(0));
-                if (blocks.at(1) == "mutate") {
-                    if (blocks.at(2) == "small") {
-                        cell -> mutateSmallScale(
-                            args.at("from").at(0)[0],
-                            args.at("to").at(0)[0],
-                            stoi(args.at("chromosome").at(0)) - 1,
-                            stoi(args.at("number").at(0))
-                        );
-                        return;
-                    } else if (blocks.at(2) == "large") {
-                        cell -> mutateLargeScale(
-                            args.at("from").at(1),
-                            stoi(args.at("from").at(0)) - 1,
-                            args.at("to").at(1),
-                            stoi(args.at("to").at(0)) - 1
-                        );
-                        return;
-                    } else if (blocks.at(2) == "inversely") {
-                        cell -> mutateInversely(
-                            args.at("on").at(1),
-                            stoi(args.at("on").at(0)) - 1
-                        );
-                        return;
+            // Cells and Animals
+            } else if (blocks.at(0) == "cells" || blocks.at(0) == "animals") {
+                if (blocks.at(1) == "mutate" || blocks.at(1) == "palindromes" || blocks.at(1) == "die") {
+                    Cell* cursor;
+                    if (blocks.at(0) == "cells") {
+                        cursor = wsp.cells.at(args.at("id").at(0));
+                    } else {
+                        cursor = wsp.animals.at(args.at("id").at(0));
                     }
-                } else if (blocks.at(1) == "palindromes") {
-                    vector<vector<string>> result = cell -> getComplementaryPalindromes();
-                    string chromosome_index = "0";
-                    string strand_index = "0";
-                    for (auto &&i : result) {
-                        if (i.at(0) != chromosome_index) {
-                            cout << Text("Chromosome " + i.at(0), "", "", {"dim", "bold"}) << endl;
-                            chromosome_index = i.at(0);
+                    
+                    if (blocks.at(1) == "mutate") {
+                        if (blocks.at(2) == "small") {
+                            cursor -> mutateSmallScale(
+                                args.at("from").at(0)[0],
+                                args.at("to").at(0)[0],
+                                stoi(args.at("chromosome").at(0)) - 1,
+                                stoi(args.at("number").at(0))
+                            );
+                            return;
+                        } else if (blocks.at(2) == "large") {
+                            cursor -> mutateLargeScale(
+                                args.at("from").at(1),
+                                stoi(args.at("from").at(0)) - 1,
+                                args.at("to").at(1),
+                                stoi(args.at("to").at(0)) - 1
+                            );
+                            return;
+                        } else if (blocks.at(2) == "inversely") {
+                            cursor -> mutateInversely(
+                                args.at("on").at(1),
+                                stoi(args.at("on").at(0)) - 1
+                            );
+                            return;
                         }
-                        if (i.at(1) != strand_index) {
-                            if (i.at(1) == "1") {
-                                cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
-                            } else {
-                                cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
+                    } else if (blocks.at(1) == "palindromes") {
+                        vector<vector<string>> result = cursor -> getComplementaryPalindromes();
+                        string chromosome_index = "0";
+                        string strand_index = "0";
+                        for (auto &&i : result) {
+                            if (i.at(0) != chromosome_index) {
+                                cout << Text("Chromosome " + i.at(0), "", "", {"dim", "bold"}) << endl;
+                                chromosome_index = i.at(0);
                             }
-                            strand_index = i.at(1);
+                            if (i.at(1) != strand_index) {
+                                if (i.at(1) == "1") {
+                                    cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
+                                } else {
+                                    cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
+                                }
+                                strand_index = i.at(1);
+                            }
+                            cout << Text("\t\t" + i.at(2) + "-" + i.at(3) + "\t" + i.at(4)) << endl;
                         }
-                        cout << Text("\t\t" + i.at(2) + "-" + i.at(3) + "\t" + i.at(4)) << endl;
+                        return;
+                    } else if (blocks.at(1) == "die") {
+                        if (cursor -> dieIfShould()) {
+                            if (blocks.at(0) == "cells") {
+                                wsp.cells.erase(args.at("id").at(0));
+                            } else {
+                                wsp.animals.erase(args.at("id").at(0));
+                            }
+                        }
+                        return;
                     }
-                    return;
-                } else if (blocks.at(1) == "die") {
-                    if (cell -> dieIfShould())
-                        wsp.cells.erase(args.at("id").at(0));
-                    return;
+                } else if (blocks.at(0) == "animals") {
+                    if (blocks.at(1) == "similarity") {
+                        Animal* a1 = wsp.animals.at(blocks.at(2));
+                        Animal* a2 = wsp.animals.at(blocks.at(3));
+                        cout << Text(to_string(a1 -> getGeneticSimilarity(*a2))) << endl;
+                        return;
+                    } else if (blocks.at(1) == "equality") {
+                        Animal* a1 = wsp.animals.at(blocks.at(2));
+                        Animal* a2 = wsp.animals.at(blocks.at(3));
+                        cout << Text(booleanToString(a1 == a2)) << endl;
+                        return;
+                    } else if (blocks.at(1) == "reproduce") {
+                        if (blocks.size() == 5) {
+                            Animal* animal = wsp.animals.at(blocks.at(2));
+                            wsp.animals[args.at("id").at(0)] = animal -> reproduceAsexually();
+                            return;
+                        } else if (blocks.size() == 6) {
+                            Animal* a1 = wsp.animals.at(blocks.at(2));
+                            Animal* a2 = wsp.animals.at(blocks.at(3));
+                            wsp.animals[args.at("id").at(0)] = *a1 + *a2;
+                            return;
+                        }
+                    } else if (blocks.at(1) == "kill" && blocks.at(2) == "chromosomes") {
+                        wsp.animals[args.at("id").at(0)] -> killBadChromosomes();
+                        return;
+                    }
                 }
             }
         }
@@ -336,13 +384,12 @@ void perform (vector<string> blocks) {
             "ERROR",
             new Text("Invalid command!")
         );
-    } catch (const exception& error) {
-        wsp.addLog(
-            "ERROR",
-            new Text(error.what())
-        );
-    }
-    
+    // } catch (const exception& error) {
+    //     wsp.addLog(
+    //         "ERROR",
+    //         new Text(error.what())
+    //     );
+    // }
 }
 
 void start () {

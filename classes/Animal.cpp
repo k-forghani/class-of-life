@@ -54,7 +54,7 @@ double Animal::getGeneticSimilarity (const Animal& animal) const {
     return similarity;
 }
 
-Animal Animal::reproduceAsexually () const {
+Animal* Animal::reproduceAsexually () const {
     Animal* child = new Animal(2 * number);
 
     for (int i = 0; i < 2; i++) {
@@ -81,7 +81,7 @@ Animal Animal::reproduceAsexually () const {
     if (Animal::getGeneticSimilarity(*child) <= SIMILARITY_THRESHOLD)
         return Animal::reproduceAsexually();
     else
-        return *child;
+        return child;
 }
 
 bool operator== (const Animal& a1, const Animal& a2) {
@@ -98,33 +98,25 @@ bool operator== (const Animal& a1, const Animal& a2) {
     TO IMPLEMENT
         First check if there is low similarity between parents!
 */
-Animal operator+ (const Animal& a1, const Animal& a2) {
+Animal* operator+ (const Animal& a1, const Animal& a2) {
     if (a1.number != a2.number)
-        return Animal((int)((a1.number + a2.number) / 2));
+        return (new Animal((int)((a1.number + a2.number) / 2)));
     
-    Animal c1 = a1.reproduceAsexually();
-    Animal c2 = a2.reproduceAsexually();
+    Animal* c1 = a1.reproduceAsexually();
+    Animal* c2 = a2.reproduceAsexually();
 
-    Animal* child = new Animal(c1.number);
-
-    Animal* current;
-    Animal* next;
+    Animal* child = new Animal(c1 -> number);
 
     if (randint(1, 2) == 1) {
-        current = &c1;
-        next = &c2;
-    } else {
-        current = &c2;
-        next = &c1;
+        swap(c1, c2);
     }
 
     for (int i = 0; i < child -> number; i++) {
-        int index = randint(0, (current -> chromosomes).size() - 1);
-        pair<Strand, Strand> dna = (current -> chromosomes).at(index) -> getChromosome();
+        int index = randint(0, (c1 -> chromosomes).size() - 1);
+        pair<Strand, Strand> dna = (c1 -> chromosomes).at(index) -> getChromosome();
         child -> addChromosome(dna.first.getStrand(), dna.second.getStrand());
-        swap(current, next);
+        swap(c1, c2);
     }
-
 
     for (int i = 0; i < child -> number; i++) {
         int source = randint(0, child -> number - 1);
@@ -136,7 +128,7 @@ Animal operator+ (const Animal& a1, const Animal& a2) {
     }
 
     if (a1.getGeneticSimilarity(*child) > SIMILARITY_THRESHOLD && a2.getGeneticSimilarity(*child) > SIMILARITY_THRESHOLD)
-        return *child;
+        return child;
     else
         return a1 + a2;
 }
