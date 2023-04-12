@@ -217,14 +217,23 @@ void start () {
                                 args.at("on").at(0)
                             );
                         }
-                    } else if (blocks.at(2) == "dna") {
-                        if (blocks.at(3) == "small") {
-
-                        } else if (blocks.at(3) == "large") {
-
-                        } else if (blocks.at(3) == "inversely") {
-
-                        }
+                   } else if (blocks.at(2) == "dna") { 
+                        if (blocks.at(3) == "small") { 
+                            genome -> mutateSmallScaleDNA( 
+                                args.at("from").at(0)[0], 
+                                args.at("to").at(0)[0], 
+                                stoi(args.at("number").at(0)) 
+                            ); 
+                        } else if (blocks.at(3) == "large") { 
+                            genome -> mutateLargeScaleDNA( 
+                                args.at("from").at(0), 
+                                args.at("to").at(0) 
+                            ); 
+                        } else if (blocks.at(3) == "inversely") { 
+                            genome -> mutateInverselyDNA( 
+                                args.at("on").at(0) 
+                            ); 
+                        } 
                     }
                 }
                 continue;
