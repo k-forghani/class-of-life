@@ -378,6 +378,34 @@ void perform (vector<string> blocks) {
                         return;
                     }
                 }
+            // Viruses
+            } else if (blocks.at(0) == "viruses") {
+                Virus* virus = wsp.viruses.at(args.at("id").at(0));
+                if (blocks.at(1) == "mutate") {
+                    if (blocks.at(2) == "small") {
+                        virus -> mutateSmallScale(
+                            args.at("from").at(0)[0],
+                            args.at("to").at(0)[0],
+                            stoi(args.at("number").at(0))
+                        );
+                        return;
+                    } else if (blocks.at(2) == "large") {
+                        virus -> mutateLargeScale(
+                            args.at("from").at(0),
+                            args.at("to").at(0)
+                        );
+                        return;
+                    } else if (blocks.at(2) == "inversely") {
+                        virus -> mutateInversely(
+                            args.at("on").at(0)
+                        );
+                        return;
+                    }
+                } else if (blocks.at(1) == "pathogenicity") {
+                    Animal animal = *wsp.animals.at(args.at("for").at(0));
+                    cout << Text(booleanToString(virus -> isPathogenic(animal))) << endl;
+                    return;
+                }
             }
         }
         wsp.addLog(

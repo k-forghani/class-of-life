@@ -13,4 +13,3 @@ genomes mutate dna large -id g3 -from aaac -to tttt
 show genome -id g3
 genomes mutate dna inversely -id g3 -on gaaa
 show genome -id g3
-exit

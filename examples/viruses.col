@@ -1,0 +1,11 @@
+load viruses -from examples/data/viruses.fasta
+list viruses
+viruses mutate small -id v1 -from t -to a -number 5
+show virus -id v1
+viruses mutate large -id v2 -from ggc -to aaa
+show virus -id v2
+viruses mutate inversely -id v2 -on tagcac
+show virus -id v2
+load animals -from examples/data/animals.fasta
+list animals
+viruses pathogenicity -id v1 -for a1
