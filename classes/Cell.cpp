@@ -374,7 +374,7 @@ vector<Chromosome*> Cell::getChromosomes () const {
     return chromosomes;
 }
 
-void Cell::dieIfShould () {
+bool Cell::dieIfShould () {
     bool will_die = false;
 
     for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
@@ -389,6 +389,8 @@ void Cell::dieIfShould () {
     // NOTE: This will work if and only if the object is constructed using 'new' keyword.
     if (will_die)
         delete this;
+    
+    return will_die;
 }
 
 void Cell::mutateSmallScale (char n1, char n2, int m, int n) {

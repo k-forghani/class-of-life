@@ -256,27 +256,79 @@ void perform (vector<string> blocks) {
                             );
                             return;
                         }
-                    } else if (blocks.at(2) == "dna") { 
+                    } else if (blocks.at(2) == "dna") {
                         if (blocks.at(3) == "small") { 
-                            genome -> mutateSmallScaleDNA( 
+                            genome -> mutateSmallScaleDNA(
                                 args.at("from").at(0)[0], 
-                                args.at("to").at(0)[0], 
-                                stoi(args.at("number").at(0)) 
+                                args.at("to").at(0)[0],
+                                stoi(args.at("number").at(0))
                             );
                             return;
                         } else if (blocks.at(3) == "large") { 
-                            genome -> mutateLargeScaleDNA( 
-                                args.at("from").at(0), 
-                                args.at("to").at(0) 
+                            genome -> mutateLargeScaleDNA(
+                                args.at("from").at(0),
+                                args.at("to").at(0)
                             );
                             return;
                         } else if (blocks.at(3) == "inversely") { 
-                            genome -> mutateInverselyDNA( 
-                                args.at("on").at(0) 
+                            genome -> mutateInverselyDNA(
+                                args.at("on").at(0)
                             );
                             return;
-                        } 
+                        }
                     }
+                }
+            // Cells
+            } else if (blocks.at(0) == "cells") {
+                Cell* cell = wsp.cells.at(args.at("id").at(0));
+                if (blocks.at(1) == "mutate") {
+                    if (blocks.at(2) == "small") {
+                        cell -> mutateSmallScale(
+                            args.at("from").at(0)[0],
+                            args.at("to").at(0)[0],
+                            stoi(args.at("chromosome").at(0)) - 1,
+                            stoi(args.at("number").at(0))
+                        );
+                        return;
+                    } else if (blocks.at(2) == "large") {
+                        cell -> mutateLargeScale(
+                            args.at("from").at(1),
+                            stoi(args.at("from").at(0)) - 1,
+                            args.at("to").at(1),
+                            stoi(args.at("to").at(0)) - 1
+                        );
+                        return;
+                    } else if (blocks.at(2) == "inversely") {
+                        cell -> mutateInversely(
+                            args.at("on").at(1),
+                            stoi(args.at("on").at(0)) - 1
+                        );
+                        return;
+                    }
+                } else if (blocks.at(1) == "palindromes") {
+                    vector<vector<string>> result = cell -> getComplementaryPalindromes();
+                    string chromosome_index = "0";
+                    string strand_index = "0";
+                    for (auto &&i : result) {
+                        if (i.at(0) != chromosome_index) {
+                            cout << Text("Chromosome " + i.at(0), "", "", {"dim", "bold"}) << endl;
+                            chromosome_index = i.at(0);
+                        }
+                        if (i.at(1) != strand_index) {
+                            if (i.at(1) == "1") {
+                                cout << Text("\tFirst Strand", "", "", {"dim", "bold"}) << endl;
+                            } else {
+                                cout << Text("\tSecond Strand", "", "", {"dim", "bold"}) << endl;
+                            }
+                            strand_index = i.at(1);
+                        }
+                        cout << Text("\t\t" + i.at(2) + "-" + i.at(3) + "\t" + i.at(4)) << endl;
+                    }
+                    return;
+                } else if (blocks.at(1) == "die") {
+                    if (cell -> dieIfShould())
+                        wsp.cells.erase(args.at("id").at(0));
+                    return;
                 }
             }
         }

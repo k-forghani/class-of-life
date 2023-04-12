@@ -1,0 +1,11 @@
+load cells -from examples/data/cells.fasta
+list cells
+show cell -id c1
+cells mutate small -id c1 -chromosome 1 -from g -to a -number 2
+show cell -id c1
+cells mutate large -id c1 -from 1 aac -to 2 gac
+show cell -id c1
+cells mutate inversely -id c1 -on 1 tcatc
+show cell -id c1
+cells palindromes -id c1
+cells die -id c1
