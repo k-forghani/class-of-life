@@ -134,7 +134,7 @@ class Interface {
         void cleanInput() const;
         void clearScreen() const;
 
-        vector<string> getCommand() const;
+        vector<string> handleCommand(string command = "") const;
 
         void showWelcome() const;
         void showAbout() const;

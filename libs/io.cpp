@@ -6,6 +6,25 @@
 
 using namespace std;
 
+vector<string> readLines (string path) {
+    ifstream fin(path);
+
+    if (!fin.is_open()) {
+        return {};
+    }
+
+    vector<string> lines;
+
+    string line;
+
+    while (!fin.eof()) {
+        getline(fin, line);
+        lines.push_back(line);
+    }
+
+    return lines;
+}
+
 void writeFastA (map<string, string> records, string path, int length) {
     ofstream fout(path);
     
@@ -19,20 +38,13 @@ void writeFastA (map<string, string> records, string path, int length) {
 }
 
 map<string, string> parseFastA (string path) {
-    ifstream fin(path);
-
-    if (!fin.is_open()) {
-        return {};
-    }
-
     map<string, string> records;
 
     string latest = "";
 
-    string line;
+    vector<string> lines = readLines(path);
 
-    while (!fin.eof()) {
-        getline(fin, line);
+    for (auto &&line : lines) {
         if (line[0] == '>') {
             latest = strip(line.substr(1, line.length()));
             records[latest] = "";

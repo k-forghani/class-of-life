@@ -295,36 +295,38 @@ void Interface::clearScreen () const {
     #endif
 }
 
-vector<string> Interface::getCommand () const {
-    Text cursor(">>>", "green", "", {"dim"});
-    cout << cursor << " ";
-    string value;
-    getline(cin, value);
+vector<string> Interface::handleCommand (string command) const {
+    cout << Text(">>>", "green", "", {"dim"}) << " ";
+    if (command == "") {
+        getline(cin, command);
+    } else {
+        cout << Text(command, "", "", {"dim"}) << endl;
+    }
     vector<string> blocks;
     int previous = -1;
     bool quotation = false;
-    for (int i = 0; i < value.length(); i++) {
-        if (value[i] == ' ' && !quotation) {
+    for (int i = 0; i < command.length(); i++) {
+        if (command[i] == ' ' && !quotation) {
             if (i - previous - 1 != 0) {
                 blocks.push_back(
-                    value.substr(previous + 1, i - previous - 1)
+                    command.substr(previous + 1, i - previous - 1)
                 );
             }
             previous = i;
-        } else if (value[i] == '"' || value[i] == '\'') {
+        } else if (command[i] == '"' || command[i] == '\'') {
             if (quotation) {
                 if (i - previous - 1 != 0) {
                     blocks.push_back(
-                        value.substr(previous + 1, i - previous - 1)
+                        command.substr(previous + 1, i - previous - 1)
                     );
                 }
             }
             previous = i;
             quotation = !quotation;
-        } else if (i == value.length() - 1) {
+        } else if (i == command.length() - 1) {
             if (i - previous != 0) {
                 blocks.push_back(
-                    value.substr(previous + 1, i - previous)
+                    command.substr(previous + 1, i - previous)
                 );
             }
         }
@@ -333,7 +335,7 @@ vector<string> Interface::getCommand () const {
 }
 
 void Interface::showWelcome () const {
-    cout << Text("Name") << ": " << Text(name) << endl;
+    cout << Text("Name:") << " " << Text(name) << endl;
     cout << Text("Version:") << " " << Text(version) << endl;
     cout << Text(description) << endl;
 }
