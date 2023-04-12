@@ -1,32 +1,32 @@
->a1 c1 1
+>a1 1 1
 acgtacgtggccacgt
->a1 c1 2
+>a1 1 2
 tgcatgcaccggtgca
->a1 c2 1
+>a1 2 1
 gtacgacttatg
->a1 c2 2
+>a1 2 2
 acgtgcacgacc
->a1 c3 1
+>a1 3 1
 acgtgg
->a1 c3 2
+>a1 3 2
 ggtgac
->a2 c1 1
+>a2 1 1
 gctagccgatcgaa
->a2 c1 2
+>a2 1 2
 tgcactgcacatgc
->a2 c2 1
+>a2 2 1
 cgatccatgctagc
->a2 c2 2
+>a2 2 2
 catgctaacgtgtt
->a2 c3 1
+>a2 3 1
 actggagtgctagc
->a2 c3 2
+>a2 3 2
 gcatcgggcagcca
->a2 c4 1
+>a2 4 1
 agtgctagcagttg
->a2 c4 2
+>a2 4 2
 actatgtacggcac
->a2 c5 1
+>a2 5 1
 aaagctagcagtgg
->a2 c5 2
+>a2 5 2
 cccgtacatgagtc
