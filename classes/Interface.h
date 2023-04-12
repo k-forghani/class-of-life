@@ -120,6 +120,7 @@ class Interface {
         string version;
         string datetime;
         string description;
+        string repository;
         vector<string> authors;
     
     public:
@@ -128,6 +129,7 @@ class Interface {
             string version,
             string datetime,
             string description,
+            string repository,
             vector<string> authors
         );
 

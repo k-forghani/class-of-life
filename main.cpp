@@ -16,9 +16,10 @@ void start();
 Workspace wsp("CoL");
 Interface interface(
     "Class of Life Command Line Interface (CoL CLI)",
-    "0.9",
-    "2023 Apr 12 21:00",
+    "0.9 BETA",
+    "2023 Apr 13 01:15",
     "A program to simply simulate some fundamental biological processes!",
+    "https://github.com/k-forghani/class-of-life",
     {
         "Kazem Forghani",
         "Elaheh Razmkhah"
@@ -60,7 +61,7 @@ void perform (vector<string> blocks) {
                 return;
             } else if (blocks.at(0) == "help") {
                 interface.showHelp(
-                    Text("Coming soon!")
+                    Text("Please take a look at examples folder.")
                 );
                 return;
             } else if (blocks.at(0) == "exit") {

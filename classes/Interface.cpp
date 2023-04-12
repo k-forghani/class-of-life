@@ -277,8 +277,9 @@ Interface::Interface (
     string version,
     string datetime,
     string description,
+    string repository,
     vector<string> authors
-) : name(name), version(version), datetime(datetime), description(description), authors(authors) {}
+) : name(name), version(version), datetime(datetime), description(description), repository(repository), authors(authors) {}
 
 void Interface::cleanInput () const {
     cin.clear();
@@ -335,13 +336,24 @@ vector<string> Interface::handleCommand (string command) const {
 }
 
 void Interface::showWelcome () const {
-    cout << Text("Name:") << " " << Text(name) << endl;
-    cout << Text("Version:") << " " << Text(version) << endl;
+    cout << Text(name) << " " << Text(version) << endl;
     cout << Text(description) << endl;
 }
 
 void Interface::showAbout () const {
-    cout << Text("Coming soon!") << endl;
+    cout << Text("Name:       ", "", "", {"dim"}) << " " << Text(name) << endl;
+    cout << Text("Version:    ", "", "", {"dim"}) << " " << Text(version) << endl;
+    cout << Text("Rleased at: ", "", "", {"dim"}) << " " << Text(datetime) << endl;
+    cout << Text("Description:", "", "", {"dim"}) << " " << Text(description) << endl;
+    cout << Text("Developers: ", "", "", {"dim"}) << " ";
+    for (int i = 0; i < authors.size(); i++) {
+        cout << Text(authors.at(i));
+        if (i < authors.size() - 1) {
+            cout << Text(", ");
+        }
+    }    
+    cout << endl;
+    cout << Text("Repository: ", "", "", {"dim"}) << " " << Text(repository) << endl;
 }
 
 void Interface::showHelp (const Text& information) const {
