@@ -36,7 +36,7 @@ string booleanToString (bool value) {
 }
 
 void perform (vector<string> blocks) {
-    // try {
+    try {
         map<string, vector<string>> args;
         string latest = "";
         for (auto &&i : blocks) {
@@ -384,12 +384,12 @@ void perform (vector<string> blocks) {
             "ERROR",
             new Text("Invalid command!")
         );
-    // } catch (const exception& error) {
-    //     wsp.addLog(
-    //         "ERROR",
-    //         new Text(error.what())
-    //     );
-    // }
+    } catch (const exception& error) {
+        wsp.addLog(
+            "ERROR",
+            new Text(error.what())
+        );
+    }
 }
 
 void start () {
