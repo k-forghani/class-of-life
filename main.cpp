@@ -5,13 +5,13 @@
 
 using namespace std;
 
-Workspace workspace("CoL");
+Workspace wsp("CoL");
 
 void start () {
     Interface interface(
         "Class of Life Command Line Interface (CoL CLI)",
         "0.9",
-        "2023 Apr 11 12:23",
+        "2023 Apr 12 16:07",
         "A program to simply simulate some fundamental biological processes!",
         {
             "Kazem Forghani",
@@ -51,39 +51,41 @@ void start () {
                 continue;
             }
         } else if (blocks.size() > 1) {
+            // Add
             if (blocks.at(0) == "add") {
                 if (blocks.at(1) == "genome") {
-                    workspace.genomes[args.at("id").at(0)] = new Genome(
+                    wsp.genomes[args.at("id").at(0)] = new Genome(
                         args.at("rna").at(0),
                         args.at("dna").at(0),
                         args.at("dna").at(1)
                     );
                 } else if (blocks.at(1) == "chromosome") {
                     if (args.at("to").at(0) == "cell") {
-                        workspace.cells[args.at("id").at(0)] -> addChromosome(
+                        wsp.cells[args.at("id").at(0)] -> addChromosome(
                             args.at("dna").at(0),
                             args.at("dna").at(1)
                         );
                     } else if (args.at("to").at(0) == "animal") {
-                        workspace.animals[args.at("id").at(0)] -> addChromosome(
+                        wsp.animals[args.at("id").at(0)] -> addChromosome(
                             args.at("dna").at(0),
                             args.at("dna").at(1)
                         );
                     }
                 } else if (blocks.at(1) == "cell") {
-                    workspace.cells[args.at("id").at(0)] = new Cell(
+                    wsp.cells[args.at("id").at(0)] = new Cell(
                         stoi(args.at("number").at(0))
                     );
                 } else if (blocks.at(1) == "animal") {
-                    workspace.animals[args.at("id").at(0)] = new Animal(
+                    wsp.animals[args.at("id").at(0)] = new Animal(
                         stoi(args.at("number").at(0))
                     );
                 } else if (blocks.at(1) == "virus") {
-                    workspace.viruses[args.at("id").at(0)] = new Virus(
+                    wsp.viruses[args.at("id").at(0)] = new Virus(
                         args.at("rna").at(0)
                     );
                 }
                 continue;
+            // Load
             } else if (blocks.at(0) == "load") {
                 map<string, string> records = parseFastA(args.at("from").at(0));
                 if (blocks.at(1) == "genomes") {
@@ -96,7 +98,7 @@ void start () {
                         data.at(items.at(0))[items.at(1)] = i.second;
                     }
                     for (auto &&i : data) {
-                        workspace.genomes[i.first] = new Genome(
+                        wsp.genomes[i.first] = new Genome(
                             i.second.at("rna"),
                             i.second.at("dnaf"),
                             i.second.at("dnas")
@@ -116,17 +118,17 @@ void start () {
                     }
                     for (auto &&i : data) {
                         if (blocks.at(1) == "cells") {
-                            workspace.cells[i.first] = new Cell(i.second.size());
+                            wsp.cells[i.first] = new Cell(i.second.size());
                             for (auto &&j : i.second) {
-                                workspace.cells[i.first] -> addChromosome(
+                                wsp.cells[i.first] -> addChromosome(
                                     j.second.at("1"),
                                     j.second.at("2")
                                 );
                             }
                         } else if (blocks.at(1) == "animals") {
-                            workspace.animals[i.first] = new Animal(i.second.size());
+                            wsp.animals[i.first] = new Animal(i.second.size());
                             for (auto &&j : i.second) {
-                                workspace.animals[i.first] -> addChromosome(
+                                wsp.animals[i.first] -> addChromosome(
                                     j.second.at("1"),
                                     j.second.at("2")
                                 );
@@ -136,61 +138,99 @@ void start () {
                 } else if (blocks.at(1) == "viruses") {
                     for (auto &&i : records) {
                         vector<string> items = split(i.first, ' ');
-                        workspace.viruses[items.at(0)] = new Virus(
+                        wsp.viruses[items.at(0)] = new Virus(
                             i.second
                         );
                     }
                 }
                 continue;
+            // Delete
             } else if (blocks.at(0) == "delete") {
                 if (blocks.at(1) == "genome") {
-                    workspace.genomes.erase(args.at("id").at(0));
+                    wsp.genomes.erase(args.at("id").at(0));
                 } else if (blocks.at(1) == "chromosome") {
                     if (args.at("from").at(0) == "cell") {
-                        workspace.cells[args.at("id").at(0)] -> deleteChromosome(stoi(args.at("index").at(0)) - 1);
+                        wsp.cells[args.at("id").at(0)] -> deleteChromosome(stoi(args.at("index").at(0)) - 1);
                     } else if (args.at("from").at(0) == "animal") {
-                        workspace.animals[args.at("id").at(0)] -> deleteChromosome(stoi(args.at("index").at(0)) - 1);
+                        wsp.animals[args.at("id").at(0)] -> deleteChromosome(stoi(args.at("index").at(0)) - 1);
                     }
                 } else if (blocks.at(1) == "cell") {
-                    workspace.cells.erase(args.at("id").at(0));
+                    wsp.cells.erase(args.at("id").at(0));
                 } else if (blocks.at(1) == "animal") {
-                    workspace.animals.erase(args.at("id").at(0));
+                    wsp.animals.erase(args.at("id").at(0));
                 } else if (blocks.at(1) == "virus") {
-                    workspace.viruses.erase(args.at("id").at(0));
+                    wsp.viruses.erase(args.at("id").at(0));
                 }
                 continue;
+            // Show
             } else if (blocks.at(0) == "show") {
                 if (blocks.at(1) == "genome") {
-                    workspace.showGenome(args.at("id").at(0), "extended");
+                    wsp.showGenome(args.at("id").at(0), "extended");
                 } else if (blocks.at(1) == "chromosome") {
-                    workspace.showChromosome(
+                    wsp.showChromosome(
                         args.at("from").at(0),
                         args.at("id").at(0),
                         stoi(args.at("index").at(0)) - 1,
                         "extended"
                     );
                 } else if (blocks.at(1) == "cell") {
-                    workspace.showCell(args.at("id").at(0), "extended");
+                    wsp.showCell(args.at("id").at(0), "extended");
                 } else if (blocks.at(1) == "animal") {
-                    workspace.showAnimal(args.at("id").at(0), "extended");
+                    wsp.showAnimal(args.at("id").at(0), "extended");
                 } else if (blocks.at(1) == "virus") {
-                    workspace.showVirus(args.at("id").at(0), "extended");
+                    wsp.showVirus(args.at("id").at(0), "extended");
                 }
                 continue;
+            // List
             } else if (blocks.at(0) == "list") {
                 if (blocks.at(1) == "genomes") {
-                    workspace.listGenomes();
+                    wsp.listGenomes();
                 } else if (blocks.at(1) == "cells") {
-                    workspace.listCells();
+                    wsp.listCells();
                 } else if (blocks.at(1) == "animals") {
-                    workspace.listAnimals();
+                    wsp.listAnimals();
                 } else if (blocks.at(1) == "viruses") {
-                    workspace.listViruses();
+                    wsp.listViruses();
+                }
+                continue;
+            // Genomes
+            } else if (blocks.at(0) == "genomes") {
+                Genome* genome = wsp.genomes.at(args.at("id").at(0));
+                if (blocks.at(1) == "transform") {
+                    pair<Strand, Strand> dna = genome -> transformRNAtoDNA();
+                    wsp.showPairOfStrands(dna, 0, true);
+                } else if (blocks.at(1) == "mutate") {
+                    if (blocks.at(2) == "rna") {
+                        if (blocks.at(3) == "small") {
+                            genome -> mutateSmallScaleRNA(
+                                args.at("from").at(0)[0],
+                                args.at("to").at(0)[0],
+                                stoi(args.at("number").at(0))
+                            );
+                        } else if (blocks.at(3) == "large") {
+                            genome -> mutateLargeScaleRNA(
+                                args.at("from").at(0),
+                                args.at("to").at(0)
+                            );
+                        } else if (blocks.at(3) == "inversely") {
+                            genome -> mutateInverselyRNA(
+                                args.at("on").at(0)
+                            );
+                        }
+                    } else if (blocks.at(2) == "dna") {
+                        if (blocks.at(3) == "small") {
+
+                        } else if (blocks.at(3) == "large") {
+
+                        } else if (blocks.at(3) == "inversely") {
+
+                        }
+                    }
                 }
                 continue;
             }
         }
-        workspace.addLog(
+        wsp.addLog(
             "ERROR",
             new Text("Invalid command!")
         );
