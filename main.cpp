@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "libs/common.h"
 #include "libs/io.h"
 #include "classes/Interface.h"
@@ -11,13 +12,13 @@ string booleanToString(bool value);
 void perform(vector<string> blocks);
 void start();
 
-// Global Variables
+/* Global Variables */
 
 Workspace wsp("CoL");
 Interface interface(
     "Class of Life Command Line Interface (CoL CLI)",
     "0.9 BETA",
-    "2023 Apr 13 01:15",
+    "2023 Apr 13 18:30",
     "A program to simply simulate some fundamental biological processes!",
     "https://github.com/k-forghani/class-of-life",
     {
@@ -26,8 +27,17 @@ Interface interface(
     }
 );
 
-// Functions Definitions
+/* Functions Definitions */
 
+/*
+    This function converts a boolean to a string.
+    Inputs:
+        value : bool
+            The boolean value
+    Output:
+        value : string
+            The corresponding string value
+*/
 string booleanToString (bool value) {
     if (value) {
         return "true";
@@ -36,6 +46,12 @@ string booleanToString (bool value) {
     }
 }
 
+/*
+    This function handles the extracted blocks of a command.
+    Inputs:
+        blocks : vector<string>
+            The blocks of the command
+*/
 void perform (vector<string> blocks) {
     try {
         map<string, vector<string>> args;
@@ -419,6 +435,9 @@ void perform (vector<string> blocks) {
     }
 }
 
+/*
+    This function starts the program.
+*/
 void start () {
     interface.showWelcome();
     

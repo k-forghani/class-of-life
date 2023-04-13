@@ -1,4 +1,6 @@
 #include <iostream>
+#include <set>
+#include <vector>
 #include "../libs/common.h"
 #include "Interface.h"
 
@@ -82,7 +84,7 @@ void Text::changeForeground (string foreground) {
 /*
     This method changes the background color of the text and renders the output.
     Inputs:
-        background:
+        background : string
             The new color of the text background can be selected from the following set:
             {black, red, green, yellow, blue, magenta, cyan, white, default}
 */
@@ -94,7 +96,7 @@ void Text::changeBackground (string background) {
 /*
     This method changes the enabled modes for the text and renders the output.
     Inputs:
-        modes:
+        modes : set<string>
             A set containing new enabled modes for the text that can be selected from the following set:
             {bold, dim, italic, underline, blinking, inverse, hidden, strikethrough}
 */
