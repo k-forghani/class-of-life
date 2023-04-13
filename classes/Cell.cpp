@@ -25,7 +25,7 @@ Strand::Strand (string strand) {
         strand : string
             The content containing A, C, G, and T
 */
-void Strand::setStrand (string strand) { 
+void Strand::setStrand (string strand) {
     this -> strand = "";
     for (int i = 0; i < strand.length(); i++) {
         char c = toupper(strand[i]);
