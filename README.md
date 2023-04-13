@@ -31,6 +31,10 @@ g++ -o main main.cpp *.o
 
 Then you can run `main` to use the interface.
 
+## Getting Started
+
+You can read the [documentation](docs/README.md) to find out how to use the program via provided command line interface.
+
 ## Schema
 
 <p align="center">
