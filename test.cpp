@@ -192,12 +192,10 @@ int main () {
 
     /* operator + */
 
-    a1 = parent;
-    a2 = child;
     cout << endl << Text("operator +", "blue") << endl;
     Animal* baby = a1 + a2;
-    cout << "Similarity with Parent 1: " << baby -> getGeneticSimilarity(a1) << endl;
-    cout << "Similarity with Parent 2: " << baby -> getGeneticSimilarity(a2) << endl;
+    cout << "Similarity with Parent 1: " << baby -> getGeneticSimilarity(parent) << endl;
+    cout << "Similarity with Parent 2: " << baby -> getGeneticSimilarity(*child) << endl;
 
 
 
