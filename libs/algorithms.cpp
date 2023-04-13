@@ -9,10 +9,17 @@ using namespace std;
         Knuth-Morris-Pratt (KMP) Pattern Searching
     Description:
         This function returns the index of first occurrence of a substring within a string.
-        It returns -1 if no occurrence was found.
-    Main Parts:
-        1. Computing LPS Table
-        2. KMP Match
+        It has two main parts:
+            1. Computing LPS Table
+            2. KMP Match
+    Inputs:
+        s : string
+            The string
+        p : string
+            The substring which will be searched for
+    Output:
+        index : int
+            The index of the first occurrence (-1 if no occurrence was found)
     Reference:
         https://www.scaler.com/topics/data-structures/kmp-algorithm/
 */
@@ -69,9 +76,17 @@ int findPattern (string s, string p) {
     Metric:
         Normalized Levenstein Distance
     Description:
-        This is an implementation of normalized levenstein distance using iterative with full matrix approach.
+        This is an implementation of normalized levenstein distance between two strings using iterative with full matrix approach.
     Approach:
         Dynamic Programming (Iterative with Full Matrix)
+    Inputs:
+        s1 : string
+            First string
+        s2 : string
+            Second string
+    Output:
+        distance : double
+            Normalized levenstein distance
     References:
         https://en.wikipedia.org/wiki/Levenshtein_distance
         https://devopedia.org/levenshtein-distance#qst-ans-3
@@ -147,7 +162,16 @@ double computeNLD (string s1, string s2) {
     Metric:
         Modified Hausdorff Similarity
     Description:
-        This function computes a normalized similarity score based on a modified version of Hausdorff distance.
+        This function computes a normalized similarity score between two sets of strings based on a modified version of Hausdorff distance.
+        It uses normalized levenstein distance to compare a pair of strings.
+    Inputs:
+        a : vector<string>
+            A vector of the strings of the first set
+        b : vector<string>
+            A vector of the strings of the second set
+    Output:
+        similarity : double
+            Normalized similarity score
     References:
         https://en.wikipedia.org/wiki/Hausdorff_distance
 */
@@ -203,6 +227,14 @@ double computeMHS (vector<string> a, vector<string> b) {
         This function finds a longest common substring (LCS) between two strings.
     Approach:
         Dynamic Programming
+    Inputs:
+        s1 : string
+            First string
+        s2 : string
+            Second string
+    Output:
+        lcs : string
+            A longest common substring (LCS)
     References:
         https://www.scaler.com/topics/longest-common-substring/
         https://stackoverflow.com/a/30560066
@@ -238,6 +270,12 @@ string findPairwiseLCS (string s1, string s2) {
 /*
     Description:
         This function finds a longest common substring (LCS) between several strings.
+    Inputs:
+        strings : vector<string>
+            A vector containing several strings
+    Output:
+        lcs : string
+            A longest common substring (LCS)
 */
 string findLCS (vector<string> strings) {
     while (strings.size() > 1) {
