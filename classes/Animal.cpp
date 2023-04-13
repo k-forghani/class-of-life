@@ -7,6 +7,11 @@ using namespace std;
 
 /* Animal */
 
+/*
+   A method to calculate the percentage of genetic similarity
+   out put : Similarity percentage 
+*/
+
 Animal::Animal (int n) : Cell(n) {}
 
 void Animal::killBadChromosomes () {
@@ -53,6 +58,11 @@ double Animal::getGeneticSimilarity (const Animal& animal) const {
     
     return similarity;
 }
+
+/*     
+This method doubles the number of chromosomes (2n) and half of them (n).
+ and It chooses a random face 
+*/
 
 Animal* Animal::reproduceAsexually () const {
     Animal* child = new Animal(2 * number);
@@ -134,6 +144,10 @@ Animal* operator+ (const Animal& a1, const Animal& a2) {
 }
 
 /* Virus */
+/*
+    A method to detect the harmfulness of the virus.
+    input :  string rna 
+*/
 
 Virus::Virus (string rna) : Genome(rna, "", "") {}
 
