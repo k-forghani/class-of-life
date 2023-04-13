@@ -2,7 +2,7 @@
 
 ## Examples
 
-You can find some example commands at [`examples`](examples) and some sample data files at [`examples/data`](examples/data).
+You can find some example commands at [`examples`](/examples) and some sample data files at [`examples/data`](/examples/data).
 
 ## Reference
 
@@ -31,7 +31,7 @@ Reads a `FastA` file and parses its content:
     load animals -from PATH_TO_FILE
     load viruses -from PATH_TO_FILE
 
-Note: The header of each record in a `FastA` file must follow a specific pattern. Please take a look at [`examples/data`](examples/data) to find out how to feed records into the program.
+Note: The header of each record in a `FastA` file must follow a specific pattern. Please take a look at [`examples/data`](/examples/data) to find out how to feed records into the program.
 
 ### Delete
 
