@@ -13,7 +13,7 @@ using namespace std;
     The constructor of Strand class
     Inputs:
         strand : string
-            the content containing A, C, G, and T
+            The content containing A, C, G, and T
 */
 Strand::Strand (string strand) {
     Strand::setStrand(strand);
@@ -23,7 +23,7 @@ Strand::Strand (string strand) {
     This method sets the content of the strand.
     Inputs:
         strand : string
-            the content containing A, C, G, and T
+            The content containing A, C, G, and T
 */
 void Strand::setStrand (string strand) { 
     this -> strand = "";
@@ -38,7 +38,7 @@ void Strand::setStrand (string strand) {
     This method returns the content of the strand.
     Output:
         strand : string
-            the content of the strand
+            The content of the strand
 */
 string Strand::getStrand () const {
     return strand;
@@ -50,11 +50,11 @@ string Strand::getStrand () const {
     The constructor of Genome class
     Inputs:
         rna : string
-            the RNA strand
+            The RNA strand
         dnaf : string
-            the first strand of DNA
+            The first strand of DNA
         dnas : string
-            the second strand of DNA
+            The second strand of DNA
 */
 Genome::Genome (string rna, string dnaf, string dnas) {
     if (this -> rna != NULL)
@@ -69,7 +69,7 @@ Genome::Genome (string rna, string dnaf, string dnas) {
     This method sets the RNA strand of the genome if possible.
     Inputs:
         s : string
-            the RNA strand
+            The RNA strand
 */
 void Genome::setRNA (string s) {
     if (rna != NULL)
@@ -80,9 +80,9 @@ void Genome::setRNA (string s) {
     This method sets the DNA strands of the genome if possible.
     Inputs:
         s1 : string
-            the first strand of DNA
+            The first strand of DNA
         s2 : string
-            the second strand of DNA
+            The second strand of DNA
 */
 void Genome::setDNA (string s1, string s2) {
     if (dna != NULL) {
@@ -95,7 +95,7 @@ void Genome::setDNA (string s1, string s2) {
     This method returns the Strand instance of RNA and an empty instance if doesn't exist.
     Output:
         rna : Strand
-            the Strand instance of RNA
+            The Strand instance of RNA
 */
 Strand Genome::getRNA () const {
     if (rna != NULL)
@@ -108,7 +108,7 @@ Strand Genome::getRNA () const {
     This method returns a pair of DNA strands and a pair with empty instances if don't exist.
     Output:
         dna : pair<Strand, Strand>
-            the pair of DNA strands
+            The pair of DNA strands
 */
 pair<Strand, Strand> Genome::getDNA () const {
     if (dna != NULL)
@@ -121,7 +121,7 @@ pair<Strand, Strand> Genome::getDNA () const {
     This method make a DNA so that the first one is the RNA and the second one is its complement.
     Output:
         dna : pair<Strand, Strand>
-            the pair of constructed DNA strands
+            The pair of constructed DNA strands
 */
 pair<Strand, Strand> Genome::transformRNAtoDNA () const {
     if (rna == NULL)
@@ -145,8 +145,8 @@ pair<Strand, Strand> Genome::transformRNAtoDNA () const {
             The nucleotide which will be mutated
         n2 : char
             The nucleotide wich will be mutated into
-        n : int
-            Number of mutations
+        n : int (default: -1)
+            Number of mutations (every occurrence will be mutated if -1)
 */
 void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
     if (rna == NULL)
@@ -176,8 +176,8 @@ void Genome::mutateSmallScaleRNA (char n1, char n2, int n) {
             The nucleotide which will be mutated
         n2 : char
             The nucleotide wich will be mutated into
-        n : int
-            Number of mutations
+        n : int (default: -1)
+            Number of mutations (every occurrence will be mutated if -1)
 */
 void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
     if (dna == NULL)
@@ -209,11 +209,13 @@ void Genome::mutateSmallScaleDNA (char n1, char n2, int n) {
 
 /*
     This method mutates a chunk of nucleotides s1 within RNA into another chunk s2.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
     Inputs:
         s1 : string
-            A chunk of nucleotides which will be mutated
+            The chunk of nucleotides which will be mutated
         s2 : string
-            A chunk of nucleotides wich will be mutated into
+            The chunk of nucleotides which will be mutated into
 */
 void Genome::mutateLargeScaleRNA (string s1, string s2) {
     if (rna == NULL)
@@ -233,11 +235,13 @@ void Genome::mutateLargeScaleRNA (string s1, string s2) {
 
 /*
     This method mutates a chunk of nucleotides s1 within two strands of DNA into another chunk s2.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
     Inputs:
         s1 : string
-            A chunk of nucleotides which will be mutated
+            The chunk of nucleotides which will be mutated
         s2 : string
-            A chunk of nucleotides wich will be mutated into
+            The chunk of nucleotides which will be mutated into
 */
 void Genome::mutateLargeScaleDNA (string s1, string s2) {
     if (dna == NULL)
@@ -266,9 +270,11 @@ void Genome::mutateLargeScaleDNA (string s1, string s2) {
 
 /*
     This method reverses a chunk of nucleotides within RNA.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
     Inputs:
         s : string
-            A chunk of nucleotides which will be mutated
+            The chunk of nucleotides which will be reversed
 */
 void Genome::mutateInverselyRNA (string s) {
     if (rna == NULL)
@@ -283,9 +289,11 @@ void Genome::mutateInverselyRNA (string s) {
 
 /*
     This method reverses a chunk of nucleotides within two strands of DNA.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
     Inputs:
         s : string
-            A chunk of nucleotides which will be mutated
+            The chunk of nucleotides which will be reversed
 */
 void Genome::mutateInverselyDNA (string s) {
     if (dna == NULL)
@@ -300,28 +308,85 @@ void Genome::mutateInverselyDNA (string s) {
 
 /* Chromosome */
 
+/*
+    The constructor of Chromosome class
+    Inputs:
+        s1 : string
+            The first strand of DNA
+        s2 : string
+            The second strand of DNA
+*/
 Chromosome::Chromosome (string s1, string s2) : Genome("", s1, s2) {}
 
+/*
+    This method sets the content of DNA.
+    Inputs:
+        s1 : string
+            The first strand of DNA
+        s2 : string
+            The second strand of DNA
+*/
 void Chromosome::setChromosome (string s1, string s2) {
     Chromosome::setDNA(s1, s2);
 }
 
+/*
+    This method returns a pair of DNA strands and a pair with empty instances if don't exist.
+    Output:
+        dna : pair<Strand, Strand>
+            The pair of DNA strands
+*/
 pair<Strand, Strand> Chromosome::getChromosome () const {
     return Chromosome::getDNA();
 }
 
+/*
+    This method mutates n first nucleotides n1 within two strands of DNA into nucleotides n2.
+    Inputs:
+        n1 : char
+            The nucleotide which will be mutated
+        n2 : char
+            The nucleotide wich will be mutated into
+        n : int (default: -1)
+            Number of mutations (every occurrence will be mutated if -1)
+*/
 void Chromosome::mutateSmallScale (char n1, char n2, int n) {
     Chromosome::mutateSmallScaleDNA(n1, n2, n);
 }
 
+/*
+    This method mutates a chunk of nucleotides s1 within two strands of DNA into another chunk s2.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
+    Inputs:
+        s1 : string
+            The chunk of nucleotides which will be mutated
+        s2 : string
+            The chunk of nucleotides which will be mutated into
+*/
 void Chromosome::mutateLargeScale (string s1, string s2) {
     Chromosome::mutateLargeScaleDNA(s1, s2);
 }
 
+/*
+    This method reverses a chunk of nucleotides within two strands of DNA.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
+    Inputs:
+        s : string
+            The chunk of nucleotides which will be reversed
+*/
 void Chromosome::mutateInversely (string s) {
     Chromosome::mutateInverselyDNA(s);
 }
 
+/*
+    This methods checks if the genetic content of chromosome is abnormal.
+    It returns true if there are more than 5 unbonded nucleotides or A-T bonds appear more than 3 times as often as G-C bonds.
+    Output:
+        abnormality : bool
+            Abnormality state of chromosome based on the conditions mentioned before
+*/
 bool Chromosome::isAbnormal () const {
     string d1 = (dna -> first).getStrand();
     string d2 = (dna -> second).getStrand();
@@ -349,6 +414,12 @@ bool Chromosome::isAbnormal () const {
 
 /* Cell */
 
+/*
+    The constructor of Cell class
+    Inputs:
+        n : int
+            Maximum number of chromosomes
+*/
 Cell::Cell (int n) {
     if (n > 0)
         number = n;
@@ -356,24 +427,53 @@ Cell::Cell (int n) {
         number = 1;
 }
 
+/*
+    The destructor of Cell class
+*/
 Cell::~Cell () {
     for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i)
         delete *i;
 }
 
+/*
+    This method appends a chromosome to the cell.
+    Inputs:
+        s1 : string
+            The first strand of DNA
+        s2 : string
+            The second strand of DNA
+*/
 void Cell::addChromosome (string s1, string s2) {
     if (chromosomes.size() < number)
         chromosomes.push_back(new Chromosome(s1, s2));
 }
 
+/*
+    This method deletes a chromosome from the cell by its index.
+    Inputs:
+        index : int
+            The index of the chromosome (starting from 0)
+*/
 void Cell::deleteChromosome (int index) {
     chromosomes.erase(chromosomes.begin() + index);
 }
 
+/*
+    This method returns the list of pointers to chromosomes of the cell.
+    Output:
+        chromosomes : vector<Chromosome*>
+            A vector containing pointers to the chromosomes of the cell
+*/
 vector<Chromosome*> Cell::getChromosomes () const {
     return chromosomes;
 }
 
+/*
+    This method kills the cell and its chromosomes if there is one abnormal chromosome at least.
+    Output:
+        will_die : bool
+            Will the cell die or not?
+*/
 bool Cell::dieIfShould () {
     bool will_die = false;
 
@@ -386,17 +486,42 @@ bool Cell::dieIfShould () {
         }
     }
     
-    // NOTE: This will work if and only if the object is constructed using 'new' keyword.
     if (will_die)
         delete this;
     
     return will_die;
 }
 
+/*
+    This method mutates n first nucleotides n1 within chromosome m into nucleotides n2.
+    Inputs:
+        n1 : char
+            The nucleotide which will be mutated
+        n2 : char
+            The nucleotide wich will be mutated into
+        m : int
+            The index of the chromosome (starting from 0)
+        n : int (default: -1)
+            Number of mutations (every occurrence will be mutated if -1)
+*/
 void Cell::mutateSmallScale (char n1, char n2, int m, int n) {
     chromosomes.at(m) -> mutateSmallScale(n1, n2, n);
 }
 
+/*
+    This method swaps substring s1 within chromosome n and substring s2 within chromosome m.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
+    Inputs:
+        s1 : string
+            The substring within chromosome n
+        n : int
+            The index of first chromosome (starting from 0)
+        s2 : string
+            The substring within chromosome m
+        m : int
+            The index of second chromosome (starting from 0)
+*/
 void Cell::mutateLargeScale (string s1, int n, string s2, int m) {
     s1 = Strand(s1).getStrand();
     s2 = Strand(s2).getStrand();
@@ -415,10 +540,29 @@ void Cell::mutateLargeScale (string s1, int n, string s2, int m) {
     }
 }
 
+/*
+    This method reverses a chunk of nucleotides within chromosome n.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
+    Inputs:
+        s : string
+            The chunk of nucleotides which will be reversed
+        m : int
+            The index of the chromosome (starting from 0)
+*/
 void Cell::mutateInversely (string s, int n) {
     chromosomes.at(n) -> mutateInversely(s);
 }
 
+/*
+    This method finds all complementary palindromes within all chromosomes of the cell.
+    Algorithm:
+        Innovative Semi-optimal Algorithm
+    Output:
+        palindromes : vector<vector<string>>
+            a vector of all complementary palindromes that each item is a vector of the following form:
+            {chromosome_index, strand_index, starting_index, ending_index, content}
+*/
 vector<vector<string>> Cell::getComplementaryPalindromes () const {
     vector<vector<string>> result;
 
