@@ -60,9 +60,7 @@ void perform (vector<string> blocks) {
                 interface.showAbout();
                 return;
             } else if (blocks.at(0) == "help") {
-                interface.showHelp(
-                    Text("Please take a look at examples folder.")
-                );
+                cout << Text("Please take a look at examples folder.") << endl;
                 return;
             } else if (blocks.at(0) == "exit") {
                 exit(0);

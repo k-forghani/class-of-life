@@ -140,7 +140,6 @@ class Interface {
 
         void showWelcome() const;
         void showAbout() const;
-        void showHelp(const Text& information) const;
 };
 
 #endif
