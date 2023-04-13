@@ -3,28 +3,62 @@
 
 using namespace std;
 
+/*
+    This function returns an integer number within interval [lower, upper].
+    Inputs:
+        lower : int
+            Lower boundary
+        upper : int
+            Upper boundary
+    Output:
+        number : int
+            Generated random number
+*/
 int randint (int lower, int upper) {
     return lower + rand() % (upper - lower + 1);
 }
 
-double randdbl (double lower, double upper, int precision) {
-    return lower + (double)(rand() % (int)(precision * (upper - lower) + 1)) / precision;
-}
-
+/*
+    This function makes all characters of a string uppercase.
+    Inputs:
+        text : string
+            The target string
+    Output:
+        text : string
+            The uppercase string
+*/
 string toupper (string text) {
-    for (int i = 0; i < text.length(); i++) {
+    for (int i = 0; i < text.length(); i++)
         text[i] = toupper(text[i]);
-    }
     return text;
 }
 
+/*
+    This function makes all characters of a string lowercase.
+    Inputs:
+        text : string
+            The target string
+    Output:
+        text : string
+            The lowercase string
+*/
 string tolower (string text) {
-    for (int i = 0; i < text.length(); i++) {
+    for (int i = 0; i < text.length(); i++)
         text[i] = tolower(text[i]);
-    }
     return text;
 }
 
+/*
+    This function splits a string by a specific delimiter and returns the items.
+    Inputs:
+        text : string
+            The target string
+        delimiter : char (default: ' ')
+            The delimiter
+    Output:
+        items : vector<string>
+            A vector of the items
+*/
 vector<string> split (string text, char delimiter) {
     vector<string> items;
 
@@ -46,6 +80,15 @@ vector<string> split (string text, char delimiter) {
     return items;
 }
 
+/*
+    This function removes whitespaces from the left and the right of a string.
+    Inputs:
+        text : string
+            The target string
+    Output:
+        text : string
+            The cleaned string
+*/
 string strip (string text) {
     while (isspace(*text.begin()))
         text.erase(0, 1);
@@ -54,6 +97,17 @@ string strip (string text) {
     return text;
 }
 
+/*
+    This function divides a string into segments with a fixed length.
+    Inputs:
+        text : string
+            The target string
+        length : int (default: 80)
+            The length of the segments
+    Output:
+        ntext : string
+            The segmented string
+*/
 string divide (string text, int length) {
     string ntext = "";
     
@@ -69,6 +123,15 @@ string divide (string text, int length) {
     return ntext;
 }
 
+/*
+    This function returns the complement of a nucleotide.
+    Inputs:
+        n : char
+            The target nucleotide
+    Output:
+        c : char
+            The complementary nucleotide
+*/
 char getComplement (char n) {
     if (n == 'A')
         return 'T';
@@ -80,6 +143,15 @@ char getComplement (char n) {
         return 'C';
 }
 
+/*
+    This function returns the complement of a sequence containing nucleotides.
+    Inputs:
+        s : string
+            The target sequence
+    Output:
+        c : string
+            The complementary sequence
+*/
 string getStrandComplement (string s) {
     for (int i = 0; i < s.length(); i++)
         s[i] = getComplement(s[i]);
