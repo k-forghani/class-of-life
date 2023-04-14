@@ -474,21 +474,14 @@ vector<Chromosome*> Cell::getChromosomes () const {
             Will the cell die or not?
 */
 bool Cell::dieIfShould () {
-    bool will_die = false;
-
-    for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
-        Chromosome c(**i);
-
-        if (c.isAbnormal()) {
-            will_die = true;
-            break;
+    for (auto &&i : chromosomes) {
+        if (i -> isAbnormal()) {
+            delete this;
+            return true;
         }
     }
-    
-    if (will_die)
-        delete this;
-    
-    return will_die;
+
+    return false;
 }
 
 /*
