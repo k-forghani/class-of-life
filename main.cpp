@@ -18,7 +18,7 @@ Workspace wsp("CoL");
 Interface interface(
     "Class of Life Command Line Interface (CoL CLI)",
     "0.9 BETA",
-    "2023 Apr 13 18:30",
+    "2023 Apr 14 22:30",
     "A program to simply simulate some fundamental biological processes!",
     "https://github.com/k-forghani/class-of-life",
     {

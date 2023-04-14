@@ -44,35 +44,29 @@ void Animal::killBadChromosomes () {
             The similarity score
 */
 double Animal::getGeneticSimilarity (const Animal& animal) const {
-    double similarity = 0;
+    vector<pair<string, string>> a, b;
 
-    for (int i = 0; i < 3; i++) {
-        vector<string> a;
-        vector<string> b;
-
-        for (auto j = chromosomes.begin(); j != chromosomes.end(); ++j) {
-            pair<Strand, Strand> dna = (**j).getChromosome();
-            if (i == 0 || i == 1)
-                a.push_back(dna.first.getStrand());
-            else if (i == 2 || i == 3)
-                a.push_back(dna.second.getStrand());
-        }
-        
-        for (auto j = animal.chromosomes.begin(); j != animal.chromosomes.end(); ++j) {
-            pair<Strand, Strand> dna = (**j).getChromosome();
-            if (i == 0 || i == 2)
-                b.push_back(dna.first.getStrand());
-            else if (i == 1 || i == 3)
-                b.push_back(dna.second.getStrand());
-        }
-
-        double score = computeMHS(a, b);
-
-        if (score > similarity)
-            similarity = score;
+    for (auto &&i : chromosomes) {
+        pair<Strand, Strand> dna = i -> getChromosome();
+        a.push_back(
+            {
+                dna.first.getStrand(),
+                dna.second.getStrand()
+            }
+        );
     }
     
-    return similarity;
+    for (auto &&i : animal.chromosomes) {
+        pair<Strand, Strand> dna = i -> getChromosome();
+        b.push_back(
+            {
+                dna.first.getStrand(),
+                dna.second.getStrand()
+            }
+        );
+    }
+    
+    return computeMHS(a, b);
 }
 
 /*
@@ -89,20 +83,17 @@ Animal* Animal::reproduceAsexually () const {
     Animal* child = new Animal(2 * number);
 
     for (int i = 0; i < 2; i++) {
-        for (auto i = chromosomes.begin(); i != chromosomes.end(); ++i) {
-            pair<Strand, Strand> dna = (**i).getChromosome();
+        for (auto &&j : chromosomes) {
+            pair<Strand, Strand> dna = j -> getChromosome();
             child -> addChromosome(dna.first.getStrand(), dna.second.getStrand());
         }
     }
 
-    for (int i = 0; i < number; i++) {
-        int source = randint(number, 2 * number - 1);
-        int target = randint(0, number - 1);
+    for (int i = 0; i < number; i++)
         iter_swap(
-            (child -> chromosomes).begin() + source,
-            (child -> chromosomes).begin() + target
+            (child -> chromosomes).begin() + randint(number, 2 * number - 1),
+            (child -> chromosomes).begin() + randint(0, number - 1)
         );
-    }
 
     for (int i = 0; i < number; i++)
         (child -> chromosomes).pop_back();
@@ -126,11 +117,9 @@ Animal* Animal::reproduceAsexually () const {
             Are the animals of the same species or not?
 */
 bool operator== (const Animal& a1, const Animal& a2) {
-    if (a1.number != a2.number)
-        return false;
-
-    if (a1.getGeneticSimilarity(a2) > SIMILARITY_THRESHOLD)
-        return true;
+    if (a1.number == a2.number)
+        if (a1.getGeneticSimilarity(a2) > SIMILARITY_THRESHOLD)
+            return true;
 
     return false;
 }
@@ -147,7 +136,7 @@ bool operator== (const Animal& a1, const Animal& a2) {
 */
 Animal* operator+ (const Animal& a1, const Animal& a2) {
     if (a1.number != a2.number)
-        return (new Animal((int)((a1.number + a2.number) / 2)));
+        return new Animal((a1.number + a2.number) / 2);
     
     Animal* c1 = a1.reproduceAsexually();
     Animal* c2 = a2.reproduceAsexually();
@@ -164,14 +153,11 @@ Animal* operator+ (const Animal& a1, const Animal& a2) {
         swap(c1, c2);
     }
 
-    for (int i = 0; i < child -> number; i++) {
-        int source = randint(0, child -> number - 1);
-        int target = randint(0, child -> number - 1);
+    for (int i = 0; i < child -> number; i++)
         iter_swap(
-            (child -> chromosomes).begin() + source,
-            (child -> chromosomes).begin() + target
+            (child -> chromosomes).begin() + randint(0, child -> number - 1),
+            (child -> chromosomes).begin() + randint(0, child -> number - 1)
         );
-    }
 
     if (a1.getGeneticSimilarity(*child) > SIMILARITY_THRESHOLD && a2.getGeneticSimilarity(*child) > SIMILARITY_THRESHOLD)
         return child;
@@ -264,8 +250,8 @@ bool Virus::isPathogenic (const Animal& animal) const {
     for (int i = 0; i < 2; i++) {
         vector<string> strings;
 
-        for (auto j = animal.chromosomes.begin(); j != animal.chromosomes.end(); ++j) {
-            pair<Strand, Strand> dna = (**j).getChromosome();
+        for (auto &&j : animal.chromosomes) {
+            pair<Strand, Strand> dna = j -> getChromosome();
             if (i == 0)
                 strings.push_back(dna.first.getStrand());
             else
@@ -276,8 +262,9 @@ bool Virus::isPathogenic (const Animal& animal) const {
 
         string r = rna -> getStrand();
 
-        if (lcs != "" && (findPattern(r, lcs) || findPattern(r, getStrandComplement(lcs))))
-            return true;
+        if (lcs != "")
+            if (findPattern(r, lcs) != -1 || findPattern(r, getStrandComplement(lcs)) != -1)
+                return true;
     }
     
     return false;

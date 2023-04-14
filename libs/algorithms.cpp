@@ -162,20 +162,20 @@ double computeNLD (string s1, string s2) {
     Metric:
         Modified Hausdorff Similarity
     Description:
-        This function computes a normalized similarity score between two sets of strings based on a modified version of Hausdorff distance.
+        This function computes a normalized similarity score between two sets of string pairs based on a modified version of Hausdorff distance.
         It uses normalized levenstein distance to compare a pair of strings.
     Inputs:
-        a : vector<string>
-            A vector of the strings of the first set
-        b : vector<string>
-            A vector of the strings of the second set
+        a : vector<pair<string, string>>
+            A vector of the string pairs of the first set
+        b : vector<pair<string, string>>
+            A vector of the string pairs of the second set
     Output:
         similarity : double
             Normalized similarity score
     References:
         https://en.wikipedia.org/wiki/Hausdorff_distance
 */
-double computeMHS (vector<string> a, vector<string> b) {
+double computeMHS (vector<pair<string, string>> a, vector<pair<string, string>> b) {
     int n1 = a.size();
     int n2 = b.size();
 
@@ -185,9 +185,15 @@ double computeMHS (vector<string> a, vector<string> b) {
 
     for (int i = 0; i < n1; i++)
         for (int j = 0; j < n2; j++)
-            distances[i][j] = computeNLD(
-                a.at(i),
-                b.at(j)
+            distances[i][j] = min(
+                min(
+                    computeNLD(a.at(i).first, b.at(j).first),
+                    computeNLD(a.at(i).second, b.at(j).second)
+                ),
+                min(
+                    computeNLD(a.at(i).first, b.at(j).second),
+                    computeNLD(a.at(i).second, b.at(j).first)
+                )
             );
 
     double s1 = 0;
