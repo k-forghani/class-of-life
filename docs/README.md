@@ -1,8 +1,8 @@
-# Class of Life Command Line Interface (CoL CLI)
+# Documentation
 
 ## Examples
 
-You can find some example commands at [`examples`](/examples) and some sample data files at [`examples/data`](/examples/data).
+You can find some sample commands at [`examples`](/examples) and some sample data files at [`examples/data`](/examples/data).
 
 ## Reference
 
