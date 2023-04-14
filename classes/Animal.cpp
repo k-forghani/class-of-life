@@ -8,12 +8,16 @@ using namespace std;
 /* Animal */
 
 /*
-   A method to calculate the percentage of genetic similarity
-   out put : Similarity percentage 
+    The constructor of Animal class
+    Inputs:
+        n : int
+            Maximum number of chromosomes
 */
-
 Animal::Animal (int n) : Cell(n) {}
 
+/*
+    This method kills the abnormal chromosomes.
+*/
 void Animal::killBadChromosomes () {
     auto i = chromosomes.begin();
     while (i != chromosomes.end()) {
@@ -27,6 +31,18 @@ void Animal::killBadChromosomes () {
     number = chromosomes.size();
 }
 
+/*
+    This method returns a score of genetic similarity between the two animals.
+    Algorithms:
+        Modified Hausdorff Similarity
+        Normalized Levenstein Distance
+    Inputs:
+        animal : Animal
+            The animal which will be compared to
+    Output:
+        similarity : double
+            The similarity score
+*/
 double Animal::getGeneticSimilarity (const Animal& animal) const {
     double similarity = 0;
 
@@ -59,11 +75,16 @@ double Animal::getGeneticSimilarity (const Animal& animal) const {
     return similarity;
 }
 
-/*     
-This method doubles the number of chromosomes (2n) and half of them (n).
- and It chooses a random face 
+/*
+    This method performs asexual reproduction.
+    It is guaranteed that the animal will have at least 0.7 genetic similarity with its parent.
+    Algorithms:
+        Modified Hausdorff Similarity
+        Normalized Levenstein Distance
+    Output:
+        child : Animal*
+            A pointer to the reproduced child
 */
-
 Animal* Animal::reproduceAsexually () const {
     Animal* child = new Animal(2 * number);
 
@@ -94,6 +115,16 @@ Animal* Animal::reproduceAsexually () const {
         return child;
 }
 
+/*
+    This overloaded operator checks if two animals are of the same species or not.
+    Two animals are considered of the same species if their genetic similarity is above 0.7.
+    Algorithms:
+        Modified Hausdorff Similarity
+        Normalized Levenstein Distance
+    Output:
+        equality : bool
+            Are the animals of the same species or not?
+*/
 bool operator== (const Animal& a1, const Animal& a2) {
     if (a1.number != a2.number)
         return false;
@@ -105,8 +136,14 @@ bool operator== (const Animal& a1, const Animal& a2) {
 }
 
 /*
-    TO IMPLEMENT
-        First check if there is low similarity between parents!
+    This overloaded operator preforms sexual reproduction.
+    It is guaranteed that the animal will have at least 0.7 genetic similarity with each of its parents.
+    Algorithms:
+        Modified Hausdorff Similarity
+        Normalized Levenstein Distance
+    Output:
+        child : Animal*
+            A pointer to the reproduced child
 */
 Animal* operator+ (const Animal& a1, const Animal& a2) {
     if (a1.number != a2.number)
@@ -117,9 +154,8 @@ Animal* operator+ (const Animal& a1, const Animal& a2) {
 
     Animal* child = new Animal(c1 -> number);
 
-    if (randint(1, 2) == 1) {
+    if (randint(1, 2) == 1)
         swap(c1, c2);
-    }
 
     for (int i = 0; i < child -> number; i++) {
         int index = randint(0, (c1 -> chromosomes).size() - 1);
@@ -144,33 +180,86 @@ Animal* operator+ (const Animal& a1, const Animal& a2) {
 }
 
 /* Virus */
-/*
-    A method to detect the harmfulness of the virus.
-    input :  string rna 
-*/
 
+/*
+    The constructor of Virus class
+    Inputs:
+        rna : string
+            The RNA strand
+*/
 Virus::Virus (string rna) : Genome(rna, "", "") {}
 
+/*
+    This method sets the RNA strand of the virus.
+    Inputs:
+        rna : string
+            The RNA strand
+*/
 void Virus::setVirus (string rna) {
     Virus::setRNA(rna);
 }
 
+/*
+    This method returns the Strand instance of virus RNA.
+    Output:
+        rna : Strand
+            The Strand instance of RNA
+*/
 Strand Virus::getVirus () const {
     return Virus::getRNA();
 }
 
+/*
+    This method mutates n first nucleotides n1 within virus RNA into nucleotides n2.
+    Inputs:
+        n1 : char
+            The nucleotide which will be mutated
+        n2 : char
+            The nucleotide wich will be mutated into
+        n : int (default: -1)
+            Number of mutations (every occurrence will be mutated if -1)
+*/
 void Virus::mutateSmallScale (char n1, char n2, int n) {
     Virus::mutateSmallScaleRNA(n1, n2, n);
 }
 
+/*
+    This method mutates a chunk of nucleotides s1 within virus RNA into another chunk s2.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
+    Inputs:
+        s1 : string
+            The chunk of nucleotides which will be mutated
+        s2 : string
+            The chunk of nucleotides which will be mutated into
+*/
 void Virus::mutateLargeScale (string s1, string s2) {
     Virus::mutateLargeScaleRNA(s1, s2);
 }
 
+/*
+    This method reverses a chunk of nucleotides within virus RNA.
+    Algorithms:
+        Knuth-Morris-Pratt (KMP) Pattern Searching
+    Inputs:
+        s : string
+            The chunk of nucleotides which will be reversed
+*/
 void Virus::mutateInversely (string s) {
     Virus::mutateInverselyRNA(s);
 }
 
+/*
+    This method checks if the virus is pathogenic for a specific animal or not.
+    Algorithms:
+        Longest Common Substring (LCS) between Multiple Strings
+    Inputs:
+        animal : Animal
+            The animal that the pathogenicity will be checked for
+    Output:
+        pathogenicity : bool
+            The pathogenicity state of the virus for the animal
+*/
 bool Virus::isPathogenic (const Animal& animal) const {
     for (int i = 0; i < 2; i++) {
         vector<string> strings;
